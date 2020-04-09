@@ -157,7 +157,7 @@ g for generate，s for server，d for deploy。
 
 看得差不多之後，在命令窗口內按 Ctrl+C 即可關閉伺服器。
 
-### 1.3 部署到 Github 的設定
+### 1.3. 部署到 Github 的設定
 
 為了安全地部署到 Github 倉庫，下面將進行一些設置。
 
@@ -731,9 +731,77 @@ git pull
 
 應該就會成功更新。
 
-### 4.3 更換電腦？
+### 4.3. 備份與恢復
 
+### 4.3.1. 備份
 
+備份是一個很嚴肅的問題。因為並不知道目前正在使用的電腦哪天會突然硬碟心情不好就導致人禍。
+
+在 blog 的目錄中，你或許留意到了有一個`.gitignore`文件，這實際上是一個給 git 用來識別的文件。裏面寫的是 git push 時被忽略的文件。比如說整個 node_modules 資料夾，這裏面是 Node 模組，在備份時其實不需要備份這個，只需要備份 package.json 和 package-lock.json，有了這兩個文件就可以輕鬆重新安裝這些模組。
+
+在代碼託管這方面，一個 repo 是可以有多個分支（branch）的，比方說，blog 實際上託管在 master branch，而備份則可以多開一個 branch 來儲存 blog 的源碼。Hexo 在 init 時生成了一個`.gitignore`的本意也是如此。
+
+在 .\\_BLOG\ID.github.io 這個資料夾下，依次執行以下指令：
+
+```
+git init
+git chekout -b hexo
+git add.
+git commit -m "message"
+git remote add origin git@github.com:YourID/YourID.github.io.git
+git push origin hexo
+```
+
+這會完成你的第一次備份。
+
+<details> <summary>這裏解釋以上指令的作用</summary> <pre><code>
+git init # 將當前目錄 init 成 repo
+git chekout -b hexo # 新建並切換至分支 hexo
+git add. # 按照 .gitignore 的邏輯新增所有文件到 commit
+git commit -m "message" # commit，備註信息是 message
+git remote add origin git@github.com:YourID/YourID.github.io.git # 添加遠程倉庫
+git push origin hexo # 將 commit 的內容推送到遠程倉庫
+</code></pre> </details>
+此處我添加的遠程 repo 使用 ssh 登入。
+
+另外，在每次對 blog 進行修改，或是發佈了新文章之後，先執行以下指令：
+
+```
+git add .
+git commit -m "message"
+git push origin hexo
+```
+
+再執行
+
+```
+hexo g
+hexo d
+```
+
+雖然有點麻煩，但這值得。
+
+### 4.3.2 恢復
+
+首先，另一部電腦上先要安裝 Node.js 和 Git，前文所提及的密鑰也請自行備份，在新電腦上同樣推薦添加至 ssh-agent。歡迎重新閱讀 1.3. 章節。
+
+在~~出事~~換了其它電腦之後，在一個新的 \_BLOG 目錄中執行以下指令：
+
+```
+git clone git@github.com:YourID/yourid.github.io.git
+```
+
+之後這個資料夾中就會看到備份的內容~~浴火重生~~重新出現。
+
+然後在這個資料夾中執行以下指令：
+
+```
+npm install
+```
+
+就會按照 package-lock.json 中的安裝歷史重新安裝對應的模組。
+
+恢復就完成了。
 
 ## 5. 警告，警告，警告！
 
