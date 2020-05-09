@@ -13,7 +13,6 @@ date: 2019-09-15 12:53:03
     12/08/19 - 此页面从 WordPress 迁移过来后开始进行修改。
     </pre>
 </details>
-
 ------
 
 ### About Me - ProtoType (29/01/20)
@@ -39,7 +38,7 @@ I'm Ceplavia. 這個名字原本沒有意義，只是在我大腦中突然出現
 如果看了一些文章後有什麼想法，歡迎透過郵件與我交流：
 
 ```
-echo c2hhZ2dvbjY2QGdtYWlsLmNvbQ== | base64 -d
+echo YWRtaW5AY2VwbGF2aWEuY29t | base64 -d
 ```
 
 ---
