@@ -6,6 +6,7 @@ date: 2019-09-15 12:53:03
 <details>
     <summary>更新記錄</summary>
     <pre>
+    24/05/20 - 0.1 type.
     27/01/20 - 在 CV 前面添加了 About Me；CV 的標題修改。
     01/09/19 - 此页面基本完成。
     28/08/19 - 此页面正在编辑。
@@ -15,7 +16,7 @@ date: 2019-09-15 12:53:03
 </details>
 ------
 
-### About Me - ProtoType (29/01/20)
+### About Me - 0.1 Type (24/05/20)
 
 I'm Ceplavia. 這個名字原本沒有意義，只是在我大腦中突然出現的詞。
 
@@ -23,15 +24,15 @@ I'm Ceplavia. 這個名字原本沒有意義，只是在我大腦中突然出現
 
 無神論者。
 
-一個熱愛遊戲，並每天都想活在遊戲裏的人。
+一個熱愛遊戲，並試圖混淆遊戲與現實之邊界的人。
 
-自稱 Game Designer，並且不願將就，不想做垃圾遊戲換名聲。
+自稱 Game Designer。為了做遊戲，什麼都在學。
 
-為了做遊戲，學了很多方面的技術，從 Coding 到網路方面都有學。
+而這個遊戲叫做「Cyan」。
 
-我的遊戲，叫做「Cyan」。打算做三個章節。第一章節是「Cyan's Call」，第二章節是「Cyan's Catalyst」，第三章節未定。
+衹會有三個章節，分別是「Cyan's Call」、「Cyan's Catalyst」和「Cyan's Cause」。
 
-大腦中經常出現很多有趣的想法，記錄下來之後發現在不久之後會出現在新遊戲當中，我知道這句話沒人信，但這是事實。
+我的大腦中經常出現很多有趣的想法，在本 Blog 記錄下來之後，在不久的將來就會出現在新遊戲當中。我知道這句話沒人信，但這是事實。
 
 運營着 Minecraft 伺服器，目的是與好友一同遊玩，地圖都有保存，某種程度上來說是不希望有些東西消失。
 
@@ -43,23 +44,62 @@ echo YWRtaW5AY2VwbGF2aWEuY29t | base64 -d
 
 ---
 
-### About This Blog - ProtoType (29/01/20)
+### About This Blog - 0.1 Type (24/05/20)
 
 這個 Blog 最初是購買 Host，我安裝 WordPress 後寫了一些遊戲評測，後來開始寫自己對於遊戲的理解及想法。
 
 但我後來有了一點別的想法，現在是使用 Hexo 生成的靜態頁面，部署在 Github Page 上。域名解析使用了 Cloudflare 的免費服務，並且開啓了「Always Online™」功能。這樣即使 Github 臨時出事，也能保證博客能正常訪問。
 
-關於 Hexo 的使用，我同時也寫下了教程，詳細可以看[這裏](https://github.com/Ceplavia/ceplavia.github.io)。
+遠古時代的人類，因其智慧及思想的傳播，而流傳萬世。而互聯網時代，只要 Github 和 Cloudflare 不倒閉，我的思想就能永遠活在 Digital Sea 裏。	
+
+> I don't give a shit about access speed or accessible in mainland China.
+
+關於 Hexo 的使用，我同時也寫下了教程，目的是讓更多人在 Digital Sea 中活着。詳細可以看[這裏](https://github.com/Ceplavia/ceplavia.github.io)。
 
 ---
-
-### NOT A Curriculum Vitae - Version C (29/01/20)
 
 **以下內容暫作廢棄處理，原定是在 2019 年在中國大陸找到工作，以下的部分原意是在中國大陸找工作時，對簡歷進行補充，因為要寫的的實在太多。**
 
 **但很可惜的是，大陸沒有人，或者說是沒有公司重視遊戲內涵。因此，以下內容作廢棄處理。**
 
+<center>------------------------------</center>
 
+<center>CYAN LINE DO NOT CROSS</center>
+
+<center>------------------------------</center>
+
+
+<p align="right">-- Cyan Issues</p>
+
+---
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+<center>--------------------------------------------------</center>
+
+<center>CONTENT BELOW PROTECTED BY M.A.D.P.C. .</center>
+
+<center>--------------------------------------------------</center>
+
+<p align="right">-- Cyan Process</p>
+
+.
+
+.
+
+NOT A Curriculum Vitae - Version C (29/01/20)
 
 此页面所列之「个人简历」意在对各招聘网上的资料进行补全。
 
@@ -69,7 +109,7 @@ echo YWRtaW5AY2VwbGF2aWEuY29t | base64 -d
 
 而那些拿着简历随意问的公司，我是不会认真的。对于有看我博客，并会点到这个 about 页面来的那些招聘者，才能看到下面的内容。
 
-### 个人简介
+个人简介
 
 暨南大学，18届本科生（延毕于19年初），计算机科学与技术专业。
 
@@ -93,7 +133,7 @@ echo YWRtaW5AY2VwbGF2aWEuY29t | base64 -d
 
 此外，个人博客也进行了多次搬迁，从最初的单纯在 Host 托管上安装并使用 WordPress ，到现在为使用 Hexo 引擎生成静态页面，部署在 Github Page 上。
 
-### 个人观点
+个人观点
 
 本人以心理学的角度出发，来研究玩家以不同立场，对于不同游戏，不同环境时的心理，从而挖掘玩家的想法，将现象归纳成结论并在游戏设计时应用，将各方面结论合称为「玩家心理学」。
 
@@ -111,13 +151,13 @@ echo YWRtaW5AY2VwbGF2aWEuY29t | base64 -d
 
 除此之外，本人认为「策划不分家」，即不分系统、数值、关卡等各行，一个好的策划应当是各方面都能独自完成，而不是专研一方面。
 
-### 个人经验
+个人经验
 
 多次参加 GameJam 及同类活动；
 
 基于汉语拼音的拼写来制作文字「Cualific」并试图应用于游戏中。
 
-### 个人能力
+个人能力
 
 擅长从小方面挖掘出完善的世界观，尤擅搭建近未来科幻世界观。搭建世界观时重视基础，不架空剧情。
 
@@ -125,13 +165,13 @@ echo YWRtaW5AY2VwbGF2aWEuY29t | base64 -d
 
 此外，善于发现游戏过程中不合理的剧情，并也善于设计基于不同游戏进度的多分支剧情。对于游戏中的细节非常执着。
 
-### 其它爱好
+其它爱好
 
 烹饪；
 
 学习其它语言。
 
-### 联系方式
+联系方式
 
 邮箱：
 
