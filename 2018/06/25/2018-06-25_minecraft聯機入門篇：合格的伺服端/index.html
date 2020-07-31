@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Cyan-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Cyan-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ceplavia.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+<script data-ad-client="ca-pub-8675315982671307" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <meta name="description" content="原開頭： 最近在准备服务器的10周目，然后想起了之前写过的联机篇。 说是过几天发，实际有2个月了吧？答辩真是一个很好用来消磨(?)时间的东西。   本文介紹我製作伺服端的方式。本文重寫於 2020 年 5 月初。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Minecraft 聯機入門篇：合格的伺服端">
+<meta property="og:url" content="https://www.ceplavia.com/2018/06/25/2018-06-25_minecraft%E8%81%AF%E6%A9%9F%E5%85%A5%E9%96%80%E7%AF%87%EF%BC%9A%E5%90%88%E6%A0%BC%E7%9A%84%E4%BC%BA%E6%9C%8D%E7%AB%AF/index.html">
+<meta property="og:site_name" content="Ceplavia&#39;s Gaming Blog">
+<meta property="og:description" content="原開頭： 最近在准备服务器的10周目，然后想起了之前写过的联机篇。 说是过几天发，实际有2个月了吧？答辩真是一个很好用来消磨(?)时间的东西。   本文介紹我製作伺服端的方式。本文重寫於 2020 年 5 月初。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-06-25T08:50:47.000Z">
+<meta property="article:modified_time" content="2020-07-30T13:52:54.891Z">
+<meta property="article:author" content="Ceplavia">
+<meta property="article:tag" content="Minecraft">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.ceplavia.com/2018/06/25/2018-06-25_minecraft%E8%81%AF%E6%A9%9F%E5%85%A5%E9%96%80%E7%AF%87%EF%BC%9A%E5%90%88%E6%A0%BC%E7%9A%84%E4%BC%BA%E6%9C%8D%E7%AB%AF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Minecraft 聯機入門篇：合格的伺服端 | Ceplavia's Gaming Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145119829-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-145119829-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ceplavia's Gaming Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.ceplavia.com/2018/06/25/2018-06-25_minecraft%E8%81%AF%E6%A9%9F%E5%85%A5%E9%96%80%E7%AF%87%EF%BC%9A%E5%90%88%E6%A0%BC%E7%9A%84%E4%BC%BA%E6%9C%8D%E7%AB%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Ceplavia">
+      <meta itemprop="description" content="遊戲是潛在抑鬱症患者最後的避風港。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ceplavia's Gaming Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Minecraft 聯機入門篇：合格的伺服端
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-06-25 16:50:47" itemprop="dateCreated datePublished" datetime="2018-06-25T16:50:47+08:00">2018-06-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-30 21:52:54" itemprop="dateModified" datetime="2020-07-30T21:52:54+08:00">2020-07-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/06/25/2018-06-25_minecraft%E8%81%AF%E6%A9%9F%E5%85%A5%E9%96%80%E7%AF%87%EF%BC%9A%E5%90%88%E6%A0%BC%E7%9A%84%E4%BC%BA%E6%9C%8D%E7%AB%AF/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/06/25/2018-06-25_minecraft聯機入門篇：合格的伺服端/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>原開頭：</p>
+<p>最近在准备服务器的10周目，然后想起了之前写过的联机篇。</p>
+<p>说是过几天发，实际有2个月了吧？答辩真是一个很好用来消磨(?)时间的东西。</p>
+</blockquote>
+<hr>
+<p>本文介紹我製作伺服端的方式。本文重寫於 2020 年 5 月初。</p>
+<a id="more"></a>
+
+<h3 id="伺服端使用"><a href="#伺服端使用" class="headerlink" title="伺服端使用"></a>伺服端使用</h3><h4 id="小知識"><a href="#小知識" class="headerlink" title="小知識"></a>小知識</h4><p>伺服端包括原版、Bukkit系、Bukkit+Forge系、Forge系；</p>
+<p>原版自然不必多説，就是官方提供的版本。</p>
+<p>Bukkit 系的伺服端除了將地圖的文件結構進行修改以方便備份外，還可以讓玩家安裝插件。最早的是 Bukkit Server，現在通常默認 Spigot 是接班人。</p>
+<p>而 Forge 系則是在官方的版本上安裝 Forge API，以使用 Mod 來進行聯機。</p>
+<p>Bukkit+Forge 系是一個盛行於 1.7.10，發源於 beta 1.7 年代的東西，從 MCPC 到 Cauldron ，再到 Kcauldron，停於 Thermos。看名字就知道，是可以同時安裝 mod 與插件的伺服端。</p>
+<h4 id="原版生存"><a href="#原版生存" class="headerlink" title="原版生存"></a>原版生存</h4><p>原版生存意味着不安裝任何 Mod，我推薦使用 <a href="https://www.spigotmc.org/" target="_blank" rel="noopener">Spigot</a> 的分支 <a href="https://papermc.io/" target="_blank" rel="noopener">PaperSpigot</a> (aka. PaperMC)，原因就是優化，以及非常快的更新速度。</p>
+<h4 id="Mod服"><a href="#Mod服" class="headerlink" title="Mod服"></a>Mod服</h4><p>若是使用遊戲版本 1.7.10，建議使用 <a href="https://github.com/CyberdyneCC/ThermosServer" target="_blank" rel="noopener">Thermos</a>。但 Thermos 已經很久遠，也沒有多少人維護，最好不要使用此遊戲版本。</p>
+<p>若是 1.10.2~1.12.2，可以使用 <a href="https://files.minecraftforge.net/" target="_blank" rel="noopener">Forge</a>+<a href="https://www.spongepowered.org/" target="_blank" rel="noopener">Sponge</a>。Sponge 是一套基於 Forge 的 API。</p>
+<p>1.12 以上，如 1.14.4、1.15.2，則建議使用 <a href="https://files.minecraftforge.net/" target="_blank" rel="noopener">Forge</a>。</p>
+<p>部署起來相當簡單，例如 Forge 服就是將 Forge 對着官方伺服端安裝。有自己動手裝過 Forge 的應該能理解。</p>
+<h4 id="不同版本的差異？"><a href="#不同版本的差異？" class="headerlink" title="不同版本的差異？"></a>不同版本的差異？</h4><p>在插件年代，有一個比較出名的插件系列叫做 Essentials，出名不是因為權限管理或是自帶經濟之類的設定，而是因為它提供了諸如<code>/home</code>、<code>/back</code>、<code>/tpa</code>之類的指令。</p>
+<p>到了沒有辦法使用插件的年代，就只能用 Mod 來實現。可以直接使用的有 <a href="https://www.curseforge.com/minecraft/mc-mods/forge-essentials-74735" target="_blank" rel="noopener">ForgeEssentials</a>(<del>1.12.2)，和 <a href="https://www.curseforge.com/minecraft/mc-mods/thut-essentials" target="_blank" rel="noopener">Thut Essentials</a>(</del>1.15.2)，這些比較適合親友服，人數不多的聯機，大家聯機只為遊玩，不需要太多權限設置等。</p>
+<p>如果需要一些更多的管理，就需要使用 Sponge 的 Mod 了，包括：</p>
+<ul>
+<li>Nucleus - 一個可以代替 Essentials 的 Mod，提供非常多的設置（包括權限分組等）及指令；</li>
+<li>LuckPerms - 權限管理，用來管理 Nucleus 接管的權限；</li>
+<li>TotalEconomy - 管理 Nucleus 接管的經濟</li>
+</ul>
+<p>但當然也有缺點，第一當然是只支持到 1.12.2，第二是當時我使用 Nucleus 時發現權限是加在玩家身上的，即使是在伺服端控制台也沒有權限執行特殊指令。因為接管了所有權限，我亦不知道對方塊直接操作（如變動）的權限是如何處理。部分會對方塊直接操作的 Mod 就沒有權限操作。例如 Project E 的賢者之石直接對方塊進行變換。以及伺服端配置中的<code>spawn-protection</code>對重生點進行保護，被保護的方塊沒有任何人可以破壞。</p>
+<h4 id="伺服端啟動"><a href="#伺服端啟動" class="headerlink" title="伺服端啟動"></a>伺服端啟動</h4><p>首先無論是上文提及的何種系伺服端，<strong>其啟動方式都是使用一句指令來啟動最核心的 .jar 檔案</strong>，具體到實際使用就變成了寫成 .bat 或 .sh 文件來偷懶。</p>
+<p>給出我常用的啟動指令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -d64 -server -XX:+UseG1GC -XX:MaxGCPauseMillis&#x3D;100 -XX:+UseStringDeduplication -Xms1G -Xmx2560M -XX:hashCode&#x3D;5 -Dfile.encoding&#x3D;UTF-8 -jar server.jar nogui</span><br></pre></td></tr></table></figure>
+
+<p>Xms 參數是初始分配記憶體。Xmx 參數是最大分配記憶體。jar 參數是指 Minecraft 的伺服器文件。</p>
+<p>此指令保存為 .bat (windows) 或 .sh (linux) 文件，保存在與核心 .jar 同一目錄下，執行即可啟動伺服端。</p>
+<h4 id="伺服端文件結構"><a href="#伺服端文件結構" class="headerlink" title="伺服端文件結構"></a>伺服端文件結構</h4><p>通常，伺服端的資料夾內包含很多文件，要關心的不多：</p>
+<ul>
+<li>plugins/mods 資料夾 - 插件或 Mod 擺放的地方</li>
+<li>world 資料夾 - 默認的地圖命名，可以修改</li>
+<li>logs 資料夾 - 用來保存 log</li>
+<li>server.properties - 伺服端設置</li>
+</ul>
+<p>我電腦上未有保存原版伺服器的設置文件，於是請查看<a href="https://minecraft-zh.gamepedia.com/Server.properties" target="_blank" rel="noopener">官方百科</a>。此處只列出少數我覺得比較重要並可能會修改的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 地圖的隨機種子，若使用特定的就要輸入</span><br><span class="line">level-seed&#x3D;</span><br><span class="line"># 新玩家進入伺服器時的默認模式</span><br><span class="line">gamemode&#x3D;survival</span><br><span class="line"># 伺服器使用的連接埠</span><br><span class="line">server-port&#x3D;25565</span><br><span class="line"># 是否啟用命令方塊</span><br><span class="line">enable-command-block&#x3D;false</span><br><span class="line"># 世界名稱，通常不變動，但若使用其它存檔則需要修改</span><br><span class="line">level-name&#x3D;world</span><br><span class="line"># 此處的 MOTD 可以在 https:&#x2F;&#x2F;minecraft.tools&#x2F;en&#x2F;motd.php 製作</span><br><span class="line">motd&#x3D;A Minecraft Server</span><br><span class="line"># 難度</span><br><span class="line">difficulty&#x3D;easy</span><br><span class="line"># 世界類型</span><br><span class="line">level-type&#x3D;default</span><br><span class="line"># 重生點保護，具體為以重生點為中心的正方體</span><br><span class="line">spawn-protection&#x3D;16</span><br><span class="line"># 若有玩家使用非正版啟動遊戲，則需要設置為 false</span><br><span class="line">online-mode&#x3D;true</span><br></pre></td></tr></table></figure>
+
+<p>其餘設置項可以在上方給出的連結處查看。</p>
+<h4 id="其它注意"><a href="#其它注意" class="headerlink" title="其它注意"></a>其它注意</h4><p>另外，也有一些 Gamerule，單機玩家應該很熟悉，無非是 keepInventory 之類作弊指令。提出要注意的一點：只有 Bukkit 系的伺服端會將地圖按維度拆分，故每個維度都需要重複執行。</p>
+<h3 id="插件-Mod-選用"><a href="#插件-Mod-選用" class="headerlink" title="插件 / Mod 選用"></a>插件 / Mod 選用</h3><h4 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h4><p>插件通常是一些微改動遊玩方式，包括但不僅限於提供傳送指令等。自己挑選喜歡的即可。</p>
+<p>如果是插件生存，我通常只會使用提供 Essentials 系列指令的插件。前文提到用 PaperSpigot，但 Spigot 的插件也可使用，可<a href="https://www.spigotmc.org/resources/categories/spigot.4/" target="_blank" rel="noopener">在此</a>找到。需要注意遊戲版本。</p>
+<h4 id="Mod"><a href="#Mod" class="headerlink" title="Mod"></a>Mod</h4><p>如果是 Mod 生存，就有比較多需要顧慮的。</p>
+<p>首先要注意一點：提供多方向遊玩。</p>
+<p>以實際舉例：若安裝了某工業 Mod，則要注意遊玩不應圍繞此工業 Mod，可以提供其它玩法的 Mod 也應一同考慮。可以使用主遊玩 Mod 搭配多個副 Mod 的方式。</p>
+<p>其次就是一些小的娛樂 Mod / 裝飾 Mod。</p>
+<h3 id="個人探討"><a href="#個人探討" class="headerlink" title="個人探討"></a>個人探討</h3><p>下方內容算是早期試圖探討玩家心理學的內容。但我重寫了一遍，略作了修改。</p>
+<p>首先需要注意一點：每一個玩家都傾向於做一個守財奴。此處並不是貶義，而是指玩家傾向於收集，在物品數量不多時更是如此。在物品充足後才會開始轉向建築（Mod 玩家）或是其它方面。</p>
+<p>我認為的好 Mod Pack 需要有以下幾類 Mod：</p>
+<ul>
+<li>主遊玩 Mod - 通常指一些科技或魔法 Mod，不僅限於一個，也可以是 2 個或 3 個，前提是 Mod 之間物品有聯動，否則遊玩起來非常消耗精力，尤其是在目前的大 Mod 發展線都相對繁複的情況下。</li>
+<li>副遊玩 Mod - 可以是主遊玩 Mod 的 addon，也可以是提供給不玩主遊玩 Mod 的人的其它選擇。比方説像是「Level Up!」這類比較像以前叫做「mcMMO」的插件的 Mod。總之是可以作為備用選擇，沒有必要逼着所有人都去玩前面睇到的主遊玩 Mod，儘管原版內容並不算多，但玩家應當自己選擇想要遊玩的方向。</li>
+<li>娛樂 Mod，通常都是小 Mod，添加一些裝飾物品或是實用物品，如 McCrayFish 的 Furniture Mod，以及 Pam 的 HarvestCraft，OpenBlock 之類。</li>
+<li>優化或輔助 Mod，小地圖，內存回收，地形修改等。</li>
+</ul>
+<h4 id="Main-Mod"><a href="#Main-Mod" class="headerlink" title="Main Mod"></a>Main Mod</h4><p>主遊玩 Mod 類型實際上並不多，幾乎可以説是除了科技就只有魔法。要注意的地方是，有沒有添加新的礦物，這個礦物會否佔去其它礦物生成，以及多個 Mod 的金屬礦物是否通用（如銅錫等），若 Mod 的礦物並不在礦物詞典中則不建議使用。</p>
+<blockquote>
+<p>不過現在幾乎所有 Mod 的礦物都在礦物詞典中。那就要注意多個 Mod 共存時會否在地下生成過多的同一金屬，影響平衡性。</p>
+</blockquote>
+<p>此外，還需注意會否有 Mod 對原版素材的需求過大。若同時遊玩數個需求鐵礦都多的 Mod，則要考慮修改生成規則等。</p>
+<p>我曾經玩過一個做鐵桶需要 72 個鐵礦的 Mod。</p>
+<h4 id="Sub-Mod"><a href="#Sub-Mod" class="headerlink" title="Sub Mod"></a>Sub Mod</h4><p>有關副遊玩 Mod，我的伺服器有時會有些不敢獨自去挖礦的玩家，也會有不喜歡主遊玩 Mod，只喜歡造建築的玩家。</p>
+<p>針對前者，我會添加一些寵物 Mod，或是增強角色戰力的 Mod，比如額外增加護甲和武器等（記得考慮平衡！）。</p>
+<p>若是此類 Mod 可以輕鬆地獲取高傷害武器，則記得適當調高遊戲難度。</p>
+<p>針對後者，為了公平性起見，我會考慮增加原版素材獲取途徑，例如 Ex Nihilo 這個 Mod。</p>
+<h4 id="Optimal-Mod"><a href="#Optimal-Mod" class="headerlink" title="Optimal Mod"></a>Optimal Mod</h4><p>內存回收的 Mod 沒有什麼好提的，幾乎每次我都會安裝。無論是為他人電腦着想或是為自己電腦着想，這類 Mod 並沒有壞處。</p>
+<p>至於地圖 Mod，要看個人喜好，最好多備幾個地圖 Mod 讓玩家自行挑選，畢竟在聯機時這不算是必用 Mod。</p>
+<p>另外還有要使用 <a href="https://www.curseforge.com/minecraft/mc-mods/jei" target="_blank" rel="noopener">Just Enough Items</a> 的話，就最好順便加上 <a href="https://www.curseforge.com/minecraft/mc-mods/just-enough-calculation" target="_blank" rel="noopener">Just Enough Calculation</a>。</p>
+<h4 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h4><p>測試非常重要。</p>
+<p>在 Minecraft 中測試 Mod 並不像現實的測試職位一樣有多種方法，只能循固定思路去做。</p>
+<p>除了要測試每一個機器的功能之外，還要注意一些方塊的功能。還有 Mod 間的衝突。</p>
+<p>要注意的方面非常多，不能盡列。總結：測試每一個可以交互的方塊。</p>
+<p>那些不會導致 crash 的 Bug 就無法避免，只能個人思考取捨。</p>
+<p>Anyway, 多做測試。</p>
+<hr>
+<p>入門篇完。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Ceplavia
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://www.ceplavia.com/2018/06/25/2018-06-25_minecraft%E8%81%AF%E6%A9%9F%E5%85%A5%E9%96%80%E7%AF%87%EF%BC%9A%E5%90%88%E6%A0%BC%E7%9A%84%E4%BC%BA%E6%9C%8D%E7%AB%AF/" title="Minecraft 聯機入門篇：合格的伺服端">https://www.ceplavia.com/2018/06/25/2018-06-25_minecraft聯機入門篇：合格的伺服端/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Minecraft/" rel="tag"># Minecraft</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/06/09/2018-06-09_%E5%8D%A0%E6%AF%94%E5%93%AA%E6%9C%89%E9%82%A3%E4%B9%88%E9%87%8D%E8%A6%81%EF%BC%9F/" rel="prev" title="占比哪有那么重要？">
+      <i class="fa fa-chevron-left"></i> 占比哪有那么重要？
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/07/10/2018-07-10_%E5%9B%BD%E5%86%85%E7%BD%91%E6%B8%B8%EF%BC%9A%E8%B0%81%E5%9C%A8%E6%8A%9B%E5%BC%83%E7%8E%A9%E5%AE%B6/" rel="next" title="国内网游：谁在抛弃玩家">
+      国内网游：谁在抛弃玩家 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#伺服端使用"><span class="nav-number">1.</span> <span class="nav-text">伺服端使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#小知識"><span class="nav-number">1.1.</span> <span class="nav-text">小知識</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原版生存"><span class="nav-number">1.2.</span> <span class="nav-text">原版生存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mod服"><span class="nav-number">1.3.</span> <span class="nav-text">Mod服</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不同版本的差異？"><span class="nav-number">1.4.</span> <span class="nav-text">不同版本的差異？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#伺服端啟動"><span class="nav-number">1.5.</span> <span class="nav-text">伺服端啟動</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#伺服端文件結構"><span class="nav-number">1.6.</span> <span class="nav-text">伺服端文件結構</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其它注意"><span class="nav-number">1.7.</span> <span class="nav-text">其它注意</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件-Mod-選用"><span class="nav-number">2.</span> <span class="nav-text">插件 &#x2F; Mod 選用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#插件"><span class="nav-number">2.1.</span> <span class="nav-text">插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mod"><span class="nav-number">2.2.</span> <span class="nav-text">Mod</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#個人探討"><span class="nav-number">3.</span> <span class="nav-text">個人探討</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Main-Mod"><span class="nav-number">3.1.</span> <span class="nav-text">Main Mod</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sub-Mod"><span class="nav-number">3.2.</span> <span class="nav-text">Sub Mod</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Optimal-Mod"><span class="nav-number">3.3.</span> <span class="nav-text">Optimal Mod</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Test"><span class="nav-number">3.4.</span> <span class="nav-text">Test</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ceplavia"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Ceplavia</p>
+  <div class="site-description" itemprop="description">遊戲是潛在抑鬱症患者最後的避風港。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">101</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://insbex.jixun.moe/" title="https://insbex.jixun.moe/" rel="noopener" target="_blank">Insb 的思维过山车</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://jixun.moe/" title="https://jixun.moe/" rel="noopener" target="_blank">季寻日志</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://laplacence.github.io/" title="https://laplacence.github.io/" rel="noopener" target="_blank">Laplacence's Trash Can</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://penguinliong.moe/" title="https://penguinliong.moe/" rel="noopener" target="_blank">Liong 的技术博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://sunnyrx.com/" title="https://sunnyrx.com/" rel="noopener" target="_blank">热心的周末</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.tcdw.net/" title="https://www.tcdw.net/" rel="noopener" target="_blank">吐槽大王部落格</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ceplavia</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://ceplaviablog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://www.ceplavia.com/2018/06/25/2018-06-25_minecraft%E8%81%AF%E6%A9%9F%E5%85%A5%E9%96%80%E7%AF%87%EF%BC%9A%E5%90%88%E6%A0%BC%E7%9A%84%E4%BC%BA%E6%9C%8D%E7%AB%AF/";
+    this.page.identifier = "2018/06/25/2018-06-25_minecraft聯機入門篇：合格的伺服端/";
+    this.page.title = "Minecraft 聯機入門篇：合格的伺服端";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://ceplaviablog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

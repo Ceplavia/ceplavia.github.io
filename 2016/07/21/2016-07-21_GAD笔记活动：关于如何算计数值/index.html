@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Cyan-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Cyan-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ceplavia.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+<script data-ad-client="ca-pub-8675315982671307" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <meta name="description" content="本文原发在这里，是我自己的回答。 此后在gad上的笔记回答我一般会在下一期出来之后把我原本的回答贴上来。这次的回答是一等奖~ 个人偏爱大型MMORPG，那么就来写一写我曾经做的一套大型MMORPG的数值框架中出现的问题和我个人的一些思考吧。 首先从我整理出的一些问题开始： 1.属性之间的相互影响及其本身复杂度 我把传统的一套属性分为主要属性及次要属性，主要属性包括力量，智力，敏捷等(可能)主要影响">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GAD笔记活动：关于如何“算计”数值。">
+<meta property="og:url" content="https://www.ceplavia.com/2016/07/21/2016-07-21_GAD%E7%AC%94%E8%AE%B0%E6%B4%BB%E5%8A%A8%EF%BC%9A%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E7%AE%97%E8%AE%A1%E6%95%B0%E5%80%BC/index.html">
+<meta property="og:site_name" content="Ceplavia&#39;s Gaming Blog">
+<meta property="og:description" content="本文原发在这里，是我自己的回答。 此后在gad上的笔记回答我一般会在下一期出来之后把我原本的回答贴上来。这次的回答是一等奖~ 个人偏爱大型MMORPG，那么就来写一写我曾经做的一套大型MMORPG的数值框架中出现的问题和我个人的一些思考吧。 首先从我整理出的一些问题开始： 1.属性之间的相互影响及其本身复杂度 我把传统的一套属性分为主要属性及次要属性，主要属性包括力量，智力，敏捷等(可能)主要影响">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.ceplavia.com/2016/07/21/2016-07-21_GAD%E7%AC%94%E8%AE%B0%E6%B4%BB%E5%8A%A8%EF%BC%9A%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E7%AE%97%E8%AE%A1%E6%95%B0%E5%80%BC/1.jpg">
+<meta property="og:image" content="https://www.ceplavia.com/2016/07/21/2016-07-21_GAD%E7%AC%94%E8%AE%B0%E6%B4%BB%E5%8A%A8%EF%BC%9A%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E7%AE%97%E8%AE%A1%E6%95%B0%E5%80%BC/2.jpg">
+<meta property="article:published_time" content="2016-07-21T00:36:54.000Z">
+<meta property="article:modified_time" content="2020-07-30T13:52:54.830Z">
+<meta property="article:author" content="Ceplavia">
+<meta property="article:tag" content="gad">
+<meta property="article:tag" content="数值">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.ceplavia.com/2016/07/21/2016-07-21_GAD%E7%AC%94%E8%AE%B0%E6%B4%BB%E5%8A%A8%EF%BC%9A%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E7%AE%97%E8%AE%A1%E6%95%B0%E5%80%BC/1.jpg">
+
+<link rel="canonical" href="https://www.ceplavia.com/2016/07/21/2016-07-21_GAD%E7%AC%94%E8%AE%B0%E6%B4%BB%E5%8A%A8%EF%BC%9A%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E7%AE%97%E8%AE%A1%E6%95%B0%E5%80%BC/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>GAD笔记活动：关于如何“算计”数值。 | Ceplavia's Gaming Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145119829-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-145119829-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ceplavia's Gaming Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.ceplavia.com/2016/07/21/2016-07-21_GAD%E7%AC%94%E8%AE%B0%E6%B4%BB%E5%8A%A8%EF%BC%9A%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E7%AE%97%E8%AE%A1%E6%95%B0%E5%80%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Ceplavia">
+      <meta itemprop="description" content="遊戲是潛在抑鬱症患者最後的避風港。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ceplavia's Gaming Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GAD笔记活动：关于如何“算计”数值。
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-07-21 08:36:54" itemprop="dateCreated datePublished" datetime="2016-07-21T08:36:54+08:00">2016-07-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-30 21:52:54" itemprop="dateModified" datetime="2020-07-30T21:52:54+08:00">2020-07-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B4%BB%E5%8A%A8%E6%96%87%E7%AB%A0/" itemprop="url" rel="index"><span itemprop="name">活动文章</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2016/07/21/2016-07-21_GAD%E7%AC%94%E8%AE%B0%E6%B4%BB%E5%8A%A8%EF%BC%9A%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E7%AE%97%E8%AE%A1%E6%95%B0%E5%80%BC/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/21/2016-07-21_GAD笔记活动：关于如何算计数值/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文原发在<a href="http://gad.qq.com/content/wendetail/7165534" target="_blank" rel="noopener">这里</a>，是我自己的回答。</p>
+<p>此后在gad上的笔记回答我一般会在下一期出来之后把我原本的回答贴上来。这次的回答是一等奖~</p>
+<p>个人偏爱大型MMORPG，那么就来写一写我曾经做的一套大型MMORPG的数值框架中出现的问题和我个人的一些思考吧。</p>
+<p>首先从我整理出的一些问题开始：</p>
+<p>1.属性之间的相互影响及其本身复杂度</p>
+<p>我把传统的一套属性分为主要属性及次要属性，主要属性包括力量，智力，敏捷等(可能)主要影响人物伤害的属性；次要属性包括暴击率，暴击伤害，闪避率等有几率影响人物伤害的属性。其中次要属性可受(亦可不受)主要属性影响，如敏捷可以间接影响闪避率等。</p>
+<p>属性之间的相互影响变相地为玩家提供了更多的变强途径，在此之上可以提供更多的玩法(如附魔等)，游戏本身乐趣度及玩家的平均游戏时间亦会有所增加。</p>
+<p>关于属性本身的复杂度，我发现这是一个牵一发而动全身的问题。若是不嫌字多的话就看看吧：</p>
+<p>在有主要及次要属性的前提下，加入元素属性的设定，一个技能可以造成一种类型的元素伤害(两种或以上元素伤害亦可复合成一种高级元素伤害，碍于篇幅此处不谈)，同时必要地就要添加元素属性抗性，在面对对应的元素属性伤害时可以提供一定的减伤率(在不同的元素伤害之间亦可改为击退率之类的)。元素属性伤害在一定程度上起与次要属性相等的作用，即主要提供更多增强人物的途径，同时对游戏中的其他一些玩法系统有所影响。</p>
+<p>后面就是我所发现的问题了，在元素伤害种类增加到一定程度的时候(约8种为边界线，请不要认为这数量很多，这是我个人多次考量之后找出的一个分水岭)，如何去决定计算伤害的函数就变得无比复杂。</p>
+<p>举个例子：</p>
+<p>每x点元素属性可以增加(x/10)%的元素属性伤害，此时，</p>
+<p>人物伤害=普通技能伤害(无属性)+普通技能伤害*(x/10)%元素属性伤害</p>
+<p>当人物身上装备提供更多元素属性伤害时，此公式变更为</p>
+<p>人物伤害=普通技能伤害(无属性)+普通技能伤害<em>(x/10)%元素属性1伤害+普通技能伤害</em>(x/10)%元素属性2伤害+…etc</p>
+<p>一般情况下若人物身上装备可以提供3种元素属性伤害时，则附加的元素属性伤害合计不应该超过(约)15%</p>
+<p>到这里就会出现一个矛盾，先把这里的合计元素属性伤害称为附加伤害，把技能本身打出去的伤害称为主要伤害。</p>
+<p>次要伤害占主要伤害的比率不宜过大，一般在不超过20%的情况下更容易令人接受，分情况讨论：</p>
+<p>若此比率过大，那么人物伤害就会变得过高，对应地游戏内怪物的难度在调整的时候就容易直接提高血量，在人物/怪物成长函数构造不好的情况下，在等级提升到一定程度后，容易出现“数据膨胀”现象(即数字直接呈指数级别增加趋势)，此现象难以避免，因在策划初期极难找到一个合适的成长函数，加之后期活动策划会偶尔放出一些大幅增强玩家的活动(如新版本开放，吸引AFK玩家回锅)，容易对角色的成长造成影响，其后果就是角色过于强大，为了平衡就可能直接调整怪物难度，在游戏中期已难以针对游戏中问题去大规模调整成长函数(暴雪对wow都做不到，更何况你?)，容易出现怪物过难的问题，在多次平衡下若无法解决，数字就会越来越大，这就是我个人认为的“恶性循环”现象。</p>
+<p>2.属性之间的相互影响程度</p>
+<p>你可曾记得以前的回合制网游中有一个有趣的设定？</p>
+<p>“敏捷——主要影响速度，次要影响暴击率”</p>
+<p>“体力——主要影响血量，次要影响速度”</p>
+<p>在主要属性之间可以来回影响，这是一把双刃刀，比率设定好了可以“无意之中”为玩家过于偏激的堆属性做修正，比率设定不好则容易出现各方面属性都差不多的万金油的人物。</p>
+<p>继续来举例子，假设某玩家喜欢一个魔法技能打出极高的伤害，于是他对装备的选择都是倾向于能够直接增加有效伤害属性(通常情况为智力)的装备，从而忽略了其他方面(比如移速，MP等)，在属性相互影响的前提下，若令智力同时可以影响MP最大值，那么这名玩家在打出这个技能之后仍然能够使用其他技能来对怪物的攻击进行回避操作。但这个比率应当以5%作为分水岭。或许有人会觉得这个数字过于小，但实际上这个数字在10%左右就极易出现前文中说到的“恶性循环”问题(有兴趣的不妨用matlab建一个模型看看?)。</p>
+<p>3.为了满足玩家的需求而对整个数值模型的影响</p>
+<p>为了满足玩家想要获得更强力装备的心愿，策划们通常都会考虑对同一个副本设立不同难度，然后以难度系数来控制怪物的参数，假设每个难度系数级别之间增幅为15%，通常玩家从上一个难度获得的装备对玩家自身属性的增幅开始会稍大，随着副本难度增加或是人物等级增加，此比率在未对装备函数调整的情况下，数次版本更迭就能递减到不足1%，这就是俗称的“边际效应”。一般为了弥补这个问题，会使副本掉落的装备的函数和难度系数线性相关，也就是说，一个低等级高难度的副本，可能掉落比高等级低难度副本更好的装备。为了弥补这个问题，又会把高等级副本的难度系数调高，极易陷入“恶性循环”。</p>
+<img src="/2016/07/21/2016-07-21_GAD%E7%AC%94%E8%AE%B0%E6%B4%BB%E5%8A%A8%EF%BC%9A%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E7%AE%97%E8%AE%A1%E6%95%B0%E5%80%BC/1.jpg" class="" title="图1">
+
+<img src="/2016/07/21/2016-07-21_GAD%E7%AC%94%E8%AE%B0%E6%B4%BB%E5%8A%A8%EF%BC%9A%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E7%AE%97%E8%AE%A1%E6%95%B0%E5%80%BC/2.jpg" class="" title="图2">
+
+<blockquote>
+<p>19年8月30日插嘴</p>
+<p>原图片名字是带中文的，因此在 WordPress 上保存之后就无法直接下载。所以这里我只能跑回文章发布的地方去把打了腾讯 gad 水印的图弄回来了。</p>
+</blockquote>
+<p>不难发现问题一直在环绕“数据膨胀”这个问题。我想出来的解决方法有几点：</p>
+<p>1.与活动策划的沟通，无论是什么活动的奖励都不应对游戏人物有较多的增强</p>
+<p>(一个很有意思的例子是，现在的游戏我很少见到在游戏内有什么活动，更多的是在游戏外，网页方面和好几个其他游戏合作一起联手推出活动，为了吸引玩家势必要推出强力道具，如此一来，数值策划的心思完全白费。)</p>
+<p>2.游戏内不宜设计太多能够让玩家一次性大幅度增强的道具。</p>
+<p>(举个例子，DNF里的强化系统，对于正常的平衡来说大部分玩家应该拥有的是+10的武器，那么为了方便，设计一些+3，+4，+5强化券无可厚非，但是设计+12，乃至+13的强化券，正常的强化系统便已无人问津。)</p>
+<p>3.设计方面鼓励让玩家通过自己的努力来变强，而不是单纯的变成人民币玩家</p>
+<p>4.通过设计玩家不可能击杀的怪物(不是绝对不可能击杀，对玩家造成一击秒杀那样的怪物，而是比差一点点就能击杀再强大一些)，来让玩家停止无止尽的变强的欲望。顺便让玩家明白他们在这个世界里只是普通的玩家，而不是神。(这个就涉及到我的另一个观点对游戏代入感问题了，那就不说了。)</p>
+<p>(人物角色对应当前版本所能达到的高度应当为相对强而不是绝对超强)</p>
+<p>最后：</p>
+<p>事实上数值，剧情，技能，其他玩法等等，各个方面都是挂钩的。一子错，满盘皆落索。</p>
+<p>数值做的再好，也要结合剧情，技能来看。</p>
+<p>当然也不会有完美的设计，先试着自己去做，然后在错误中一点一点摸索，就能发现问题所在。</p>
+<p>一番杂谈，若有错误，还望指出。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Ceplavia
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://www.ceplavia.com/2016/07/21/2016-07-21_GAD%E7%AC%94%E8%AE%B0%E6%B4%BB%E5%8A%A8%EF%BC%9A%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E7%AE%97%E8%AE%A1%E6%95%B0%E5%80%BC/" title="GAD笔记活动：关于如何“算计”数值。">https://www.ceplavia.com/2016/07/21/2016-07-21_GAD笔记活动：关于如何算计数值/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/gad/" rel="tag"># gad</a>
+              <a href="/tags/%E6%95%B0%E5%80%BC/" rel="tag"># 数值</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/06/26/2016-06-26_%E7%BB%9D%E5%94%B1/" rel="prev" title="絕唱/绝唱/절창/Farewell。">
+      <i class="fa fa-chevron-left"></i> 絕唱/绝唱/절창/Farewell。
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/08/04/2016-08-04_%E6%B8%B8%E6%88%8F%E6%B5%8B%E8%AF%84%EF%BC%9A%E5%B0%81%E5%8D%B0%E8%80%85/" rel="next" title="游戏测评：封印者/Closers/글로저스">
+      游戏测评：封印者/Closers/글로저스 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ceplavia"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Ceplavia</p>
+  <div class="site-description" itemprop="description">遊戲是潛在抑鬱症患者最後的避風港。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">101</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://insbex.jixun.moe/" title="https://insbex.jixun.moe/" rel="noopener" target="_blank">Insb 的思维过山车</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://jixun.moe/" title="https://jixun.moe/" rel="noopener" target="_blank">季寻日志</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://laplacence.github.io/" title="https://laplacence.github.io/" rel="noopener" target="_blank">Laplacence's Trash Can</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://penguinliong.moe/" title="https://penguinliong.moe/" rel="noopener" target="_blank">Liong 的技术博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://sunnyrx.com/" title="https://sunnyrx.com/" rel="noopener" target="_blank">热心的周末</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.tcdw.net/" title="https://www.tcdw.net/" rel="noopener" target="_blank">吐槽大王部落格</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ceplavia</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://ceplaviablog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://www.ceplavia.com/2016/07/21/2016-07-21_GAD%E7%AC%94%E8%AE%B0%E6%B4%BB%E5%8A%A8%EF%BC%9A%E5%85%B3%E4%BA%8E%E5%A6%82%E4%BD%95%E7%AE%97%E8%AE%A1%E6%95%B0%E5%80%BC/";
+    this.page.identifier = "2016/07/21/2016-07-21_GAD笔记活动：关于如何算计数值/";
+    this.page.title = "GAD笔记活动：关于如何“算计”数值。";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://ceplaviablog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

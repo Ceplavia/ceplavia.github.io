@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Cyan-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Cyan-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ceplavia.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+<script data-ad-client="ca-pub-8675315982671307" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <meta name="description" content="注意，本文与 Minecraft 三部曲一样，要求阅读者拥有基本的 Linux 系统操作知识。  前言最近在和朋友愉快地玩一些很不错的三方图，同时也和一些初次接触求生的朋友玩，使用大厅的本地服务器实在是难以连接，而使用最佳可用服务器则总是连到别人的大量魔改服务器，搞得本地文件都变了，单喷都能改成500多发子弹，不检查文件完整性就没法修复，于是干脆自己搭建。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="番外：在CentOS上搭建求生之路2服务器">
+<meta property="og:url" content="https://www.ceplavia.com/2019/11/18/2019-11-18_%E7%95%AA%E5%A4%96%EF%BC%9A%E5%9C%A8CentOS%E4%B8%8A%E6%90%AD%E5%BB%BA%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF2%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
+<meta property="og:site_name" content="Ceplavia&#39;s Gaming Blog">
+<meta property="og:description" content="注意，本文与 Minecraft 三部曲一样，要求阅读者拥有基本的 Linux 系统操作知识。  前言最近在和朋友愉快地玩一些很不错的三方图，同时也和一些初次接触求生的朋友玩，使用大厅的本地服务器实在是难以连接，而使用最佳可用服务器则总是连到别人的大量魔改服务器，搞得本地文件都变了，单喷都能改成500多发子弹，不检查文件完整性就没法修复，于是干脆自己搭建。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-11-18T09:40:00.000Z">
+<meta property="article:modified_time" content="2020-07-30T13:52:54.991Z">
+<meta property="article:author" content="Ceplavia">
+<meta property="article:tag" content="求生之路2">
+<meta property="article:tag" content="服务器">
+<meta property="article:tag" content="CentOS">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.ceplavia.com/2019/11/18/2019-11-18_%E7%95%AA%E5%A4%96%EF%BC%9A%E5%9C%A8CentOS%E4%B8%8A%E6%90%AD%E5%BB%BA%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF2%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>番外：在CentOS上搭建求生之路2服务器 | Ceplavia's Gaming Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145119829-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-145119829-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ceplavia's Gaming Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.ceplavia.com/2019/11/18/2019-11-18_%E7%95%AA%E5%A4%96%EF%BC%9A%E5%9C%A8CentOS%E4%B8%8A%E6%90%AD%E5%BB%BA%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF2%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Ceplavia">
+      <meta itemprop="description" content="遊戲是潛在抑鬱症患者最後的避風港。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ceplavia's Gaming Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          番外：在CentOS上搭建求生之路2服务器
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-18 17:40:00" itemprop="dateCreated datePublished" datetime="2019-11-18T17:40:00+08:00">2019-11-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-30 21:52:54" itemprop="dateModified" datetime="2020-07-30T21:52:54+08:00">2020-07-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%95%AA%E5%A4%96/" itemprop="url" rel="index"><span itemprop="name">番外</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/11/18/2019-11-18_%E7%95%AA%E5%A4%96%EF%BC%9A%E5%9C%A8CentOS%E4%B8%8A%E6%90%AD%E5%BB%BA%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF2%E6%9C%8D%E5%8A%A1%E5%99%A8/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/11/18/2019-11-18_番外：在CentOS上搭建求生之路2服务器/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>注意，本文与 Minecraft 三部曲一样，要求阅读者拥有基本的 Linux 系统操作知识。</p>
+<hr>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在和朋友愉快地玩一些很不错的三方图，同时也和一些初次接触求生的朋友玩，使用大厅的本地服务器实在是难以连接，而使用最佳可用服务器则总是连到别人的大量魔改服务器，搞得本地文件都变了，单喷都能改成500多发子弹，不检查文件完整性就没法修复，于是干脆自己搭建。</p>
+<a id="more"></a>
+
+<p>求生2的服务器对硬件要求很低，基本上国内阿里云腾讯云什么的 1 核 2g 已足够，只是硬盘稍有要求，因为服务端本身就不小。</p>
+<p>我用的系统是 CentOS 7，但实际操作里因为不同发行版而要有不同操作的地方很少，所以就不着重说了。</p>
+<h3 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h3><p><del>像广东人喝茶一样，</del>装新软件之前先<del>洗杯碟</del>更新……</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br></pre></td></tr></table></figure>
+
+<p>之后安装依赖库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install glibc.i686 libstdc++.i686</span><br></pre></td></tr></table></figure>
+
+<p>若是使用 root 用户登录的服务器，则需要创建一个新的普通用户。因为下文提到的 SteamCMD 不能在 root 用户下跑。使用<code>adduser blabla</code>就能创建一个名为 blabla 的用户了。再使用<code>passwd blabla</code>就能为 blabla 用户设置密码，密码需要不少于7位。</p>
+<p>然后登录为新创建的用户并切换到该用户的根目录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su blabla    &#x2F;&#x2F; 从 root 用户切换到其它用户不用输密码</span><br><span class="line">cd</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里我把新用户名设置为 blabla 是有原因的，当然可以设置成别的，比如「userl4d2」，但最好不要设置成「l4d2」，你会后悔的，最后会说明为什么。</p>
+</blockquote>
+<p>接下来需要安装 SteamCMD，这是一个在命令行下可以运行的 Steam ，实际上他就是没有界面而已。</p>
+<p>执行以下命令来下载 SteamCMD 到当前目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;steamcdn-a.akamaihd.net&#x2F;client&#x2F;installer&#x2F;steamcmd_linux.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>然后解压：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar xvf steamcmd_linux.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>之后就可以使用 SteamCMD 来下载求生之路 2 的服务端了，先执行 steamcmd.sh：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;steamcmd.sh</span><br></pre></td></tr></table></figure>
+
+<p>然后匿名登录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login anonymous</span><br></pre></td></tr></table></figure>
+
+<p>之后指定目录，并下载服务端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">force_install_dir .&#x2F;l4d2server</span><br><span class="line">app_update 222860 validate</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意，这里的目录你也可以叫 l4d2 ，只要简单地把第一行指令的目录部分改成「./l4d2」就好了，但还是建议不要，同样在最后说明为什么。 </p>
+<p>此外，下载需时比较久，毕竟服务端其实也接近 7g ，我使用阿里云的速度不错，也需要下载个十多分钟。</p>
+</blockquote>
+<p>完成之后就退出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+<p>这里已经可以执行<code>./srcds_run</code>这个指令来直接启动超级纯净的服务器了，我跟着别人的不完整教程搭建时也是这样想的：「反正我只是要联机」，但我非常建议安装必备插件以及进行必要的安全防护，是的，你没看错，安全防护。不过在做安全防护之前，先安装一些必须插件，很有必要。</p>
+<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>首先我们需要安装 <a href="https://www.sourcemod.net/downloads.php?branch=stable" target="_blank" rel="noopener">SourceMOD</a> 和 <a href="http://metamodsource.net/downloads.php?branch=stable" target="_blank" rel="noopener">MetaMOD</a>，这两个东西除了提供 API 可供开发插件外，也提供了一些基本的功能。</p>
+<blockquote>
+<p>链接都是 stable 的分支。</p>
+</blockquote>
+<p>这里其它教程就开始作妖了，叫你在本地把两个东西捏一起再用什么软件上传，对我就是说 <a href="https://blog.csdn.net/qq741058114/article/details/81287465" target="_blank" rel="noopener">CSDN</a> 那篇东西。</p>
+<p>前面都用到 wget 了你为什么要自己折腾……</p>
+<p>打开上方两个 MOD 的链接，见到 Download 下面的小企鹅了吗？这些都是直链，右键那个小企鹅，按「复制连结网址」之类的东西，然后切换到我们该用来放插件的目录，在前面打上<code>wget</code>，并下载，就像下面这样。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd l4d2game    &#x2F;&#x2F; 注意：这里切换到你前面使用 SteamCMD 下载游戏时写的目录</span><br><span class="line">cd left4dead2   &#x2F;&#x2F; 这是真正的游戏目录……我是这么认为的 </span><br><span class="line">cd addons</span><br><span class="line">wget https:&#x2F;&#x2F;sm.alliedmods.net&#x2F;smdrop&#x2F;1.10&#x2F;sourcemod-1.10.0-git6454-linux.tar.gz</span><br><span class="line">wget https:&#x2F;&#x2F;mms.alliedmods.net&#x2F;mmsdrop&#x2F;1.10&#x2F;mmsource-1.10.7-git971-linux.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>这里的下载网址是我写文章时现复制的，总之命令看起来就像这样，当然读者也执行这两条是没有问题的，但我建议替换成新版本的链接。</p>
+<p>之后解压：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar xvf sourcemod-1.10.0-git6454-linux.tar.gz</span><br><span class="line">tar xvf mmsource-1.10.7-git971-linux.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>解压完之后这两个包可以直接删掉了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm sourcemod-1.10.0-git6454-linux.tar.gz</span><br><span class="line">rm mmsource-1.10.7-git971-linux.tar.gz</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这两个插件除了有基础功能之外，其实就像 Minecraft 的 Forge 和 Rift 一样，可以再安装别的插件，比方说 .smx （不是 Super Mario X） 的插件就要安装到 addons\sourcemod 下。</p>
+</blockquote>
+<p>到这里插件就算是安装完了，一般来说现在应该先开个服试试，检查一下插件是不是正确安装了，但开服参数里也包含着安全防护的东西，现在直接开服会有安全问题，所以请耐心继续阅读。</p>
+<h3 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h3><p>先到<a href="http://steamcommunity.com/actions/GroupCreate" target="_blank" rel="noopener">这里</a>创建一个属于你的 Steam 组，创建完成后记下组 ID ，另外，让要一起联机的人都加入这个组。</p>
+<p>现在，当前目录应该是在 addons ，那我们向上一层，到 cfg 文件夹去：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ..</span><br><span class="line">cd cfg</span><br><span class="line">vi server.cfg</span><br></pre></td></tr></table></figure>
+
+<p>在这里新建一个<code>server.cfg</code>，在里面写点东西。这里我就列出比较重要的。另外，这里写的东西实际上就是开服完成后执行的脚本。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hostname &quot;Ceplavia&#39;s L4D2 Server&quot;    &#x2F;&#x2F; 这个是服务器开放时，在游戏的右下角（如果你有加入一些组）显示的服务器名称，可以写但没用，下面会提到为什么</span><br><span class="line">sv_allow_lobby_connect_only 0    &#x2F;&#x2F; 是否允许从大厅选择「组服务器」来连接，建议 0 ，也就是 false</span><br><span class="line">sv_tags hidden    &#x2F;&#x2F; 在浏览服务器的地方隐藏</span><br><span class="line">sv_steamgroup 你的组id    &#x2F;&#x2F; 就是前面你建立的组的 ID</span><br><span class="line">sv_steamgroup_exclusive 1    &#x2F;&#x2F; 设置组为私有</span><br><span class="line"></span><br><span class="line">sm_cvar sv_gametypes coop    &#x2F;&#x2F; 游戏模式为合作</span><br><span class="line">z_difficulty Normal    &#x2F;&#x2F;游戏难度为普通</span><br></pre></td></tr></table></figure>
+
+<p>中间我故意分隔了一下，前面的部分是纯净的服务器就能执行的，下面的两行是安装了那两个插件才会执行的。</p>
+<blockquote>
+<p>对我就故意不写怎么离开编辑状态并保存，vim 应该自己学。</p>
+</blockquote>
+<p>然后到<code>addons/sourcemod/configs</code>这个目录来，修改<code>admins_simple.ini</code>这个文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ..    &#x2F;&#x2F; 现在应该是在 cfg 文件夹里，往上一层</span><br><span class="line">cd addons</span><br><span class="line">cd sourcemod</span><br><span class="line">cd configs</span><br><span class="line">vi admins_simple.ini</span><br></pre></td></tr></table></figure>
+
+<p>在里面以这样的格式写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;STEAM_数字:数字:好多数字&quot;		&quot;99:z&quot;</span><br></pre></td></tr></table></figure>
+
+<p>前面那串是你的 SteamID，可以在<a href="https://steamidfinder.com/" target="_blank" rel="noopener">这里</a>查找到。</p>
+<p>这么一来就差不多了，回到游戏所在的目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ..    &#x2F;&#x2F; 向上返回到 sourcemod</span><br><span class="line">cd ..    &#x2F;&#x2F; 向上返回到 addons</span><br><span class="line">cd ..    &#x2F;&#x2F; 向上返回到 left4dead2</span><br><span class="line">cd ..    &#x2F;&#x2F; 向上返回到 l4d2server</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>应该没错……总之要返回到有<code>srcds_run</code>这个东西所在的目录。</p>
+</blockquote>
+<p>然后我们来写一个启动脚本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi start.sh</span><br></pre></td></tr></table></figure>
+
+<p>写这段东西就好了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;srcds_run -game left4dead2 -insecure +hostport 写个数字嘛 -condebug  +exec server.cfg -nomaster</span><br></pre></td></tr></table></figure>
+
+<p>来具体解释一下，srcds_run 就是启动服务端用的；game 参数不多说了；insecure 是禁用 VAC，一些客户端的 mod 不禁用这个的话容易被制裁，比如说自动 BunnyHop 的 mod；hostport 是端口，默认是27015，建议修改；condebug 是输出 debug 的信息；exec 是执行前面写的<code>server.cfg</code>；nomaster 同样是隐藏服务器用的。</p>
+<blockquote>
+<p>注意，这里使用的端口，请在防火墙或安全组允许双向，TCP 和 UDP 都要。</p>
+</blockquote>
+<p>然后给这个启动脚本加上权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x start.sh</span><br></pre></td></tr></table></figure>
+
+<p>这样就可以执行 start.sh 来启动服务器了，建议新增一个 screen 来使用。要停止服务器，只要在 screen 内 Ctrl+C 即可。</p>
+<h3 id="三方地图"><a href="#三方地图" class="headerlink" title="三方地图"></a>三方地图</h3><p>用 pscp 之类的工具上传到 addons这个文件夹内再开服就行。路径是<code>IP:home/你的用户/游戏文件夹/left4dead2/addons</code>。</p>
+<p>前面我提到过为什么用户名和下载的文件夹名不要用「l4d2」，这里把路径里部分换成 l4d2 就明白了，真的很容易搞混目录。</p>
+<h3 id="插件指令"><a href="#插件指令" class="headerlink" title="插件指令"></a>插件指令</h3><p>游戏内可以输入<code>/admin</code>来执行管理员指令，可以进行换图、投票等操作。</p>
+<p>要玩三方地图的话，可以切换地图，在选择地图的地方，类似「c1m1_blabla」这样命名的都是官方地图，具体对应什么可以去查，神奇的地方在于不按剧情顺序。如果没有安装三方图，会有一些不是这个格式的地图，我估计是测试场景，我也不敢开。要是有装三方图的话，会列在前面。</p>
+<h3 id="进入服务器"><a href="#进入服务器" class="headerlink" title="进入服务器"></a>进入服务器</h3><p>游戏内按「~」呼出控制台，输入<code>connect IP:你自己的端口</code>，例如<code>connect 1.2.3.4:56789</code>即可，当然你要是有域名的话，也可以写一个域名解析，这样就不用记 IP 了。</p>
+<h3 id="其它游戏的服务端"><a href="#其它游戏的服务端" class="headerlink" title="其它游戏的服务端"></a>其它游戏的服务端</h3><p>像别的可以联机的游戏，比如我最近正在玩的 Project Zomboid，也是可以利用同样的方式开服的，在前面下载游戏的地方把 app id 改成不同游戏的便可。</p>
+<hr>
+<h3 id="WHY安全？"><a href="#WHY安全？" class="headerlink" title="WHY安全？"></a>WHY安全？</h3><p>国内的人在某种程度上真的很犯贱。</p>
+<p>求生说起来也有 10 年了吧？说到求生，大家的印象都是「特价的时候才一顿饭的价钱，补个票吧」，而坚持在玩的人，我觉得真的没多少。</p>
+<p>而这种 p2p 的联机方式虽然不能说不好，但至少在国内是很难做到的，因此开个服务器来联机也无可厚非。</p>
+<p>但就有这么一种贱民，开着收费的求生服，卖 VIP，当你的服务器在公网上暴露，也就是能在游戏里的搜索服务器那访问到，就会有人来尝试连接，一旦发现能连上，你的服务器在稍后就会受到 DDoS 攻击。</p>
+<p>只要你不隐藏起来，一开就 D 你。</p>
+<p><strong>一个月卖 VIP 能卖多少钱？值得吗？</strong></p>
+<p>前面在<code>server.cfg</code>里写的<code>sv_tags hidden</code>以及启动参数里的<code>-nomaster</code>都是把服务器隐藏起来的一种手段。以免遭到这种人的 DDoS。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Ceplavia
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://www.ceplavia.com/2019/11/18/2019-11-18_%E7%95%AA%E5%A4%96%EF%BC%9A%E5%9C%A8CentOS%E4%B8%8A%E6%90%AD%E5%BB%BA%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF2%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="番外：在CentOS上搭建求生之路2服务器">https://www.ceplavia.com/2019/11/18/2019-11-18_番外：在CentOS上搭建求生之路2服务器/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF2/" rel="tag"># 求生之路2</a>
+              <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag"># 服务器</a>
+              <a href="/tags/CentOS/" rel="tag"># CentOS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/11/09/2019-11-09_%E8%A7%86%E7%82%B9%EF%BC%9A%E6%90%AD%E5%8F%B0%E7%90%86%E8%AE%BA/" rel="prev" title="视点：搭台理论">
+      <i class="fa fa-chevron-left"></i> 视点：搭台理论
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/09/2019-12-09_%E8%A7%86%E7%82%B9%EF%BC%9A%E5%88%92%E5%88%86%E8%83%BD%E5%8A%9B/" rel="next" title="视点：划分能力？">
+      视点：划分能力？ <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体步骤"><span class="nav-number">2.</span> <span class="nav-text">具体步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件"><span class="nav-number">3.</span> <span class="nav-text">插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全"><span class="nav-number">4.</span> <span class="nav-text">安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三方地图"><span class="nav-number">5.</span> <span class="nav-text">三方地图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件指令"><span class="nav-number">6.</span> <span class="nav-text">插件指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进入服务器"><span class="nav-number">7.</span> <span class="nav-text">进入服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它游戏的服务端"><span class="nav-number">8.</span> <span class="nav-text">其它游戏的服务端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WHY安全？"><span class="nav-number">9.</span> <span class="nav-text">WHY安全？</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ceplavia"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Ceplavia</p>
+  <div class="site-description" itemprop="description">遊戲是潛在抑鬱症患者最後的避風港。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">101</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://insbex.jixun.moe/" title="https://insbex.jixun.moe/" rel="noopener" target="_blank">Insb 的思维过山车</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://jixun.moe/" title="https://jixun.moe/" rel="noopener" target="_blank">季寻日志</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://laplacence.github.io/" title="https://laplacence.github.io/" rel="noopener" target="_blank">Laplacence's Trash Can</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://penguinliong.moe/" title="https://penguinliong.moe/" rel="noopener" target="_blank">Liong 的技术博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://sunnyrx.com/" title="https://sunnyrx.com/" rel="noopener" target="_blank">热心的周末</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.tcdw.net/" title="https://www.tcdw.net/" rel="noopener" target="_blank">吐槽大王部落格</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ceplavia</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://ceplaviablog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://www.ceplavia.com/2019/11/18/2019-11-18_%E7%95%AA%E5%A4%96%EF%BC%9A%E5%9C%A8CentOS%E4%B8%8A%E6%90%AD%E5%BB%BA%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF2%E6%9C%8D%E5%8A%A1%E5%99%A8/";
+    this.page.identifier = "2019/11/18/2019-11-18_番外：在CentOS上搭建求生之路2服务器/";
+    this.page.title = "番外：在CentOS上搭建求生之路2服务器";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://ceplaviablog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Cyan-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Cyan-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ceplavia.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+<script data-ad-client="ca-pub-8675315982671307" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <meta name="description" content="在整理东西的时候突然看到了以前玩「洛奇英雄传」的时候写下来的东西，写写我对回复HP这种设定的思考。 以前洛奇英雄传的大剑，在捏人的时候参数并不是只和外观挂钩的，如果我没记错的话，体型越大，普通攻击伤害越高，但攻速慢；体型小则反之。 在以前就觉得这种设定即使在技能都一样的情况下也可能会出现不同输出风格的角色。不过输出方面并不是我要说的，当时同期也在玩「灵魂回响」，那是个没有治疗职业的 MMORPG">
+<meta property="og:type" content="article">
+<meta property="og:title" content="视点：一种「回复HP」的思路">
+<meta property="og:url" content="https://www.ceplavia.com/2019/05/14/2019-05-14_%E8%A7%86%E7%82%B9%EF%BC%9A%E4%B8%80%E7%A7%8D%E5%9B%9E%E5%A4%8DHP%E7%9A%84%E6%80%9D%E8%B7%AF/index.html">
+<meta property="og:site_name" content="Ceplavia&#39;s Gaming Blog">
+<meta property="og:description" content="在整理东西的时候突然看到了以前玩「洛奇英雄传」的时候写下来的东西，写写我对回复HP这种设定的思考。 以前洛奇英雄传的大剑，在捏人的时候参数并不是只和外观挂钩的，如果我没记错的话，体型越大，普通攻击伤害越高，但攻速慢；体型小则反之。 在以前就觉得这种设定即使在技能都一样的情况下也可能会出现不同输出风格的角色。不过输出方面并不是我要说的，当时同期也在玩「灵魂回响」，那是个没有治疗职业的 MMORPG">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-05-14T07:27:41.000Z">
+<meta property="article:modified_time" content="2020-07-30T13:52:54.942Z">
+<meta property="article:author" content="Ceplavia">
+<meta property="article:tag" content="角色回复">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.ceplavia.com/2019/05/14/2019-05-14_%E8%A7%86%E7%82%B9%EF%BC%9A%E4%B8%80%E7%A7%8D%E5%9B%9E%E5%A4%8DHP%E7%9A%84%E6%80%9D%E8%B7%AF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>视点：一种「回复HP」的思路 | Ceplavia's Gaming Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145119829-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-145119829-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ceplavia's Gaming Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.ceplavia.com/2019/05/14/2019-05-14_%E8%A7%86%E7%82%B9%EF%BC%9A%E4%B8%80%E7%A7%8D%E5%9B%9E%E5%A4%8DHP%E7%9A%84%E6%80%9D%E8%B7%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Ceplavia">
+      <meta itemprop="description" content="遊戲是潛在抑鬱症患者最後的避風港。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ceplavia's Gaming Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          视点：一种「回复HP」的思路
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-05-14 15:27:41" itemprop="dateCreated datePublished" datetime="2019-05-14T15:27:41+08:00">2019-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-30 21:52:54" itemprop="dateModified" datetime="2020-07-30T21:52:54+08:00">2020-07-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%A7%86%E7%82%B9/" itemprop="url" rel="index"><span itemprop="name">视点</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/05/14/2019-05-14_%E8%A7%86%E7%82%B9%EF%BC%9A%E4%B8%80%E7%A7%8D%E5%9B%9E%E5%A4%8DHP%E7%9A%84%E6%80%9D%E8%B7%AF/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/14/2019-05-14_视点：一种回复HP的思路/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在整理东西的时候突然看到了以前玩「洛奇英雄传」的时候写下来的东西，写写我对回复HP这种设定的思考。</p>
+<p>以前洛奇英雄传的大剑，在捏人的时候参数并不是只和外观挂钩的，如果我没记错的话，体型越大，普通攻击伤害越高，但攻速慢；体型小则反之。</p>
+<p>在以前就觉得这种设定即使在技能都一样的情况下也可能会出现不同输出风格的角色。不过输出方面并不是我要说的，当时同期也在玩「灵魂回响」，那是个没有治疗职业的 MMORPG ，输出和 T 可以发动不同的灵魂之力来增加特效。我隐约记得玩的是法师，而且灵魂之力应该有些是增加减伤之类的，对于 T 如何回复 HP 或是暂时增加 EHP 之类的并没有研究。</p>
+<p>不过「没有治疗职业」这一点再和体型的设定挂钩就有意思了。</p>
+<p>我当时所想的是不同职业的 HP 再生速度是不同的，根据不同的属性，例如体力等等，则再产生变化。</p>
+<p>例如一个魁梧的战士，他在作为 T 的情况下，HP 的每秒再生速率是 A/3s ，那么在经过他佩戴的装备，又或是人物本身的属性加成之后，或许能达到 1.2A/3s ，但这虽然可能在应对小怪上足够，只看再生速率的话能连续应对好几波的小怪；</p>
+<p>还可以加上受到致命攻击时再生速率降低 30% ，又或是每次受到伤害后一定时间内的再生速率会降低，使得在特定情况下不得不交出相应的技能来应对。</p>
+<p>技能上能做的文章也相对多：</p>
+<p>- 减少再生的频率， 例如每 3s 再生一次加快为每 2s 一次，但此后的再生速度或许会<strong>惩罚至每 5s 一次；</strong></p>
+<p>（也就是说不由治疗职业给予的「治疗」都会有惩罚）</p>
+<p>- 增加再生时回复的 HP ；</p>
+<p>诸如此类的设定不止可以出现在 T 的身上，也可以出现在治疗职业身上，因为我觉得治疗职业仅仅是读个条就能起来一大截血量，无论怎么想都只是用来应对特定机制的。</p>
+<p>同时体力还可以和减伤之类的扯上关系，但这次先谈回血。</p>
+<p>此外还有自己吃血吃蓝。这个我也曾想过，吃血无可厚非，不过同样也可以改成是一个临时提供的高再生速率。</p>
+<p>惩罚则是一定时间内不能再吃。蓝也是一样，我曾经想过自己吃蓝药的话，就会在一段时间内惩罚最大蓝量。</p>
+<p>这样的设定有点类似小说里的「临时吃满状态但打不出几招」，是作为拼命招式用的，而平时打小怪，我早就觉得一个法师能火球术打个不停，而且不累，就已经是很奇怪的设定了。</p>
+<p>治疗职业的技能可以有好几种设定，除了上面写的两种之外，还有别的设定：</p>
+<p>取消再生速率的限制，使其维持在原本的再生速率，持续一定时间；</p>
+<p>祝福一块地区，在里面的角色提高再生速率；</p>
+<p>临时提高再生速率并且没有惩罚；</p>
+<p>等等诸如此类的</p>
+<p>除此之外，职业特色还是要明确，例如治疗职业仅限可以对什么属性进行修改，可以对什么属性进行小幅调整；而 T 又可以控制什么属性。</p>
+<p>在本文中，例如 T 可以激发自己的斗志，减低受到的伤害之类的，这种能力治疗就不能给予，因为你总不能念叨几句（指读条）就让别人减少受到的伤害吧。这也算一种另类的职业特色。限制着每个职业的特性不会太统一。</p>
+<p>在其它一些 MMORPG ，治疗职业可以给 T 上减伤，T自己又能开减伤，甚至输出职业也能丢个减伤，综合起来出现的就是一些策划不想看到的「骚操作」。</p>
+<p>例如某个技能你在被打中后就会提高下次受到这个技能的伤害，在 WOW 里是很常见的换 T 机制，但要是什么职业都能给减伤，策划原本打算让你吃 3 次伤害一换 T ，结果装备起来之后搞不好能 6 次伤害才一换 T ，看似是增加不同的打法，其实是火起来之后就会被策划修掉的东西。</p>
+<p>不过话又说回来，这种没有能直接回复大量 HP 的设定会不会把游戏的节奏拖得「偏向老年化」呢，利用现有各种 MMORPG 的团队伤害机制来对比，其实造成团灭最后都是归结到一个原因：在受到突如其来的大伤害（无论是能避免还是不能避免）后，又再受到了原本并不致命的小伤害而被「补刀」死。</p>
+<p>而这种 HP 回复机制则是靠着「增加再生跳数或再生量」来增加血量，曲线是比较平缓的，意味着不能在大伤害之后接源源不绝的小伤害，否则这个机制就起不了作用。大伤害后一段时间不会有新的伤害，在副本中就像是一个临时的休息，让人喘一口气重新集中精神的设定。</p>
+<p>WOW 里现在就很常见老年人（其实这么说不恰当，因为年龄普遍是30~40，或许50，但对于这个游戏来说的确是老年人，就权当一种尊重的说法了）打团本因为反应不过来而不小心吃到大伤害倒地的。</p>
+<p>我所想的这种机制对于治疗职业来说多了一些应对的时间，不至于在特定的时候读不出来技能就完蛋，因为其它职业本身 HP 就在再生，只是快慢的问题。至于在受到大伤害之后也有时间让你对一个角色进行集中治疗（如果他吃到了一个大伤害的话）。</p>
+<p>在保证了不会因为这些「被补刀」而导致的一两个人倒地就要重来的情况之后，副本的难度其实就主要在于其它机制了，这种周期式出现大伤害的机制其实很公式化，能不能过主要是看伤害职业会不会不管机制在那吃伤害。当机制公式化之后，剩下的只是靠 boss 的血量来增加难度了，毕竟一直集中精神，只要时间长了就容易出现差错。</p>
+<p>这样的 boss 设计其实一些单机里我也见过，具体就是一个体型比较大的怪对着你猛扑，或是猛撞一下地板对大范围内造成伤害，然后这个怪就晕了（进硬直），这个时候角色可以选择赶紧吃药，又或是趁着 boss 有易伤的时候打出大量伤害。</p>
+<p>可能有点复杂，来整理一下我想的这种机制对血量的设定有什么改变吧：</p>
+<p>一般回复 - 站着等再生；</p>
+<p>额外回复 - 使用技能让再生的频率加快或量增加，技能结束后再生速率会降低；</p>
+<p>额外回复 - 喝药水（立即），治疗后在一段时间里会减少最大生命值，喝的动作时被击中可能药水就洒了；</p>
+<p>回复限制 - 在受到致命攻击（暴击？）后，一段时间内再生速率降低；</p>
+<p>上面几种都是可以看作在战斗期间的设定，至于不在战斗期间我还有一些别的很「RPG」的想法。  </p>
+<p>回到旅店好好睡一觉血就满了嘛；</p>
+<p>至于在脱战情况下喝药水则不是立即了，要读条，但这样喝药水后不会有惩罚；</p>
+<p>此外不在战斗状态的话一些激发回血的技能也不能用；</p>
+<p>还可以找一位好心的治疗职业玩家来给你治疗；</p>
+<p>记得 FFXIV 刚出来时幻术师有个技能叫「战姿」，所以我在想，例如：</p>
+<p>进入战斗姿态， HP 再生速率减慢（没错是减慢），但动作速度增加多少，伤害再增加多少这样。持续时间内还要消耗别的东西，例如是体力或者精神力，理所当然地是因为角色很集中。（不过是不是有点像 WOW 以前的 ZS 切姿态？）  </p>
+<p>当然其它姿态也有对应的不同 T 的方式（会这么想是因为在 WOW 中无论是 ZS 切姿态还是 DK 切灵气，都其实多数只用其中的一个，在战斗中切换的情况不多），这样就增加了可玩性。也可以把这种姿态设置成间歇使用的技能，来应对不同的情况。（是不是又扯远了？）</p>
+<p>正好前面说到了好心的治疗，治疗职业的蓝量同样可以适用于血量的设计。</p>
+<p>T 和 DPS 会去吃伤害的原因一是因为血多，二是因为血容易来，治疗一个读条近乎就回起来20%甚至更多，而治疗一个读条奶得起来也是因为蓝量和蓝量回复支撑着，当蓝量变得不那么廉价，在法术的选择上也不会太随意，变相提高了治疗职业的技术要求。</p>
+<p>像 WOW 那样很多 DEBUFF 需要驱散， FFXIV 那样治疗只要偶尔奶一下然后就一直在输出，其实都是让治疗职业不会太轻松的设定，否则人人都是治疗了。</p>
+<p>同时这样的设定也可以有很多生活技能玩，这个另外再说（如果我记得的话），也可能会直接在下一篇里联动一起写。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Ceplavia
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://www.ceplavia.com/2019/05/14/2019-05-14_%E8%A7%86%E7%82%B9%EF%BC%9A%E4%B8%80%E7%A7%8D%E5%9B%9E%E5%A4%8DHP%E7%9A%84%E6%80%9D%E8%B7%AF/" title="视点：一种「回复HP」的思路">https://www.ceplavia.com/2019/05/14/2019-05-14_视点：一种回复HP的思路/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%A7%92%E8%89%B2%E5%9B%9E%E5%A4%8D/" rel="tag"># 角色回复</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/04/30/2019-04-30_%E8%A7%86%E7%82%B9%E5%8F%8A%E7%8E%A9%E5%AE%B6%E5%BF%83%E7%90%86%E5%AD%A6%EF%BC%9A%E9%80%86%E6%B0%B4%E5%AF%92%EF%BC%9A%E8%BF%99%E6%98%AF%E4%B8%80%E6%95%B4%E4%B8%AA%E4%B8%96%E7%95%8C%EF%BC%8C%E4%B8%8D%E6%98%AF%E4%BD%A0%E5%81%9A%E7%9A%84%E4%BB%80%E4%B9%88%E7%83%82%E7%8B%AC%E7%AB%8B%E6%B8%B8%E6%88%8F/" rel="prev" title="视点及玩家心理学：「逆水寒」：这是一整个世界，不是你做的什么烂独立游戏">
+      <i class="fa fa-chevron-left"></i> 视点及玩家心理学：「逆水寒」：这是一整个世界，不是你做的什么烂独立游戏
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/05/27/2019-05-27_%E8%A7%86%E7%82%B9%EF%BC%9A%E9%83%A8%E5%88%86%E4%BA%BA%E7%9C%BC%E4%B8%AD%E6%B2%A1%E7%94%A8%E7%9A%84%E8%AE%BE%E5%AE%9A/" rel="next" title="视点：部分人眼中没用的设定">
+      视点：部分人眼中没用的设定 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ceplavia"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Ceplavia</p>
+  <div class="site-description" itemprop="description">遊戲是潛在抑鬱症患者最後的避風港。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">101</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://insbex.jixun.moe/" title="https://insbex.jixun.moe/" rel="noopener" target="_blank">Insb 的思维过山车</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://jixun.moe/" title="https://jixun.moe/" rel="noopener" target="_blank">季寻日志</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://laplacence.github.io/" title="https://laplacence.github.io/" rel="noopener" target="_blank">Laplacence's Trash Can</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://penguinliong.moe/" title="https://penguinliong.moe/" rel="noopener" target="_blank">Liong 的技术博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://sunnyrx.com/" title="https://sunnyrx.com/" rel="noopener" target="_blank">热心的周末</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.tcdw.net/" title="https://www.tcdw.net/" rel="noopener" target="_blank">吐槽大王部落格</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ceplavia</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://ceplaviablog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://www.ceplavia.com/2019/05/14/2019-05-14_%E8%A7%86%E7%82%B9%EF%BC%9A%E4%B8%80%E7%A7%8D%E5%9B%9E%E5%A4%8DHP%E7%9A%84%E6%80%9D%E8%B7%AF/";
+    this.page.identifier = "2019/05/14/2019-05-14_视点：一种回复HP的思路/";
+    this.page.title = "视点：一种「回复HP」的思路";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://ceplaviablog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

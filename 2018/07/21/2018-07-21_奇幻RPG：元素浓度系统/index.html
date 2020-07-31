@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Cyan-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Cyan-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ceplavia.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+<script data-ad-client="ca-pub-8675315982671307" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <meta name="description" content="元素浓度系统 Ens Otyo System （其实两个单词都是对应中文发音缩减音节的结果，发现了吗？） 这是一个我很久以前想做，但我的技术能力又做不出来的东西。 总而言之，是一个解决在譬如水下地区竟然能施放火球术的方案。不是直接对区域进行限制，而是改为使用此系统接管所有法术的施放。 首先我们先来给法术增加一个咏唱限制。对咏唱法术的属性和当前区域该属性的值进行判断。区域属性值超过界限时，全速咏唱，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="奇幻RPG：元素浓度系统">
+<meta property="og:url" content="https://www.ceplavia.com/2018/07/21/2018-07-21_%E5%A5%87%E5%B9%BBRPG%EF%BC%9A%E5%85%83%E7%B4%A0%E6%B5%93%E5%BA%A6%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="Ceplavia&#39;s Gaming Blog">
+<meta property="og:description" content="元素浓度系统 Ens Otyo System （其实两个单词都是对应中文发音缩减音节的结果，发现了吗？） 这是一个我很久以前想做，但我的技术能力又做不出来的东西。 总而言之，是一个解决在譬如水下地区竟然能施放火球术的方案。不是直接对区域进行限制，而是改为使用此系统接管所有法术的施放。 首先我们先来给法术增加一个咏唱限制。对咏唱法术的属性和当前区域该属性的值进行判断。区域属性值超过界限时，全速咏唱，">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-07-21T15:32:02.000Z">
+<meta property="article:modified_time" content="2020-07-30T13:52:54.892Z">
+<meta property="article:author" content="Ceplavia">
+<meta property="article:tag" content="世界观">
+<meta property="article:tag" content="元素浓度">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.ceplavia.com/2018/07/21/2018-07-21_%E5%A5%87%E5%B9%BBRPG%EF%BC%9A%E5%85%83%E7%B4%A0%E6%B5%93%E5%BA%A6%E7%B3%BB%E7%BB%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>奇幻RPG：元素浓度系统 | Ceplavia's Gaming Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145119829-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-145119829-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ceplavia's Gaming Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.ceplavia.com/2018/07/21/2018-07-21_%E5%A5%87%E5%B9%BBRPG%EF%BC%9A%E5%85%83%E7%B4%A0%E6%B5%93%E5%BA%A6%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Ceplavia">
+      <meta itemprop="description" content="遊戲是潛在抑鬱症患者最後的避風港。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ceplavia's Gaming Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          奇幻RPG：元素浓度系统
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-07-21 23:32:02" itemprop="dateCreated datePublished" datetime="2018-07-21T23:32:02+08:00">2018-07-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-30 21:52:54" itemprop="dateModified" datetime="2020-07-30T21:52:54+08:00">2020-07-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%A7%86%E7%82%B9/" itemprop="url" rel="index"><span itemprop="name">视点</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%A7%86%E7%82%B9/%E8%AE%BE%E5%AE%9A/" itemprop="url" rel="index"><span itemprop="name">设定</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/07/21/2018-07-21_%E5%A5%87%E5%B9%BBRPG%EF%BC%9A%E5%85%83%E7%B4%A0%E6%B5%93%E5%BA%A6%E7%B3%BB%E7%BB%9F/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/21/2018-07-21_奇幻RPG：元素浓度系统/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>元素浓度系统 Ens Otyo System</p>
+<p>（其实两个单词都是对应中文发音缩减音节的结果，发现了吗？）</p>
+<p>这是一个我很久以前想做，但我的技术能力又做不出来的东西。</p>
+<p>总而言之，是一个解决在譬如水下地区竟然能施放火球术的方案。不是直接对区域进行限制，而是改为使用此系统接管所有法术的施放。</p>
+<p>首先我们先来给法术增加一个咏唱限制。对咏唱法术的属性和当前区域该属性的值进行判断。区域属性值超过界限时，全速咏唱，低于多少又高于多少时，80%速度咏唱，少于多少时，则干脆不可咏唱。</p>
+<h2 id="基础设定"><a href="#基础设定" class="headerlink" title="基础设定"></a><strong>基础设定</strong></h2><p>游戏中每个区域参考MC中Chunk的概念进行编程，每个区域有其固有属性，属性假设为只有地、火、风、水。那么在最平衡的地方，每一个属性都占25%，为了说明方面就让他干脆是25点吧，这样每个区域的总属性点数是100点。在强属性区域，该属性需要占比达到70%以上。</p>
+<h2 id="法术飞行"><a href="#法术飞行" class="headerlink" title="法术飞行"></a><strong>法术飞行</strong></h2><p>法术从A区域飞行到B区域，抽取A区域中的法术元素转移到B区域中，A区域中立即按百分比减少对应元素的浓度，从其他类型元素处按区域权值以比例方式抽取补充。</p>
+<p>飞行时路过的路径也会受到影响。权值与A区域距离成正比。即越接近B区域，变化得越多。</p>
+<h2 id="周期事件"><a href="#周期事件" class="headerlink" title="周期事件"></a><strong>周期事件</strong></h2><p>强/弱属性地区以Tag标识，然后加以权值来储存这个数据。</p>
+<p>每次周期有一定（较低）的机率（还受法阵影响）来触发元素回溯。元素回溯指的是地区的元素浓度回到最初的设定标准。这个模拟了大自然的自我调节。</p>
+<h2 id="法阵影响"><a href="#法阵影响" class="headerlink" title="法阵影响"></a><strong>法阵影响</strong></h2><p>有些法阵会从更远的区域调动元素向当前区域补充元素——看起来是如此，但注意这里只是在调节各个区域的元素比例，实际不调整数量。</p>
+<p>被法阵影响的地区，周期事件的成功率会下调。 法阵还可以提供更多存在感。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a><strong>例子</strong></h2><p>有一个水系铸能使受委托前往火山地区解决当地降雨稀少的问题。</p>
+<p>要求：在火山地区的某村庄施放降雨术。</p>
+<p>降雨术</p>
+<p>基础咏唱时间：17秒（引导）</p>
+<p>魔力值消耗：25%MAXMP+320MP</p>
+<p>范围：150px</p>
+<p>咏唱需求：当前区域水元素浓度在80%或以上</p>
+<p>已知火山地区各区域水元素浓度都在10%以下，使用水箭术从河流地区将水元素运向火山地区明显不可行。</p>
+<p>于是在河流地区和火山地区边缘各架设一个元素法阵。</p>
+<p>河流地区架设的是元素传送法阵，可以抽空区域中的元素向其他地区传送。</p>
+<p>这还不够，传送到的水元素会被周期事件调节回低比例，于是火山地区还要架设一个元素集中法阵，将周期事件的频率降低。</p>
+<p>这样就在火山地区临时有了高比例的水元素浓度。然后就可以唱技能完成委托了。</p>
+<p>如何？</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Ceplavia
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://www.ceplavia.com/2018/07/21/2018-07-21_%E5%A5%87%E5%B9%BBRPG%EF%BC%9A%E5%85%83%E7%B4%A0%E6%B5%93%E5%BA%A6%E7%B3%BB%E7%BB%9F/" title="奇幻RPG：元素浓度系统">https://www.ceplavia.com/2018/07/21/2018-07-21_奇幻RPG：元素浓度系统/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%B8%96%E7%95%8C%E8%A7%82/" rel="tag"># 世界观</a>
+              <a href="/tags/%E5%85%83%E7%B4%A0%E6%B5%93%E5%BA%A6/" rel="tag"># 元素浓度</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/07/10/2018-07-10_%E5%9B%BD%E5%86%85%E7%BD%91%E6%B8%B8%EF%BC%9A%E8%B0%81%E5%9C%A8%E6%8A%9B%E5%BC%83%E7%8E%A9%E5%AE%B6/" rel="prev" title="国内网游：谁在抛弃玩家">
+      <i class="fa fa-chevron-left"></i> 国内网游：谁在抛弃玩家
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/07/26/2018-07-26_%E4%BA%91%E7%8E%A9%E5%AE%B6/" rel="next" title="云玩家">
+      云玩家 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础设定"><span class="nav-number">1.</span> <span class="nav-text">基础设定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#法术飞行"><span class="nav-number">2.</span> <span class="nav-text">法术飞行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#周期事件"><span class="nav-number">3.</span> <span class="nav-text">周期事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#法阵影响"><span class="nav-number">4.</span> <span class="nav-text">法阵影响</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">5.</span> <span class="nav-text">例子</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ceplavia"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Ceplavia</p>
+  <div class="site-description" itemprop="description">遊戲是潛在抑鬱症患者最後的避風港。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">101</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://insbex.jixun.moe/" title="https://insbex.jixun.moe/" rel="noopener" target="_blank">Insb 的思维过山车</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://jixun.moe/" title="https://jixun.moe/" rel="noopener" target="_blank">季寻日志</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://laplacence.github.io/" title="https://laplacence.github.io/" rel="noopener" target="_blank">Laplacence's Trash Can</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://penguinliong.moe/" title="https://penguinliong.moe/" rel="noopener" target="_blank">Liong 的技术博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://sunnyrx.com/" title="https://sunnyrx.com/" rel="noopener" target="_blank">热心的周末</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.tcdw.net/" title="https://www.tcdw.net/" rel="noopener" target="_blank">吐槽大王部落格</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ceplavia</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://ceplaviablog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://www.ceplavia.com/2018/07/21/2018-07-21_%E5%A5%87%E5%B9%BBRPG%EF%BC%9A%E5%85%83%E7%B4%A0%E6%B5%93%E5%BA%A6%E7%B3%BB%E7%BB%9F/";
+    this.page.identifier = "2018/07/21/2018-07-21_奇幻RPG：元素浓度系统/";
+    this.page.title = "奇幻RPG：元素浓度系统";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://ceplaviablog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

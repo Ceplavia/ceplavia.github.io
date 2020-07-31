@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Cyan-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Cyan-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ceplavia.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+<script data-ad-client="ca-pub-8675315982671307" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <meta name="description" content="写完之后发现整篇都在反讽，所以我先把我的看法写在前面。 我的看法是： 游戏开发过程中的每一个部分都很重要，大到核心玩法的固定，小到一个按钮的大小，甚至一个标点符号。  前段时间（有好几年了）喜欢玩一个叫做Game Dev Tycoon的游戏，通俗地讲，这就是一个Game Develop Simulator。 要做的就是不停地变更类型搭配，出游戏，赚钱。 里面有一个环节，在游戏开发时要调节各部分占比">
+<meta property="og:type" content="article">
+<meta property="og:title" content="占比哪有那么重要？">
+<meta property="og:url" content="https://www.ceplavia.com/2018/06/09/2018-06-09_%E5%8D%A0%E6%AF%94%E5%93%AA%E6%9C%89%E9%82%A3%E4%B9%88%E9%87%8D%E8%A6%81%EF%BC%9F/index.html">
+<meta property="og:site_name" content="Ceplavia&#39;s Gaming Blog">
+<meta property="og:description" content="写完之后发现整篇都在反讽，所以我先把我的看法写在前面。 我的看法是： 游戏开发过程中的每一个部分都很重要，大到核心玩法的固定，小到一个按钮的大小，甚至一个标点符号。  前段时间（有好几年了）喜欢玩一个叫做Game Dev Tycoon的游戏，通俗地讲，这就是一个Game Develop Simulator。 要做的就是不停地变更类型搭配，出游戏，赚钱。 里面有一个环节，在游戏开发时要调节各部分占比">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-06-09T10:01:49.000Z">
+<meta property="article:modified_time" content="2020-07-30T13:52:54.890Z">
+<meta property="article:author" content="Ceplavia">
+<meta property="article:tag" content="开发">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.ceplavia.com/2018/06/09/2018-06-09_%E5%8D%A0%E6%AF%94%E5%93%AA%E6%9C%89%E9%82%A3%E4%B9%88%E9%87%8D%E8%A6%81%EF%BC%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>占比哪有那么重要？ | Ceplavia's Gaming Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145119829-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-145119829-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ceplavia's Gaming Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.ceplavia.com/2018/06/09/2018-06-09_%E5%8D%A0%E6%AF%94%E5%93%AA%E6%9C%89%E9%82%A3%E4%B9%88%E9%87%8D%E8%A6%81%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Ceplavia">
+      <meta itemprop="description" content="遊戲是潛在抑鬱症患者最後的避風港。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ceplavia's Gaming Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          占比哪有那么重要？
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-06-09 18:01:49" itemprop="dateCreated datePublished" datetime="2018-06-09T18:01:49+08:00">2018-06-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-30 21:52:54" itemprop="dateModified" datetime="2020-07-30T21:52:54+08:00">2020-07-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%A7%86%E7%82%B9/" itemprop="url" rel="index"><span itemprop="name">视点</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/06/09/2018-06-09_%E5%8D%A0%E6%AF%94%E5%93%AA%E6%9C%89%E9%82%A3%E4%B9%88%E9%87%8D%E8%A6%81%EF%BC%9F/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/06/09/2018-06-09_占比哪有那么重要？/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>写完之后发现整篇都在反讽，所以我先把我的看法写在前面。</p>
+<p>我的看法是： 游戏开发过程中的每一个部分都很重要，大到核心玩法的固定，小到一个按钮的大小，甚至一个标点符号。</p>
+<hr>
+<p>前段时间（有好几年了）喜欢玩一个叫做Game Dev Tycoon的游戏，通俗地讲，这就是一个Game Develop Simulator。</p>
+<p>要做的就是不停地变更类型搭配，出游戏，赚钱。 里面有一个环节，在游戏开发时要调节各部分占比，比如画面，音乐的占比，会影响成品质量和销量什么的。</p>
+<p>这段情节让我想起了现在的GameJam，以及国内目前各大公司的一些游戏创意比赛。</p>
+<p>目的？当然是在其中挑选好的创意，然后投资，做出成品拿来卖了，至于说推动国内独立游戏发展……这句话我打出来自己都想笑。</p>
+<p>假定这样一个情况：有一队做出了超棒的创意，前所未有，拿了第一，举办这个比赛的公司也进行了投资，那么这个成品游戏真的会好玩吗？</p>
+<p>其实是不会。</p>
+<p>真的不会。</p>
+<p>可以看看近几年来国内的这类游戏创意大赛，参加者的要求是大学生。而国内的大学生普遍有着什么样的特点呢？</p>
+<p>自大。</p>
+<p>不是说他们的游戏创意差到了一个不能接受的地步，而是那种进了决赛，或是最后拿到名次，得到投资之后做出来成品的过程。</p>
+<p>仔细一想，这整个过程，其实和那些天天与学校的比赛搞来搞去没有本质关系。</p>
+<p>“这个创业比赛我都拿到第一了，上课的部分就先放一下，反正能拿到风投，毕业创业一波美滋滋。”</p>
+<p>“这个10美分的比赛我都第一了，……”</p>
+<p>是吧？一样的情况。</p>
+<p>只是做梦的人和做的梦不同。</p>
+<hr>
+<p>那么又回到了标题，不同部分的占比，在游戏开发过程中有那么重要吗？</p>
+<p>最近在做自己的游戏，我没打算先把核心的玩法做出来，而是打算从打开游戏，直到看到开发商Logo画面，游戏主菜单画面……按这样的顺序做。</p>
+<p>有什么好处呢？我不敢确认地说，但我花了很多心思在打开游戏直至完全进入这个部分。</p>
+<p>最后出来的成果，至少是我个人满意的。</p>
+<p>所以我才会想起时间占比这个问题。</p>
+<p>独立游戏在我这里的定义已经是个贬义词了，泛指所有：</p>
+<ul>
+<li>Unity制作</li>
+<li>主场景像素风</li>
+<li>立绘是画师手绘</li>
+<li>主角有莫名奇妙的能力</li>
+<li>而且主角不一定是人</li>
+<li>架空的超能力世界</li>
+<li>出现的路人角色极少</li>
+<li>剧情是找亲人或找什么鬼东西</li>
+<li>或者做到最后变成了教育向的剧情</li>
+<li>收集品超多，或是难找到夭寿</li>
+<li>设置界面一如既往地只有音量音效是否全屏</li>
+<li>全收集后有新关卡</li>
+<li>低级趣味彩蛋</li>
+</ul>
+<p>每个独立游戏都想表达出自己的“剧情”，于是就变成了这样的流水线产物。每个所谓「策划」都说自己有屌到夭寿的剧情和设计。</p>
+<p>实际上能卖的有多少嘛……(手动姚明脸)</p>
+<p>花费时间最多的部分变成了核心玩法部分，试BUG，试这个那个。</p>
+<p>音乐？外包。美术？外包。（喔这里的美术只是画(动词)哦，国内的独立游戏我真没见到会做建模的。）</p>
+<p>开始界面？随便做做就算了，反正核心玩法才是重点。</p>
+<p>然后他们最擅长的就是埋彩蛋，低级趣味的那种。就是会让你露出=_,=表情的那种。</p>
+<p>流程也短到夭寿，要么就是死堆关卡量。线性剧情的那种就物品加到有至少3~4小时的游戏时间。 “啊你都没做过游戏，你怎么会知道核心玩法要做多久？那个什么东西要做好久的，开始菜单有个进入的按钮和设置就好了。”</p>
+<p>……觉得不重要的人全是这样想的。</p>
+<p>在我看来，即使是开始画面，或是游戏进行过程中的载入画面，在制作时的时间占比应当要和写剧情的时间相仿的。注意是剧情，不是独立游戏那种突然让你做这个做那个架空世界观根本不稳自己都解释不通的那种垃圾剧情。</p>
+<p>菜单，载入有助于世界观的建构，这就是我的观点。 最近很火的Detroit: Become Human，很多「媒体」和云评测都在吹，说是从来都是云玩家的人甚至买了ps4特地体验这个游戏。</p>
+<p>这些对游戏不热爱的人都这样想，那我是怎么想的呢？ 这游戏世界观根本不稳，一边玩一边吐槽，这就是我的游戏流程。</p>
+<p>只把游戏中的其中一点表现出来真的很重要吗？为了这一点就可以抛弃其他一切？</p>
+<p>对于有剧情的游戏来说，一个好的演绎故事的机制、配合好的故事，这才是那些所谓「创意大赛」所应当考核的地方。</p>
+<p>当整个生态圈都他O的在微创新，说什么创意大赛这种丢人的东西呢？</p>
+<p>有多少参加这种比赛的「策划」都是那种「哇这个加上这个会不会很好玩？」「我就是想表达这种剧情」的人呢？</p>
+<p>反正我是能遇到不少这样的天天异想天开的人。 整个国内的游戏圈给我的感觉就是这样。</p>
+<p>「大佬说这个好玩，大佬6666，这游戏真好玩」</p>
+<p>「网游？做个剑侠风吧，现在挺火的」</p>
+<p>「独立游戏？你要表现你内心的想法，比如用偏黑暗风的场景」</p>
+<hr>
+<p>我可去你们妈的吧，这样的废物也配做游戏？</p>
+<p>你们(指这些所谓大佬，顺便一提我很讨厌别人称他为大佬他还真的就这么接受的人，谦逊之心人当有之，没有的人是狗东西。)做的游戏，在国内请媒体写点水文，然后骗骗有钱的人，仅此而已。</p>
+<p>少他妈以钱为理由继续做这些垃圾。</p>
+<p>我宁可饱受折磨地做我自己的游戏，也不愿被这种烂生态改变。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Ceplavia
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://www.ceplavia.com/2018/06/09/2018-06-09_%E5%8D%A0%E6%AF%94%E5%93%AA%E6%9C%89%E9%82%A3%E4%B9%88%E9%87%8D%E8%A6%81%EF%BC%9F/" title="占比哪有那么重要？">https://www.ceplavia.com/2018/06/09/2018-06-09_占比哪有那么重要？/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%BC%80%E5%8F%91/" rel="tag"># 开发</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/05/08/2018-05-08_%E6%B5%85%E8%B0%88%E5%9B%BD%E6%9C%8DEVE%E5%89%8D%E6%99%AF/" rel="prev" title="浅谈国服EVE前景">
+      <i class="fa fa-chevron-left"></i> 浅谈国服EVE前景
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/06/25/2018-06-25_minecraft%E8%81%AF%E6%A9%9F%E5%85%A5%E9%96%80%E7%AF%87%EF%BC%9A%E5%90%88%E6%A0%BC%E7%9A%84%E4%BC%BA%E6%9C%8D%E7%AB%AF/" rel="next" title="Minecraft 聯機入門篇：合格的伺服端">
+      Minecraft 聯機入門篇：合格的伺服端 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ceplavia"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Ceplavia</p>
+  <div class="site-description" itemprop="description">遊戲是潛在抑鬱症患者最後的避風港。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">101</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://insbex.jixun.moe/" title="https://insbex.jixun.moe/" rel="noopener" target="_blank">Insb 的思维过山车</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://jixun.moe/" title="https://jixun.moe/" rel="noopener" target="_blank">季寻日志</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://laplacence.github.io/" title="https://laplacence.github.io/" rel="noopener" target="_blank">Laplacence's Trash Can</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://penguinliong.moe/" title="https://penguinliong.moe/" rel="noopener" target="_blank">Liong 的技术博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://sunnyrx.com/" title="https://sunnyrx.com/" rel="noopener" target="_blank">热心的周末</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.tcdw.net/" title="https://www.tcdw.net/" rel="noopener" target="_blank">吐槽大王部落格</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ceplavia</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://ceplaviablog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://www.ceplavia.com/2018/06/09/2018-06-09_%E5%8D%A0%E6%AF%94%E5%93%AA%E6%9C%89%E9%82%A3%E4%B9%88%E9%87%8D%E8%A6%81%EF%BC%9F/";
+    this.page.identifier = "2018/06/09/2018-06-09_占比哪有那么重要？/";
+    this.page.title = "占比哪有那么重要？";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://ceplaviablog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>

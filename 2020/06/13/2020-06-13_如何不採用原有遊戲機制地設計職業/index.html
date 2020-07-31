@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Cyan-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Cyan-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ceplavia.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+<script data-ad-client="ca-pub-8675315982671307" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <meta name="description" content="這篇文章的分類是革新，包括之前，以及之後我所寫的部分文章也會歸類到此。 如果條件允許的話，之後會寫的是關於 RPG 中等級制度如何進行革新。 雖然我這樣寫，但我卻不知道之後我會不會再續寫。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何不採用原有遊戲機制地設計職業">
+<meta property="og:url" content="https://www.ceplavia.com/2020/06/13/2020-06-13_%E5%A6%82%E4%BD%95%E4%B8%8D%E6%8E%A1%E7%94%A8%E5%8E%9F%E6%9C%89%E9%81%8A%E6%88%B2%E6%A9%9F%E5%88%B6%E5%9C%B0%E8%A8%AD%E8%A8%88%E8%81%B7%E6%A5%AD/index.html">
+<meta property="og:site_name" content="Ceplavia&#39;s Gaming Blog">
+<meta property="og:description" content="這篇文章的分類是革新，包括之前，以及之後我所寫的部分文章也會歸類到此。 如果條件允許的話，之後會寫的是關於 RPG 中等級制度如何進行革新。 雖然我這樣寫，但我卻不知道之後我會不會再續寫。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-13T05:12:31.000Z">
+<meta property="article:modified_time" content="2020-07-30T13:52:55.070Z">
+<meta property="article:author" content="Ceplavia">
+<meta property="article:tag" content="技能">
+<meta property="article:tag" content="職業">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.ceplavia.com/2020/06/13/2020-06-13_%E5%A6%82%E4%BD%95%E4%B8%8D%E6%8E%A1%E7%94%A8%E5%8E%9F%E6%9C%89%E9%81%8A%E6%88%B2%E6%A9%9F%E5%88%B6%E5%9C%B0%E8%A8%AD%E8%A8%88%E8%81%B7%E6%A5%AD/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>如何不採用原有遊戲機制地設計職業 | Ceplavia's Gaming Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145119829-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-145119829-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ceplavia's Gaming Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.ceplavia.com/2020/06/13/2020-06-13_%E5%A6%82%E4%BD%95%E4%B8%8D%E6%8E%A1%E7%94%A8%E5%8E%9F%E6%9C%89%E9%81%8A%E6%88%B2%E6%A9%9F%E5%88%B6%E5%9C%B0%E8%A8%AD%E8%A8%88%E8%81%B7%E6%A5%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Ceplavia">
+      <meta itemprop="description" content="遊戲是潛在抑鬱症患者最後的避風港。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ceplavia's Gaming Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何不採用原有遊戲機制地設計職業
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-13 13:12:31" itemprop="dateCreated datePublished" datetime="2020-06-13T13:12:31+08:00">2020-06-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-30 21:52:55" itemprop="dateModified" datetime="2020-07-30T21:52:55+08:00">2020-07-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A9%E6%96%B0/" itemprop="url" rel="index"><span itemprop="name">革新</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2020/06/13/2020-06-13_%E5%A6%82%E4%BD%95%E4%B8%8D%E6%8E%A1%E7%94%A8%E5%8E%9F%E6%9C%89%E9%81%8A%E6%88%B2%E6%A9%9F%E5%88%B6%E5%9C%B0%E8%A8%AD%E8%A8%88%E8%81%B7%E6%A5%AD/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/06/13/2020-06-13_如何不採用原有遊戲機制地設計職業/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>這篇文章的分類是<strong>革新</strong>，包括之前，以及之後我所寫的部分文章也會歸類到此。</p>
+<p>如果條件允許的話，之後會寫的是關於 RPG 中等級制度如何進行革新。</p>
+<p>雖然我這樣寫，但我卻不知道之後我會不會再續寫。</p>
+<a id="more"></a>
+
+<p>既然標題寫到了「原有遊戲機制」，那麼我就要簡單地定義一個遊戲機制。</p>
+<p>人物，有生命條，有資源條。商店和任務獎勵會獲得藥水，藥水可以回復生命和資源。</p>
+<p>使用藥水，以一瓶回復 500 生命的藥水為例，正常使用是分為 5 口，每次回復 100 點，也可以一口全喝完，浪費一點，只回復 400 生命。</p>
+<p>人物身上會有 BUFF 與 DEBUFF，當然怪物身上也會有。</p>
+<p>在這個機制下，職業會被設定成圍繞資源的產生方式來使用技能。</p>
+<p>那麼我要做的，就是反而不使用其中的部分機制。</p>
+<hr>
+<p>職業：Berserker，這個職業在大多數人的認知裏，是攻擊力高，但普遍在生命較低的情況才比較有戰鬥力的職業。但為了這個職業不至於猝死，又會設計保命技能。</p>
+<p>為了保命技能可以確實保命，又會設計得很 imba。</p>
+<p>以下技能按先後次序列出，是角色在成長期間學到的順序，另外，只寫出代表技能，各種傷害技能不列。</p>
+<p><strong>揮砍(主動)</strong></p>
+<ul>
+<li>描述：使用雙手武器對敵人進行一次揮砍，造成 X 傷害。</li>
+<li>附加效果：15% 機率令敵人進入<strong>流血</strong>狀態，持續 3 秒；使用後 2 秒內進入武器準備狀態，不能使用武器技能。</li>
+<li>補充：有流血狀態時，每 1 秒損失 X 點生命。</li>
+</ul>
+<p><strong>側步(主動)</strong></p>
+<ul>
+<li>描述：揮動雙手武器，利用武器重量造成的慣性，向旁邊移動。</li>
+<li>附加效果：2 秒內進入<strong>武器準備</strong>狀態，不能使用武器技能。</li>
+</ul>
+<p><strong>磨刀(主動)</strong></p>
+<ul>
+<li>描述：裝備雙手武器並在鐵砧附近使用此技能，強化造成的流血傷害。</li>
+<li>附加效果：造成的流血狀態造成傷害的速度加快 30%。</li>
+</ul>
+<p><strong>嗜血(被動)</strong></p>
+<ul>
+<li>描述：對敵人造成流血狀態時，立即利用雙手武器再攻擊一次。</li>
+<li>附加效果：-</li>
+</ul>
+<p><strong>狂躁(被動)</strong></p>
+<ul>
+<li>描述：受到攻擊後有 40% 機率堆疊狂躁效果，最多堆疊 3 層。</li>
+<li>附加效果：狂躁會讓下一次使用武器技能後的武器準備時間增加 100%，並使此技能造成的傷害提升 20%，使用武器技能會消耗 1 層狂躁效果。</li>
+</ul>
+<p><strong>狂暴(主動)</strong></p>
+<ul>
+<li>描述：進入狂暴狀態，不會受到擊退效果影響，持續 30 秒。</li>
+<li>附加效果：所有武器技能傷害提升 20%，使用時立即堆疊 3 層狂躁效果。</li>
+</ul>
+<p><strong>再生(被動)</strong></p>
+<ul>
+<li>描述：離開狂暴狀態時獲得再生效果，持續 5 秒。</li>
+<li>附加效果：-</li>
+<li>補充：有再生效果時每 0.5 秒回復失去生命的 3%。</li>
+</ul>
+<p><strong>深層狂暴(被動)</strong></p>
+<ul>
+<li>描述：狂暴狀態下試圖堆疊狂躁時有 20% 機率進入深層狂暴，持續直至退出狂暴狀態。</li>
+<li>附加效果：深層狂暴會額外增加 2 層狂躁的可堆疊次數；深層狂暴狀態下武器沒有準備時間。</li>
+</ul>
+<hr>
+<p>我想説明的主要特色就是深層狂暴。</p>
+<p>很多遊戲都這樣，把狂暴當成 BUFF 技能，純粹地提供增益，而無視職業設計需要特色。</p>
+<p>又或者説，無視這個職業本身。</p>
+<p>以我的文字能力描述可能不太能令人理解，但我覺得應該所有人都明白 Berserker 這種職業是個瘋子。</p>
+<p>當你理解了這種職業玩起來要很瘋，就能明白為什麼我會設計這種深層狂暴。</p>
+<p>核心不在於堆疊狂躁這個被動，而是在堆疊狂躁其本身。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Ceplavia
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://www.ceplavia.com/2020/06/13/2020-06-13_%E5%A6%82%E4%BD%95%E4%B8%8D%E6%8E%A1%E7%94%A8%E5%8E%9F%E6%9C%89%E9%81%8A%E6%88%B2%E6%A9%9F%E5%88%B6%E5%9C%B0%E8%A8%AD%E8%A8%88%E8%81%B7%E6%A5%AD/" title="如何不採用原有遊戲機制地設計職業">https://www.ceplavia.com/2020/06/13/2020-06-13_如何不採用原有遊戲機制地設計職業/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E8%83%BD/" rel="tag"># 技能</a>
+              <a href="/tags/%E8%81%B7%E6%A5%AD/" rel="tag"># 職業</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/01/2020-06-01_%E8%A6%96%E9%BB%9E%EF%BC%9A%E9%81%8A%E6%88%B2%E7%9A%84%E7%9B%A1%E9%A0%AD%E6%98%AF%E7%B4%80%E9%8C%84%E7%89%87/" rel="prev" title="視點：遊戲的盡頭是紀錄片">
+      <i class="fa fa-chevron-left"></i> 視點：遊戲的盡頭是紀錄片
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/19/2020-06-19_%E7%8E%A9%E5%AE%B6%E5%BF%83%E7%90%86%E5%AD%B8%EF%BC%9A%E8%BC%B8%E5%85%A5%E8%88%87%E9%AB%94%E9%A9%97/" rel="next" title="玩家心理學：輸入與體驗">
+      玩家心理學：輸入與體驗 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ceplavia"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Ceplavia</p>
+  <div class="site-description" itemprop="description">遊戲是潛在抑鬱症患者最後的避風港。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">101</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://insbex.jixun.moe/" title="https://insbex.jixun.moe/" rel="noopener" target="_blank">Insb 的思维过山车</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://jixun.moe/" title="https://jixun.moe/" rel="noopener" target="_blank">季寻日志</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://laplacence.github.io/" title="https://laplacence.github.io/" rel="noopener" target="_blank">Laplacence's Trash Can</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://penguinliong.moe/" title="https://penguinliong.moe/" rel="noopener" target="_blank">Liong 的技术博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://sunnyrx.com/" title="https://sunnyrx.com/" rel="noopener" target="_blank">热心的周末</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.tcdw.net/" title="https://www.tcdw.net/" rel="noopener" target="_blank">吐槽大王部落格</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ceplavia</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://ceplaviablog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://www.ceplavia.com/2020/06/13/2020-06-13_%E5%A6%82%E4%BD%95%E4%B8%8D%E6%8E%A1%E7%94%A8%E5%8E%9F%E6%9C%89%E9%81%8A%E6%88%B2%E6%A9%9F%E5%88%B6%E5%9C%B0%E8%A8%AD%E8%A8%88%E8%81%B7%E6%A5%AD/";
+    this.page.identifier = "2020/06/13/2020-06-13_如何不採用原有遊戲機制地設計職業/";
+    this.page.title = "如何不採用原有遊戲機制地設計職業";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://ceplaviablog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
