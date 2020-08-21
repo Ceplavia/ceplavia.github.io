@@ -280,10 +280,10 @@
 <p>同时自己看了看 <code>Networking.NetworkTransport</code> ，里面没有提到 OpenSSL 。</p>
 <p>接着看 Unreal4 （别忘了 PUBG 就是这引擎做的），文档里找不到有关的描述，那就换种方式搜，我试着在谷歌里搜类似「ue4 using openssl」的字句，找到了 UE4 官方论坛里的一个<a href="https://forums.unrealengine.com/unreal-engine/feedback-for-epic/1503637-openssl-error-when-starting-ue4editor" target="_blank" rel="noopener">帖</a>，在 #2 回复又看到了熟悉的关键词。</p>
 <blockquote>
-<p> Until the OpenSSL fix makes it into the launcher, you can create an environment variable called “OPENSSL_ia32cap” with the value “:~0x20000000d”. (Both without the quote marks) </p>
+<p> Until the OpenSSL fix makes it into the launcher, you can create an environment variable called &quot;OPENSSL_ia32cap&quot; with the value &quot;:~0x20000000d&quot;. (Both without the quote marks) </p>
 </blockquote>
 <p>这个帖里的问题是打不开 Epic Games Launcher，并且「 I then tried starting UE4Editor.exe but it crashed without error or showing up. 」</p>
-<p>那么会是 OpenSSL 的问题吗？但 OpenSSL 最近的更新是在 9 月。而根据 Intel 官网的数据里看， Icelake ，也就是 10 代 Core ，目前只有 G 后缀，通通都是移动平台，推出日期都是 Q3’19……</p>
+<p>那么会是 OpenSSL 的问题吗？但 OpenSSL 最近的更新是在 9 月。而根据 Intel 官网的数据里看， Icelake ，也就是 10 代 Core ，目前只有 G 后缀，通通都是移动平台，推出日期都是 Q3&#39;19……</p>
 <p>不，我觉得就是 Intel 的 10nm 架构问题。</p>
 <p>或者说我最初就觉得是 Intel 在 10nm 的架构上改动了什么东西，导致和原本的 14nm++ 相差太大而造成的。</p>
 
