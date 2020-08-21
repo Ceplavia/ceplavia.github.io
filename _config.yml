@@ -88,3 +88,6 @@ deploy:
 
 sitemap: 
   path: sitemap.xml
+  
+marked:
+  smartypants: false
