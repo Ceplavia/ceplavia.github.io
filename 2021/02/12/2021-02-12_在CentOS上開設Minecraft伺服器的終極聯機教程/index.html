@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Cyan-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Cyan-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.ceplavia.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+<script data-ad-client="ca-pub-8675315982671307" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <meta name="description" content="自從之前寫過一篇如何在 CentOS 上開設 L4D2 的遊戲伺服器之後，現在的時間正值 Minecraft 的 1.17 版本發佈之前，之前寫的 Minecraft 聯機三部曲我也不甚滿意，因此寫一篇重製版。應該會和番外：在CentOS上搭建求生之路2服务器這篇東西一樣非常的漫長，但我會試着寫完的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在CentOS上開設Minecraft伺服器的終極聯機教程">
+<meta property="og:url" content="https://www.ceplavia.com/2021/02/12/2021-02-12_%E5%9C%A8CentOS%E4%B8%8A%E9%96%8B%E8%A8%ADMinecraft%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%9A%84%E7%B5%82%E6%A5%B5%E8%81%AF%E6%A9%9F%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Ceplavia&#39;s Gaming Blog">
+<meta property="og:description" content="自從之前寫過一篇如何在 CentOS 上開設 L4D2 的遊戲伺服器之後，現在的時間正值 Minecraft 的 1.17 版本發佈之前，之前寫的 Minecraft 聯機三部曲我也不甚滿意，因此寫一篇重製版。應該會和番外：在CentOS上搭建求生之路2服务器這篇東西一樣非常的漫長，但我會試着寫完的。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-12T11:28:19.000Z">
+<meta property="article:modified_time" content="2021-03-07T02:52:58.105Z">
+<meta property="article:author" content="Ceplavia">
+<meta property="article:tag" content="Minecraft">
+<meta property="article:tag" content="CentOS">
+<meta property="article:tag" content="伺服器">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://www.ceplavia.com/2021/02/12/2021-02-12_%E5%9C%A8CentOS%E4%B8%8A%E9%96%8B%E8%A8%ADMinecraft%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%9A%84%E7%B5%82%E6%A5%B5%E8%81%AF%E6%A9%9F%E6%95%99%E7%A8%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>在CentOS上開設Minecraft伺服器的終極聯機教程 | Ceplavia's Gaming Blog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145119829-2"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-145119829-2');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ceplavia's Gaming Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.ceplavia.com/2021/02/12/2021-02-12_%E5%9C%A8CentOS%E4%B8%8A%E9%96%8B%E8%A8%ADMinecraft%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%9A%84%E7%B5%82%E6%A5%B5%E8%81%AF%E6%A9%9F%E6%95%99%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Ceplavia">
+      <meta itemprop="description" content="遊戲是潛在抑鬱症患者最後的避風港。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ceplavia's Gaming Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在CentOS上開設Minecraft伺服器的終極聯機教程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-12 19:28:19" itemprop="dateCreated datePublished" datetime="2021-02-12T19:28:19+08:00">2021-02-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-03-07 10:52:58" itemprop="dateModified" datetime="2021-03-07T10:52:58+08:00">2021-03-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%95%AA%E5%A4%96/" itemprop="url" rel="index"><span itemprop="name">番外</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/02/12/2021-02-12_%E5%9C%A8CentOS%E4%B8%8A%E9%96%8B%E8%A8%ADMinecraft%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%9A%84%E7%B5%82%E6%A5%B5%E8%81%AF%E6%A9%9F%E6%95%99%E7%A8%8B/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/02/12/2021-02-12_在CentOS上開設Minecraft伺服器的終極聯機教程/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>自從之前寫過一篇如何在 CentOS 上開設 L4D2 的遊戲伺服器之後，現在的時間正值 Minecraft 的 1.17 版本發佈之前，之前寫的 Minecraft 聯機三部曲我也不甚滿意，因此寫一篇重製版。應該會和<a href="https://www.ceplavia.com/2019/11/18/2019-11-18_%E7%95%AA%E5%A4%96%EF%BC%9A%E5%9C%A8CentOS%E4%B8%8A%E6%90%AD%E5%BB%BA%E6%B1%82%E7%94%9F%E4%B9%8B%E8%B7%AF2%E6%9C%8D%E5%8A%A1%E5%99%A8/">番外：在CentOS上搭建求生之路2服务器</a>這篇東西一樣非常的漫長，但我會試着寫完的。</p>
+<a id="more"></a>
+
+<p>[TOC]</p>
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>要開始之前，重申一下，這篇文章我不會以「看着很方便」的方式來把需要什麼、要做什麼等等清楚地列出來，我覺得這些根本就不是教程。</p>
+<p>我只會把我自己如何去架設一個 Minecraft 伺服器的過程翔實地寫下來，務求讓讀者明白每一個步驟，我所踩過的每一個坑，也會詳細寫出。當然，如果有些步驟你是清楚的，就可以適當跳過，只閲讀你不太明白的部分。一些名詞如果我沒有解釋而讀者又看不懂，也可以將這些名詞丟去 Google。</p>
+<p>如果讀者對 Linux 的使用並不諳練，我建議先行熟悉常用指令，並不難。</p>
+<h1 id="準備一台-VPS-伺服器"><a href="#準備一台-VPS-伺服器" class="headerlink" title="準備一台 VPS (伺服器)"></a>準備一台 VPS (伺服器)</h1><h2 id="什麼是-VPS？該用哪個雲計算平台？"><a href="#什麼是-VPS？該用哪個雲計算平台？" class="headerlink" title="什麼是 VPS？該用哪個雲計算平台？"></a>什麼是 VPS？該用哪個雲計算平台？</h2><p>首先要明白的一點是，Minecraft 要進行聯機遊玩的話，雖然也可以以客户端直接相互連接的方式進行，但實際上 Minecraft 現在對於單人遊戲的處理方式也是在本地開設伺服端，然後連接到這個伺服端，這樣的聯機，通俗點講就是非常卡，甚至可以連不上。</p>
+<p>於是我們需要一台 VPS，在這台 VPS 上架設 Minecraft 的伺服端。</p>
+<blockquote>
+<p>注意伺服器和伺服端的區別。伺服器是在大多數情況下需要花費金錢去購買的 VPS，而伺服端則是一個「軟體」，運行在這台 VPS 上。</p>
+</blockquote>
+<p>若你是在中國大陸，並且户籍也是中國大陸，那麼選擇其實非常多。例如阿里雲、騰訊雲、華為雲、百度雲等。要注意的是這些雲計算平台通常有非常猛的一次性新用户優惠。最瘋狂的情況下可以以 1 折的價錢購買到手，如果是打算長時間和朋友一起遊玩，可以考慮一次性購買 2 年，甚至 3 年。</p>
+<p>如果想要一直用這些優惠，在備份好的情況下，可以每幾個月，甚至幾年換一次平台。</p>
+<p>大陸以外的國家則有更多考慮，VPS 平台有很多，不再廢話。不過我就只能很慘地用阿里雲，所以本文有些地方可能會主要以阿里雲為主來説明，但概念上其實是一樣的，其它平台也應該會有一樣的東西，自己稍微變通一下再進行設置即可。</p>
+<h2 id="為什麼要-VPS？"><a href="#為什麼要-VPS？" class="headerlink" title="為什麼要 VPS？"></a>為什麼要 VPS？</h2><p>你也可以只在自己的電腦上 (Windows 10) 運行伺服端，但中國大陸的網絡多數不會有公網 IP，so...</p>
+<p>VPS 除了有提供公網 IP 之外，也可以 7x24 運行，擁有一台自己的 VPS 也可以用來做很多事，比如 steam 掛卡，或是架設其它遊戲的伺服端。</p>
+<blockquote>
+<p>如果你確實只打算在自己的電腦上運行，可以跳過 VPS 部分。畢竟測試伺服端時我也是在自己電腦上測試。</p>
+</blockquote>
+<h2 id="配置呢？"><a href="#配置呢？" class="headerlink" title="配置呢？"></a>配置呢？</h2><p>其實對於Minecraft 伺服端的 JVM (Java Virtual Machine) 來説，大多數情況下只需要 1C2G (1 Core 2G，即 1 核心的 CPU 和 2G 的 RAM )的配置就可以流暢地「運行」原版伺服端或 Mod 數不多的伺服端。</p>
+<blockquote>
+<p>此處的「運行」是單純地指運行，網絡的部分我會在優化篇再寫，如果單純只和大陸以內的朋友聯機，通常情況下不需要擔心。</p>
+</blockquote>
+<p>而自己使用 VPS 來架設伺服端時，由於操作系統也要佔去一部分 RAM，因此能使用的 RAM 只有大概 1.6G。考慮到這點，或許使用一些伺服端的托管平台更方便？但這些平台也有它的缺點，也是和網絡有關。</p>
+<p>綜上，對於 VPS 來講，只運行原版，或是 Mod 較少的伺服端，可以只用 1C2G 的配置。</p>
+<p>如果 Mod 比較多，就要使用 2C4G 的配置。如果 Mod 中有比較消耗性能的，也可以考慮 4C4G。此外，聯機人數越多，所需的 RAM 越高。RAM 的需求可以簡單地視作「每個人約 100 M」。</p>
+<p>而帶寬的部分，1M 也大概足以讓 10 個人共同聯機。但我會比較推薦流量計費的方式，即帶寬可以提高到 5M 左右，消耗的流量再額外計費。如果遊玩的人不多，在 10 個以內，流量計費絕對是比較便宜的。</p>
+<h2 id="VPS-上的操作系統用什麼？"><a href="#VPS-上的操作系統用什麼？" class="headerlink" title="VPS 上的操作系統用什麼？"></a>VPS 上的操作系統用什麼？</h2><p>我個人是比較推薦 CentOS，當然也有我用習慣了的因素在。我是個歧視 Ubuntu 的人，so...</p>
+<h2 id="有-VPS-了，然後呢？"><a href="#有-VPS-了，然後呢？" class="headerlink" title="有 VPS 了，然後呢？"></a>有 VPS 了，然後呢？</h2><p>為了方便地進行管理，你需要以 SSH 的方式連接到 VPS。而登入 VPS 默認是用密碼的，你<strong>最好</strong>改成密鑰方式登入。</p>
+<blockquote>
+<p>要説明區別的話，想像一下你家的指紋鎖。可以設置密碼開門，也可以設置指紋開門。設置了密碼的話，不管是誰，只要知道你的密碼就可以開門。但如果只設置指紋，不考慮識別問題的話，就必須擁有指紋才可以開門，指紋就像是上面提到的密鑰 。</p>
+<p>因此在 VPS 上使用密鑰登入非常安全，但當然也有不方便的部分。比如沒在使用電腦時，想在手機上使用 Termux 登入 VPS 做一些管理的話就要把密鑰複製一份到手機上。而密鑰由於具有唯一性，要千萬注意，不能泄漏給別人。有時運氣不好硬碟損壞，密鑰也沒了，因此備份密鑰也是你要做的事。</p>
+</blockquote>
+<p>如何做好 VPS 的安全也是一門學問，我的能力有限，原則上為了絕對的安全，應當配置成只允許特定 IP 登入，即只允許另一台 VPS_2 登入，然後連接這台 VPS_2，再連接到 VPS。但只是開個 Minecraft 伺服器，不需要這麼複雜。讀者若有興趣的話可以自行再 Google 相關內容。</p>
+<h1 id="僅僅是準備一個-Minecraft-伺服端"><a href="#僅僅是準備一個-Minecraft-伺服端" class="headerlink" title="僅僅是準備一個 Minecraft 伺服端"></a>僅僅是準備一個 Minecraft 伺服端</h1><h2 id="預防針"><a href="#預防針" class="headerlink" title="預防針"></a>預防針</h2><p>先打個預防針，這一章會比上一章更長，肯定長很多，我還沒開始寫就知道肯定會長很多，因為真的有很多要注意的事，幾乎都是我遇到過的問題。另外，我也會提到一些歷史問題。</p>
+<p>看到這裏，可以先去下載 <a href="https://notepad-plus-plus.org/downloads/" target="_blank" rel="noopener">Notepad++</a>，或者看你的個人喜好也可以使用 VSCode，總之不要使用系統自帶的 <code>notepad.exe</code>，否則編輯大多數配置文件時會很頭痛。</p>
+<h2 id="先從最簡單的原版開始"><a href="#先從最簡單的原版開始" class="headerlink" title="先從最簡單的原版開始"></a>先從最簡單的原版開始</h2><p>首先我們需要一個伺服端本體，它是一個 <code>.jar</code> 文件，通常會使用命令來執行。</p>
+<blockquote>
+<p>官方的伺服端，在 Windows 上，它是有 GUI (Graphical user interface，圖形使用者介面) 的。當然也可以透過額外參數的方式禁用 GUI。實際上誰也不會用這個 GUI，因為沒有必要，所以你可以當這段是廢話。</p>
+</blockquote>
+<p>原版遊戲的伺服端非常地……易於部署，但卻很不好找。基於某些原因，Mojang 非常不願意提供舊版的伺服端下載，無論你什麼時候訪問他們的官方網站上的<a href="https://www.minecraft.net/en-us/download/server/" target="_blank" rel="noopener">伺服端下載頁面</a>，都只能下載到最新正式版的伺服端，幸好有好心人提供了，在 <a href="https://mcversions.net/" target="_blank" rel="noopener">MCVersions</a> 可以下到所有版本，包括各種預覽版的客户端和伺服端文件。</p>
+<p>在得到一個 <code>.jar</code> 文件之後，首先開一個新的資料夾，把這個 <code>Minecraft_Server.jar</code> 放進去。然後為了方便測試，在 Windows 下需要在同目錄內新建一個 <code>.bat</code> 文件，把下面這段東西塞進去。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -d64 -server -XX:+UseG1GC -XX:MaxGCPauseMillis&#x3D;100 -XX:+UseStringDeduplication -Xms1G -Xmx2560M -XX:hashCode&#x3D;5 -Dfile.encoding&#x3D;UTF-8 -jar Minecraft_Server.jar nogui</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>這是我平時在使用的指令。JVM 初始分配 1G RAM，最多分配到 2560M，也就是 2.5G。這兩個參數都可以修改，但最好不要小於 1G。</p>
+<p>參數中的 Minecraft_Server.jar 並不是一成不變的，根據你使用的伺服端 .jar 文件需要更改。</p>
+<p>後面的 nogui 就是在 Windows 下不使用 GUI，因為不需要。</p>
+<p>最後的 pause 是默認以 Powershell 或 Cmd 執行完指令後，不讓窗口直接消失而添加的，在 VPS 上使用 linux 操作系統時，可以去掉。</p>
+</blockquote>
+<p>之後運行這個 <code>.bat</code> 就可以啟動伺服端了。伺服端啟動完成的標誌是在控制台輸出這樣的語句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Done (xxxs)! For help, type &quot;help&quot;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>初次運行時，會要求你同意 EULA。不用在意這實際上是要做什麼。看見那個提示時，先直接關掉控制台窗口，找到同目錄下的 <code>eula.txt</code> ，打開，將裏面的 <code>eula=false</code> 改成  <code>eula=true</code> ，再啟動伺服端即可。</p>
+</blockquote>
+<p>在沒有 Mod 的情況下只要看到這句就證明好了，在自己電腦上測試時，可以試着啟動和伺服端的遊戲版本相同的客户端，並連接試試。IP 可以寫 <code>127.0.0.1</code> 或是 <code>localhost</code>。</p>
+<p>如果你能連接上，那通常沒有什麼大問題。</p>
+<p>唯一正常關閉伺服端的指令是 <code>stop</code>。以及，在控制台窗口內輸入指令不需要加「/」，在遊戲當中才需要。</p>
+<h2 id="伺服端配置與指令"><a href="#伺服端配置與指令" class="headerlink" title="伺服端配置與指令"></a>伺服端配置與指令</h2><p>接下來就講解一下伺服端的配置，先從資料夾開始。要關心的資料夾只有這幾個：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">crash-reports	這是存放伺服端崩潰報告的資料夾，在原版伺服端中存在感很低</span><br><span class="line">logs			這是擺平時的 log 的地方</span><br><span class="line">world			地圖默認就叫這個</span><br></pre></td></tr></table></figure>
+
+<p>要關心的文件實際上只有 <code>server.properties</code> 和 <code>whitelist.json</code> ，前者是伺服端的配置文件，後者在你運行 Offline Server 時可能需要手動修改。</p>
+<p>配置文件的説明在<a href="https://minecraft-zh.gamepedia.com/Server.properties" target="_blank" rel="noopener">這裏</a>已經有非常詳細的説明了。對於大多數伺服器運營者來説，如果有盜版玩家一同遊玩，需要將 <code>online-mode</code> 這一項設置為 <code>false</code>。</p>
+<p>至於 <code>Whitelist.json</code> 為什麼我會特地提出來講，在 <code>online-mode=false</code> 的時候，如果啟用白名單模式，使用伺服端指令 <code>whitelist add blabla</code> 的時候，獲取到玩家的 uuid 並不是正確的，需要手動修改，非常煩。此外，所有的指令可以在<a href="https://minecraft-zh.gamepedia.com/%E5%91%BD%E4%BB%A4" target="_blank" rel="noopener">這裏</a>看到。</p>
+<blockquote>
+<p>通常情況下，配置文件我會手動添加一行 <code>spawn-protection=3</code>，不知道為什麼這行默認不會生成。如果出生點被 Creeper 破壞的話會非常煩。</p>
+</blockquote>
+<h2 id="接下來是稍微複雜一點的插件服（Plugin-Server）"><a href="#接下來是稍微複雜一點的插件服（Plugin-Server）" class="headerlink" title="接下來是稍微複雜一點的插件服（Plugin Server）"></a>接下來是稍微複雜一點的插件服（Plugin Server）</h2><h3 id="歷史介紹"><a href="#歷史介紹" class="headerlink" title="歷史介紹(?)"></a>歷史介紹(?)</h3><p>説到插件服我就要稍微介紹一下歷史，最早的插件服是 Bukkit，而 Bukkit 其實也「定義」出了一個「標準」。原版伺服端的地圖資料夾是以檔案命名的方式來區分世界的。而 Bukkit 系的「定義」則將地圖拆成每個世界一個資料夾，在沒有插件增加/修改世界的情況下，默認會有三個，分別是主世界、下界（地獄）、基佬界(?)（末地），並且只在首次進入時生成。</p>
+<blockquote>
+<p> 這一點上尤其需要注意，如果讀者會一個地圖用到死的話。在插件服和模組服之間使用地圖時要注意轉換。</p>
+</blockquote>
+<h3 id="Spigot"><a href="#Spigot" class="headerlink" title="Spigot"></a>Spigot</h3><p>不過雖然現在 Bukkit 沒落了，但它的精神傳了下來。</p>
+<p>現在插件服通常使用 <a href="https://www.spigotmc.org/" target="_blank" rel="noopener">Spigot</a>，有什麼大的區別呢？</p>
+<p>呃……最大的區別應該就是 Spigot 的性能更高。並且有非常龐大的<a href="https://www.spigotmc.org/resources/categories/spigot.4/" target="_blank" rel="noopener">插件資源</a>，如果對模組服亂加礦物的設計感到很煩，插件服也可以玩得非常開心，有非常多的小遊戲插件，這方面在 MCBBS 應當有介紹，我就不提了。</p>
+<p>在伺服端的資料夾內也會多出一個 <code>plugins</code>，然後插件本身的配置文件是放在 <code>plugins</code> 資料夾內的，這一點只要簡單地裝個插件測試一下就更好明白了。</p>
+<h3 id="PaperMC-PaperSpigot"><a href="#PaperMC-PaperSpigot" class="headerlink" title="PaperMC (PaperSpigot)"></a>PaperMC (PaperSpigot)</h3><p>另一個較有名的插件伺服端是 <a href="https://papermc.io/" target="_blank" rel="noopener">PaperMC</a>，從標題的名字 PaperSpigot 就可以看得出來，它實際上是 Spigot 的一個超高性能分支，由於是個分支，因此也支援 Spigot 的絕大部分插件。</p>
+<p>在更新速度上，遊戲的新版本推出時，PaperMC 更新得比 Spigot 略慢。</p>
+<p>PaperMC 提供極多的性能配置項目，我印象最深的是可以定義一個方塊中可以存在多少隻生物。</p>
+<p>我對這個伺服端的評價就如同作者的介紹一樣，「It&#39;s stupid fast.」</p>
+<h2 id="再稍微麻煩一點的模組服-Modded-Server"><a href="#再稍微麻煩一點的模組服-Modded-Server" class="headerlink" title="再稍微麻煩一點的模組服 (Modded Server)"></a>再稍微麻煩一點的模組服 (Modded Server)</h2><h3 id="預防針-1"><a href="#預防針-1" class="headerlink" title="預防針"></a>預防針</h3><p>從英文就看得出來，Modded 其實是對遊戲內容有修改的，並不像 Plugin 一樣，更像 Addon 的定義。</p>
+<p>從而也就會產生模組之間衝突的問題，有時這些問題非常好定位，有時嘛……</p>
+<h3 id="又講歷史"><a href="#又講歷史" class="headerlink" title="又講歷史"></a>又講歷史</h3><p>我最早是在 beta 1.7.3 開始接觸到這種伺服端的，那個時候的伺服端實際上要更複雜，是一種同時支援插件與模組的伺服端，這個接下來也會講。當時能安裝的模組只有 Ported 過的，只有一些特定的大型模組。但在那個時候能夠玩到最早版本的 IndustrialCraft 已經非常棒了。如果我沒有記錯的話，那是叫 MCPC+。直到 1.7.10 （注意是正式版）之前，伺服端幾乎都是同時支援插件與模組的方式。非常有名的是 Cauldron-&gt;KCauldron-&gt;Thermos 這系列。</p>
+<h3 id="Forge，非常普遍的-Modded-Server"><a href="#Forge，非常普遍的-Modded-Server" class="headerlink" title="Forge，非常普遍的 Modded Server"></a>Forge，非常普遍的 Modded Server</h3><h4 id="一些基礎"><a href="#一些基礎" class="headerlink" title="一些基礎"></a>一些基礎</h4><p>首先，和插件服對應，會多出來的資料夾是 <code>mods</code> 而不是 <code>plugins</code>，非常直觀，要安裝的 Mod 就放進 <code>mods</code> 資料夾。</p>
+<p>唯獨要注意的是，有些僅適用於客户端的 Mod 並不需要放到這個資料夾中，比如小地圖之類的。但有的 Mod 明明是個客户端 Mod，也需要放進伺服端 <code>mods</code> 中，比如説 JustEnoughItems (JEI) 的附屬 Calculator Mod，以及 JEI 在伺服端安裝後，合成時就可以打開合成表，然後點擊「+」按鈕放置到合成台上。這些都是特例，只能死記。</p>
+<p>另外，Mod 的配置檔也和客户端一樣，是在外面的 <code>config</code> 資料夾內。</p>
+<p>在地圖方面，不像 Bukkit 系衍生出來的伺服端，地圖文件並不會拆分成三個資料夾。</p>
+<h4 id="注意-Mod-衝突問題"><a href="#注意-Mod-衝突問題" class="headerlink" title="注意 Mod 衝突問題"></a>注意 Mod 衝突問題</h4><p>這個是個很頭痛的問題，我覺得我很有必要先解釋一下什麼是衝突。</p>
+<p>Mod 會互相打架要追溯到以前使用 ModLoader 的年代，那個時候安裝 Mod 是要用壓縮工具（如 7z、WinRAR）將遊戲本體 <code>.jar</code> 打開，把 Mod 塞進去，以至於遊戲本體檔案會被撐得非常大。在那個時候，ModLoader 實際上也已經算是一個 API 了。它解決了當時的 Minecraft 的物品使用 ItemID 所導致的問題。</p>
+<blockquote>
+<p>比如説……火把的 ID 是 50 。最初物品 ID 我記得是 256 以內，往後則是工具。比方説某個 Mod_A 定義了 ID 100 是它的物品，另一個 Mod_B 也同樣定義，就會衝突，當時的 ModLoader 則解決了這種問題。</p>
+</blockquote>
+<p>Mod 之間會不會打架，甚至會不會影響到伺服端運作，要分好幾個階段。</p>
+<ul>
+<li>是否能進入到遊戲標題畫面；</li>
+<li>是否能順利創建地圖、加載地圖、進入世界；</li>
+<li>進入世界後使用特定方塊時是否會崩潰；</li>
+<li>特定方塊產生的粒子是否會導致伺服端崩潰；</li>
+<li>兩個或更多個 Mod 之間會否有影響；</li>
+<li>...更多...</li>
+</ul>
+<p>很多時候當你覺得成功進入世界就是沒有問題的時候，往往之後就會有驚喜，因此要多做測試，這個問題下文會再寫。這裏寫了一點是因為先提到了 Forge Server。</p>
+<h2 id="再高級一點的混合伺服端"><a href="#再高級一點的混合伺服端" class="headerlink" title="再高級一點的混合伺服端"></a>再高級一點的混合伺服端</h2><p>嗯……我就直接稱為混合端了。要注意的是，融合端全部都是在基於 Bukkit 系的情況下支援 Mod。</p>
+<p>也就是説，伺服端會優先擁有 Bukkit 系的特性——也就是地圖會分成三個（多個）資料夾。</p>
+<h3 id="Cauldron-KCauldron-Thermos"><a href="#Cauldron-KCauldron-Thermos" class="headerlink" title="Cauldron / KCauldron / Thermos"></a>Cauldron / KCauldron / Thermos</h3><p>呃……Thermos 不是膳魔師。這些都是在 1.7.10 這個版本非常優秀的伺服端。同時支援插件與模組，但因為實在太過於久遠，我選擇不作太多介紹。幾乎所有在 1.7.10 非常有名的 Mod 後來都升級到了 1.12.2 版本。因此我認為現在實在是沒有什麼必要去繼續遊玩 1.7.10。</p>
+<h3 id="Magma"><a href="#Magma" class="headerlink" title="Magma"></a>Magma</h3><h4 id="一點廢話"><a href="#一點廢話" class="headerlink" title="一點廢話"></a>一點廢話</h4><p>我最初接觸到 <a href="https://github.com/magmafoundation/Magma" target="_blank" rel="noopener">Magma</a> 這個端的時候，真的是太感動了。Cauldron 後繼有人啊（抹淚）。</p>
+<h4 id="小介紹"><a href="#小介紹" class="headerlink" title="小介紹"></a>小介紹</h4><p>Magma 是未來（確信）。</p>
+<p>它是一個基於 Forge 和 PaperSpigot 的融合端。這意味着它不僅像以前的 Cauldron 系伺服端一樣可以同時安裝插件與模組，更好的是它能安裝 Spigot 的插件。</p>
+<p>正如我前文所提到，Spigot 的插件內容好到了你幾乎不需要安裝模組。因此使用 Magma 伺服端的話，只要玩家夠多、伺服器的硬件足夠，最後的地圖會非常精彩及有意思。</p>
+<p>目前，Magma 主要版本為 1.12.2，但 1.15.x 版本的伺服端已經在 beta 測試當中，1.16.x 版本也已經有可用的發佈了。</p>
+<h2 id="協議轉換插件"><a href="#協議轉換插件" class="headerlink" title="協議轉換插件"></a>協議轉換插件</h2><h3 id="這是什麼東西？"><a href="#這是什麼東西？" class="headerlink" title="這是什麼東西？"></a>這是什麼東西？</h3><p>這是一個更為高級的部分。目的是讓 Bedrock 端和 Java 端能連接到同一個伺服器遊玩。由於 Mojang 的奇怪邏輯，Bedrock 版和 Java 版有一些「特性」是不相同的。基岩版特性可<a href="https://minecraft-zh.gamepedia.com/%E5%9F%BA%E5%B2%A9%E7%89%88%E7%8B%AC%E6%9C%89%E7%89%B9%E6%80%A7?variant=zh-hant" target="_blank" rel="noopener">在此</a>看到。有一種特殊插件是可以安裝在伺服端上，<strong>讓另一個版本能夠加入遊戲</strong>，而（如果有衝突的特性）以伺服端為基準。</p>
+<p>比方説，對於 Java 伺服端來説，可以先使用 Spigot 作為伺服端，然後安裝插件，使得特定版本的 Bedrock 端能夠加入這個伺服器。這是非常……厲害的「創舉」，因為可以讓移動端（別忘了移動端也是 Bedrock ）和 PC 端一同遊玩。</p>
+<h3 id="可以怎麼用？"><a href="#可以怎麼用？" class="headerlink" title="可以怎麼用？"></a>可以怎麼用？</h3><p>對於 Java 伺服端來説，可以使用 <a href="https://geysermc.org/" target="_blank" rel="noopener">GeyserMC</a>，以讓 Bedrock 版遊戲能夠加入。對於 Bedrock 伺服端來説，可以使用 <a href="https://github.com/BigBrotherTeam/BigBrother" target="_blank" rel="noopener">BigBrother</a>，以讓 Java 版遊戲可加入。我認為儘量使用 GeyserMC 最好。</p>
+<h3 id="有潛在的問題嗎？"><a href="#有潛在的問題嗎？" class="headerlink" title="有潛在的問題嗎？"></a>有潛在的問題嗎？</h3><p>有。</p>
+<p>雖然我有開設近乎永久的 Bedrock 伺服端，但我其實很討厭這個版本。唯一原因就是，更新太頻繁。</p>
+<p>眾所周知在 MS Store 下載的應用都會自動更新，有時根本不知道客户端有更新，而伺服端更新並沒有想像中的「方便」，並且 Bedrock 伺服端只有架設在 Ubuntu 上比較方便，我真的很討厭 Ubuntu。</p>
+<p>因此，我認為只在 Java 版的伺服端上安裝 GeyserMC，來讓 Bedrock 版的客户端連接更好。</p>
+<h2 id="其它伺服端？"><a href="#其它伺服端？" class="headerlink" title="其它伺服端？"></a>其它伺服端？</h2><p>可以在<a href="https://minecraft-zh.gamepedia.com/%E5%AE%9A%E5%88%B6%E6%9C%8D%E5%8A%A1%E5%99%A8?variant=zh-tw" target="_blank" rel="noopener">此處</a>找到。</p>
+<blockquote>
+<p>在我寫此文時，我原本以為在這麼多年的遊玩歷史中，我經歷過的伺服端已經涵蓋了絕大多數，但在 Gamepedia 找到此頁面時我才知道原來部分伺服端也有更多的高性能分支。Minecraft 真是一個邊玩可以邊學習其它知識的遊戲。</p>
+</blockquote>
+<h2 id="並沒有提到的-Liteloader-Rift-Fabric"><a href="#並沒有提到的-Liteloader-Rift-Fabric" class="headerlink" title="並沒有提到的 Liteloader / Rift / Fabric"></a>並沒有提到的 Liteloader / Rift / Fabric</h2><h3 id="這個系列的歷史"><a href="#這個系列的歷史" class="headerlink" title="這個系列的歷史"></a>這個系列的歷史</h3><p>Liteloader 正如其名，它很 Lite，在 1.11 開始出現，終止於 1.12。當時能夠兼容 Forge，而 Liteloader 上的 Mod 基本上都是非常輕量的 Mod，像是自動釣魚之類的。</p>
+<p>而它在 1.12 終止之後，在 1.13 變成了 Rift，並且大放異彩，有許多 Mod 開發者紛紛轉向 Rift。</p>
+<blockquote>
+<p>有人或許會疑惑，這個 API 的 Mod 幾乎都是輕量 Mod，為什麼會吸引 Mod 開發者？</p>
+<p>1.13 是海洋更新，在遊戲的邏輯層面有非常多的改動，並不像某個垃圾版本加了幾隻蜜蜂就有膽刷版本號。當時的 Forge 宣佈將暫不更新 1.13，而是繼續維護 1.12。我依稀記得他們提到過一些技術上的問題，的確一個跨度比較大的版本，Forge 要及時更新的話會有點有心無力。</p>
+</blockquote>
+<p>很神奇的是這個在 1.13 大放異彩的 API 一下就暴斃了。到了 1.14 搖身一變成了 Fabric，並維護至今。</p>
+<p>他們是這樣寫的：「Fabric is a lightweight, experimental modding toolchain for Minecraft.」</p>
+<p>lightweight，對吧。但奇怪的是有很多新出現的科技 Mod 都選擇使用 Fabric 而非 Forge。比方説 TechReborn，甚至有大量小 Mod 都從 Forge 轉向 Fabric。</p>
+<p><strong>總之，Fabric 我是不會推薦的。</strong></p>
+<p>Forge 和 Fabric 正在割裂玩家群體。很多小 Mod 非常有意思，奈何必須要在兩個 API 之間做選擇。</p>
+<p>的確，Fabric Mod 數量也很多，有些也非常有趣。但除非所有 Forge Mod 都可以提供 Fabric 版本，否則在這個大 Mod 幾乎不往新版本更新（或是有新版本但是是閹割版）的情況下我真的不會推薦用 Fabric Mod。</p>
+<h2 id="Modded-Server-的-Mod-衝突或報錯問題"><a href="#Modded-Server-的-Mod-衝突或報錯問題" class="headerlink" title="Modded Server 的 Mod 衝突或報錯問題"></a>Modded Server 的 Mod 衝突或報錯問題</h2><h4 id="最基礎的報錯"><a href="#最基礎的報錯" class="headerlink" title="最基礎的報錯"></a>最基礎的報錯</h4><p>首先是最基礎的報錯：沒有安裝前置。這種報錯非常好處理，也非常好識別，大概會在輸出看到這樣的語句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BLABLA requires CORE 1.0 or above</span><br></pre></td></tr></table></figure>
+
+<p>這樣就是説 BLABLA 這個 Mod 沒有安裝 CORE 這個前置，又或者前置的版本不夠新。安裝或更新即可。</p>
+<h4 id="好定位的報錯"><a href="#好定位的報錯" class="headerlink" title="好定位的報錯"></a>好定位的報錯</h4><p>接下來是也比較好定位的報錯，不過我首先要稍微提一下 Java 報 Error 的機制，它是從最底層往上報的。舉個例子的話，假設一本書中有一個錯字，就可能看到：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">第4個字</span><br><span class="line">第3行</span><br><span class="line">第2頁</span><br><span class="line">第1本書</span><br><span class="line">書架第2列</span><br><span class="line">書架第3行</span><br><span class="line">第4個書架</span><br></pre></td></tr></table></figure>
+
+<p>這樣的報錯。</p>
+<p>因此，這種情況下報錯的 Mod 反而會出現在第一行，這就非常好定位了，刪了它。</p>
+<p>但是絕大多數情況下並不是因為這個 Mod 不能使用，而是因為有另一個 Mod 在和它衝突。如果你對遊戲的運行機制比較熟悉，可以試着找。但我會建議直接移除這種報錯的 Mod。</p>
+<h4 id="最慘的情況"><a href="#最慘的情況" class="headerlink" title="最慘的情況"></a>最慘的情況</h4><p>以下是真實案例。</p>
+<p>我曾經同時使用過三個 Mod，分別是 <a href="https://www.curseforge.com/minecraft/mc-mods/immersive-portals-mod" target="_blank" rel="noopener">Immersive Portals</a>，<a href="https://www.curseforge.com/minecraft/mc-mods/double-slabs" target="_blank" rel="noopener">Double Slabs</a> 以及一個提供半磚形式的合成台、爐子等的 Mod，我也忘了這些方塊是否是 Double Slabs 的，我暫時找不到這個 Mod，又或者我當時就是只有使用兩個 Mod。</p>
+<p>首先，Immersive Portals 是直接將世界連接起來的 Mod，玩家能夠直接看到傳送門另一邊的實時景象，相當於是同時載入兩個世界，沉浸感提升非常高。</p>
+<p>Double Slabs 則是可以將不同的半磚堆在一個方塊內。我就將合成台和爐子堆在了一起。</p>
+<p>然後我從地獄穿過傳送門看向這個方塊……</p>
+<p>這個時候其實已經非常不對勁了，因為這個方塊的材質已經丟失了，然後就是馬上出現的客户端從伺服端斷開，且無法再連上。無論伺服端是否刪除大部分文件重開，或是再做別的什麼從頭再來的操作，都沒有用。</p>
+<p>當時的報錯我記得很清楚：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Internal Exception: io.netty.handler.codec.DecoderException: </span><br><span class="line">java.lang.NullPointerException</span><br></pre></td></tr></table></figure>
+
+<p>這種報錯是<strong>絕不可能</strong>看得出來到底是什麼 Mod 發神經，我當初是怎麼發現的呢？我往伺服端的 Mods 資料夾內一個個塞 Mod，重複啟動了不知道多少次伺服端，才找出來的。</p>
+<p>在出現這種情況時，就只有這種解決方法，就是每次只往 Mods 資料夾內放 1~3 個 Mod，啟動伺服器，看是否有報錯，直到找到出問題的 Mod 為止。</p>
+<h1 id="你的伺服端需要更多"><a href="#你的伺服端需要更多" class="headerlink" title="你的伺服端需要更多"></a>你的伺服端需要更多</h1><p>前一章講解了如何使用插件及模組伺服端，也講了一些常見的報錯如何去解決。接下來我準備提一些常見的，或是我自己平時就會用，必備的插件或模組。</p>
+<h2 id="Gamerule-部分"><a href="#Gamerule-部分" class="headerlink" title="Gamerule 部分"></a>Gamerule 部分</h2><h3 id="小簡介"><a href="#小簡介" class="headerlink" title="小簡介"></a>小簡介</h3><p>其實最常見的多數就是防火蔓延，地形防炸，死亡背包不掉落。</p>
+<p>所有的 Gamerule 可以在<a href="https://minecraft-zh.gamepedia.com/%E5%91%BD%E4%BB%A4/gamerule" target="_blank" rel="noopener">這裏</a>查到。</p>
+<p>Gamerule 這個東西應該是玩基岩版的小/中學生都熟悉的內容，不過我特別提出來説肯定是有問題……</p>
+<p>要提的只有兩個：<code>mobGriefing</code> 和 <code>keepInventory</code>。</p>
+<h3 id="mobGriefing"><a href="#mobGriefing" class="headerlink" title="mobGriefing"></a>mobGriefing</h3><p><code>mobGriefing</code> 這個比較簡單，要注意的是這並不單純是防 Creeper 炸地形，而是禁止所有生物與方塊互動。會影響什麼呢？羊吃草（將草地方塊變為泥土方塊）、Enderman 抱方塊、Creeper 炸地形、村民採收作物等。重要的其實是影響村民不能採收作物，要考慮到有的玩家會建造村民農場，所以如果要做到防 Creeper 炸地形，可以考慮用插件或模組代替。</p>
+<h3 id="keepInventory"><a href="#keepInventory" class="headerlink" title="keepInventory"></a>keepInventory</h3><p><code>keepInventory</code> 這個就比較直接，就是死亡後背包物品不會掉落。但是為什麼它也會有問題呢……</p>
+<p>哈啊……（嘆氣）</p>
+<p>先説會出現的問題，就是在使用權限管理插件的伺服器上，這條 Gamerule 可能會直接失靈或是半失靈。直接失靈不僅是會導致背包的物品掉落，而是會讓物品都不掉出來，而身上也沒有，就是直接消失。半失靈就是雖然物品會保留，但偶爾會將經驗條清零，這點也比較煩。</p>
+<p><del>原本這裏打了一大堆，但我刪掉了。</del></p>
+<p>總結，如果想要這條 Gamerule 正常運行的話，最好不要使用將權限拆分得特別細，然後又不提供管理功能的插件，我依稀記得這種狗屎垃圾插件叫 Nucleus。</p>
+<blockquote>
+<p><code>keepInventory</code> (可能是)依賴一個特定權限，來讓角色在死亡之後不掉落物品。我不確定這個權限是玩家死亡後給玩家重新添加物品，還是索性不掉落。而有的插件動到了這個權限你也不知道，再使用權限管理插件例如 LuckPerms 之類分配權限時，就會出事。典型影響還包括玩家所持的物品不能改變地形，如 Project E 的賢者之石。</p>
+<p>別問我為什麼記得這麼清楚。</p>
+</blockquote>
+<h2 id="通常必備"><a href="#通常必備" class="headerlink" title="通常必備"></a>通常必備</h2><p>通常我會用一個 Essentials 系的插件或模組。插件我或許之後會考慮 EssentialsX，而模組方面則是使用 ThutEssentials。</p>
+<h3 id="插件部分"><a href="#插件部分" class="headerlink" title="插件部分"></a>插件部分</h3><ul>
+<li>Essentials 系列 —— 提供大量基礎指令</li>
+<li>WorldEdit —— 以備不時之需</li>
+<li>MCMMO —— 只開插件服時我通常會裝，算是稍微提升一點原版體驗</li>
+<li>...等等</li>
+</ul>
+<h3 id="模組部分"><a href="#模組部分" class="headerlink" title="模組部分"></a>模組部分</h3><ul>
+<li>客户端優化，包括截至 1.14 都有的 FoamFix，或者之後 Fabric 上的 Sodium</li>
+<li>小地圖</li>
+<li>UI 改善</li>
+<li>……更多</li>
+</ul>
+<h1 id="如何測試伺服端"><a href="#如何測試伺服端" class="headerlink" title="如何測試伺服端"></a>如何測試伺服端</h1><p>在前面的「Mod 衝突問題」一節中我寫過了大概會出現什麼問題，這章我要講如何找到這些問題，以及一些非常影響玩家遊玩的問題。</p>
+<p>首先，這些問題通常都是<strong>不可能</strong>出現在原版服的。</p>
+<h2 id="通常測試"><a href="#通常測試" class="headerlink" title="通常測試"></a>通常測試</h2><p>無非就是伺服端在啟動時有無報錯，客户端能否順利連接，各 Mod 添加的礦物、植物等能否正確生成等。而深入的 Mod 功能測試見下文。</p>
+<p>做測試時，我通常會在本地開始伺服端，然後用客户端連接作測試。</p>
+<p>如果機器配置不是太高，或內存不夠，測試這個步驟就會變得很煩。</p>
+<h2 id="插件服權限問題"><a href="#插件服權限問題" class="headerlink" title="插件服權限問題"></a>插件服權限問題</h2><p>插件服基本上會出現的就只有權限問題導致的指令不可用。我遇到的問題也只有這樣。注意：哪怕只有一個插件提供了權限設置，那麼你就一定要安裝一個權限管理插件來解決，因為 Bukkit 系的 <code>permissions.yml</code> 一直都是廢的，哪怕你覺得這個文件好像真的能管理權限。</p>
+<p>通常我會選擇使用 LuckPerms，此處就不列出所有指令了，只講解解決的思路：</p>
+<p>首先，在 LuckPerms 的配置檔中修改存儲方式為 yml，因為這樣我們才能直接使用 Notepad++ 或其它文件編輯器來修改權限。</p>
+<p>然後，伺服端啟動的情況下，控制台內使用指令新建一個默認玩家組，向這個組的玩家添加你想要玩家默認能用的權限，包括但不僅限於 <code>/tpa</code> 、 <code>/home</code> 之類的，以及部分插件提供的權限。</p>
+<p>之後，新建一個 admin 組，繼承自上面的玩家組，將所有權限添加到 admin 組。這樣就簡單地區分開了普通玩家和 Operators。</p>
+<blockquote>
+<p>我就不搞什麼遊客組玩家組管理組服主組了，沒必要。</p>
+</blockquote>
+<p>用了 LuckPerms 來管理權限之後，將玩家設為 op 的這個行為，就變成了要移動玩家到其它組。模組服也可能會出現這種問題，用類似思路解決即可。</p>
+<h2 id="模組服-Mod-全面測試"><a href="#模組服-Mod-全面測試" class="headerlink" title="模組服 Mod 全面測試"></a>模組服 Mod 全面測試</h2><h3 id="有什麼可能的方面需要測試？"><a href="#有什麼可能的方面需要測試？" class="headerlink" title="有什麼可能的方面需要測試？"></a>有什麼可能的方面需要測試？</h3><p>要測試的方面有幾個：</p>
+<ul>
+<li>語言文件能否正常載入 —— 有的 Mod 雖然有語言文件，但默認仍然載入英文，或是乾脆只載入 Mod 的物品名稱，如 shitmod.blocks.shitblock。這種 Mod 就刪了算了。</li>
+<li>Mod 提供的方塊功能是否正確 —— 比方説工業系列 Mod 的粉碎機，通 32EU/t 正常，通 128EU/t 理論上要炸，但沒炸。又或是不附加模塊時正常工作，放兩個加速模塊進去就導致遊戲崩潰之類的。不要以為作者沒寫出就不會有這種 Bug，玩得正爽的時候客户端連伺服端一起炸會非常破壞玩家體驗。</li>
+<li>Mod 使用的粒子會否導致問題 —— 是會的。Mrcrayfish&#39;s Furniture Mod (AKA cfm) 就曾經出現過這種問題。大多數可交互的物品沒有問題，唯獨洗澡龍頭噴出的水粒子碰到玩家實體（也可能包括其它實體）時會伺服端客户端一起崩潰。</li>
+</ul>
+<h3 id="那麼如何來做測試？"><a href="#那麼如何來做測試？" class="headerlink" title="那麼如何來做測試？"></a>那麼如何來做測試？</h3><p>測試我通常會分成幾個部分：Essentials 系列測試、插件/ Mod 測試、壓力測試。</p>
+<h4 id="Essentials-系列測試"><a href="#Essentials-系列測試" class="headerlink" title="Essentials 系列測試"></a>Essentials 系列測試</h4><p>這部分的測試相對簡單，但最好需要另一名玩家協助。</p>
+<p>首要測試的是一些傳送指令，例如 <code>/tpa</code>、<code>/home</code>、<code>/back</code>，要注意 <code>/tpa</code> 這個指令一般情況下會關聯到<code>/tpaccept</code>和<code>/tpdeny</code>，都要做測試。如果使用了部分貨幣插件，使用這些指令時就可以設置扣貨幣使用，也要進行相關的測試，確保功能正常。</p>
+<p>另外，要注意的是這些指令要區分成普通玩家及 admin (OP) 玩家，都要進行測試。比方説我平時的設置是 <code>/tpa</code> 讓普通玩家可以便捷地進行傳送，但需要得到對方同意，而 admin 則可以直接使用 <code>/tp</code>。</p>
+<h4 id="插件-Mod-測試"><a href="#插件-Mod-測試" class="headerlink" title="插件/ Mod 測試"></a>插件/ Mod 測試</h4><p>插件測試相對更簡單，因為插件通常提供不了太多功能，只需要測試它的主要功能是否正常，以及提供的指令會否導致伺服端出現異常。</p>
+<p>Mod 測試就相對插件複雜，我通常會選擇在本地開啟伺服端，客户端連接上伺服端後測試這種方式。</p>
+<p>然後，例如 IndustrialCraft 這種 Mod，我會配合 JEI (Just Enough Items)。對於礦物及新物品生成的部分，就要先用 Creative Mode 到地底隨便看看，確保有正常生成。之後就使用 JEI 作弊調出合成路線所需的礦物，將所有可以合成的方塊全部試一次。這個過程會需要極大量的時間，但也能保證之後玩家在遊玩時不會遇到奇怪的 Bug。</p>
+<p>舉個例子，假設核電站方塊是不能合成的，玩家在準備一大堆材料，逐漸往上合成到最後才不能合成，不管是誰都會覺得很煩。而這種問題，如果僅僅是 Mod 的 Config 中做了限制還算好的，有時會出現奇怪的 Bug 而導致不能合成，又因為已經開始運營而不能放棄這個 Mod，遊玩上就會有限制。</p>
+<p>簡單總結就是，所有方塊和合成都去試一次。</p>
+<h4 id="壓力測試"><a href="#壓力測試" class="headerlink" title="壓力測試"></a>壓力測試</h4><p>壓力測試是個奇怪的詞，因為小伺服器上通常不會有太多玩家同時在線，但也是要測。除了可以大概知道一下極限之外，也有其它東西要測。</p>
+<p>比如 Dynmap （包括插件和 Mod），這是一個渲染伺服端世界地圖，並在特定端口開放網站，讓不在遊戲內的玩家也可以看地圖的一個插件 / Mod。在進行一次 <code>fullrender</code> 之後雖然伺服器的 CPU 佔用就不會太高，但如果有跑地圖的必要（例如找特定地形和建築），伺服端就會持續渲染，從而導致伺服器佔用奇高。</p>
+<p>要顧及的方面很多，不能盡述。</p>
+<h1 id="部署測試好的伺服端到-VPS-上"><a href="#部署測試好的伺服端到-VPS-上" class="headerlink" title="部署測試好的伺服端到 VPS 上"></a>部署測試好的伺服端到 VPS 上</h1><p>通常伺服端並不會使用 Windows，所以我只寫兩個在 Linux 下可用的。</p>
+<p>以前比較懶的時候我會用 pscp，這是一個利用 ssh 連接傳輸文件的工具，同屬 putty 系列。</p>
+<p>不過很煩的是私鑰總要轉換成 putty 系列用的 <code>.ppk</code>，我後來嫌怕混亂，就索性用 ftp 的方式了。對於文件也可以比較直觀地訪問、管理。</p>
+<h2 id="Centos-下安裝-並配置vsftpd"><a href="#Centos-下安裝-並配置vsftpd" class="headerlink" title="Centos 下安裝 並配置vsftpd"></a>Centos 下安裝 並配置vsftpd</h2><p>嗯……就先安裝。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y vsftpd</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>這一步要求 sudo。</p>
+</blockquote>
+<p>配置文件在 <code>/etc/vsftpd</code>，分別是<code>vsftpd.conf</code>、<code>ftpusers</code>、<code>user_list</code>，第一個是主要配置文件，第二個是黑名單，第三個是白名單。誰也不知道他們為什麼要用這麼容易混淆的名字來做黑白名單，總之要關心的只有第一個文件。</p>
+<p>要做的配置修改通常只有<code>write_enable=YES</code>這一項，使得允許上傳文件。其它的配置則可以參考其它人的教程，此處就不展開説。FTP 的登入也是使用 VPS 的用户及密鑰，我通常使用 <a href="https://filezilla-project.org/" target="_blank" rel="noopener">Filezilla</a> 這個 FTP 客户端。</p>
+<h2 id="怎麼用呢"><a href="#怎麼用呢" class="headerlink" title="怎麼用呢"></a>怎麼用呢</h2><p>就……客户端和伺服端兩邊的窗口事實上就像 Windows 的 Explorer 一樣，可以直觀地拖文件，很好用對吧。</p>
+<h2 id="本地開服和在伺服器開服的區別"><a href="#本地開服和在伺服器開服的區別" class="headerlink" title="本地開服和在伺服器開服的區別"></a>本地開服和在伺服器開服的區別</h2><p>通常本地開服會將伺服端的啟動指令寫在 <code>.bat</code> 文件內，雙擊打開。</p>
+<p>伺服器上的操作差別不大，指令是寫在 <code>.sh</code> 文件中，可以在上傳伺服端之前就先寫好放着用。在伺服器上用 <code>cd</code> 指令到伺服端目錄內，以 <code>./start.sh</code> 指令啟動即可。</p>
+<p>在開原版服時會遇到 spigot 或是 Paperspigot 經常更新的情況，記得要改啟動指令內的文件名。</p>
+<p>當然，可以直接在伺服器上用 vim 改，也可以經 ftp 把文件拖回本地，改完再上傳回去。</p>
+<h1 id="優化網絡連接"><a href="#優化網絡連接" class="headerlink" title="優化網絡連接"></a>優化網絡連接</h1><h2 id="為什麼要優化"><a href="#為什麼要優化" class="headerlink" title="為什麼要優化"></a>為什麼要優化</h2><p>如果伺服器所在位置和玩家所在位置接近，或者是在一個國家內，問題通常不大。但如果跨國，或是跨太平洋等，問題就大了。網絡路由並不是呈直線的。</p>
+<p>就像在 Minecraft 裏，從玩家 A 的據點到玩家 B 的據點。我假定一個路線 1a，比較接近平時玩家的方式：</p>
+<p>進入地獄傳送門 -&gt; 坐礦車到玩家 B 的地獄傳送門旁邊 -&gt; 再進入地獄傳送門</p>
+<p>在這個過程中，玩家會消耗一定的食物，但不會消耗很多。那麼這個「網絡連接」就算是質量非常高的。</p>
+<p>如果是另一個路線 2：</p>
+<p>徒步到最近的車站 -&gt; 坐礦車到傳送中心車站 -&gt; 進入地獄傳送門 -&gt; 坐礦車到對應傳送門 -&gt; 再進入傳送門 -&gt; 出來之後再坐車到玩家 B 附近。</p>
+<p>這個過程中，食物消耗就大了。這個網絡連接就算是質量相對低的。</p>
+<p>在現實世界中，國家內的路由通常就是路線 1a，而跨國線路通常會是路線 2，這個時候就需要做優化。</p>
+<h2 id="現實世界的例子"><a href="#現實世界的例子" class="headerlink" title="現實世界的例子"></a>現實世界的例子</h2><p>優化之後，另搭一條路線 1b 一樣的路線讓玩家來走。同時，我們也要插一個木牌，告訴玩家可以走 1b，比路線 2 更快。</p>
+<p>用現實世界來舉例的話。我們現有兩台 VPS，分別是 A 和 B。</p>
+<p>遊戲伺服端搭在 A 上。比方説日本玩家連接這台 A ，路由非常複雜（路線長），又丟包（耗費食物）。</p>
+<p>但是 VPS B 就在日本，玩家連接 B 非常快，就只是出家門口跑個 30 格的程度。</p>
+<p>此處的硬性要求是，B 到 A 的路由質量要高。這樣我們就可以在 VPS B 上插個木牌，告訴玩家可以從這裏連接到 A。</p>
+<h2 id="怎麼實現"><a href="#怎麼實現" class="headerlink" title="怎麼實現"></a>怎麼實現</h2><p>很慚愧，這個計劃我原本打算在 Minecraft 1.17 正式版發佈，並運營的時候進行測試。</p>
+<p>不過 1.17 真的是……非常能拖。</p>
+<p>所以這部分就先看別人寫的教程吧，之後等我自己實現完之後也會更新這部分。</p>
+<p><a href="https://blog.csdn.net/qq_21958271/article/details/85652370" target="_blank" rel="noopener">https://blog.csdn.net/qq_21958271/article/details/85652370</a></p>
+<h1 id="最後"><a href="#最後" class="headerlink" title="最後"></a>最後</h1><p>這真的是……很長的一篇東西，我第一次覺得 Markdown 的 4 種標題格式都不夠用。也耗費了我非常長的時間，這篇文章從 2 月 12 日開始寫，中間邊寫邊查一些資料，到我寫下這段最後的總結是 3 月 7 號。</p>
+<p>我也擔心過會不會有爬文章的來把這篇東西爬走，不過再想了想我的博客本身就沒有多少人訪問，看到的人應該是他的幸運。</p>
+<p><del>這篇東西比我的畢業論文還長。</del></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Ceplavia
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="https://www.ceplavia.com/2021/02/12/2021-02-12_%E5%9C%A8CentOS%E4%B8%8A%E9%96%8B%E8%A8%ADMinecraft%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%9A%84%E7%B5%82%E6%A5%B5%E8%81%AF%E6%A9%9F%E6%95%99%E7%A8%8B/" title="在CentOS上開設Minecraft伺服器的終極聯機教程">https://www.ceplavia.com/2021/02/12/2021-02-12_在CentOS上開設Minecraft伺服器的終極聯機教程/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Minecraft/" rel="tag"># Minecraft</a>
+              <a href="/tags/CentOS/" rel="tag"># CentOS</a>
+              <a href="/tags/%E4%BC%BA%E6%9C%8D%E5%99%A8/" rel="tag"># 伺服器</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/03/2021-02-03_%E7%8E%A9%E5%AE%B6%E5%BF%83%E7%90%86%E5%AD%B8%EF%BC%9A%E6%88%91%E7%B5%82%E6%96%BC%E7%9C%8B%E5%AE%8C%E4%BA%86CB2077%E7%9A%84%E5%AF%A6%E6%B3%81/" rel="prev" title="玩家心理學：我終於看完了CB2077的實況">
+      <i class="fa fa-chevron-left"></i> 玩家心理學：我終於看完了CB2077的實況
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#注意"><span class="nav-number">1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#準備一台-VPS-伺服器"><span class="nav-number">2.</span> <span class="nav-text">準備一台 VPS (伺服器)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什麼是-VPS？該用哪個雲計算平台？"><span class="nav-number">2.1.</span> <span class="nav-text">什麼是 VPS？該用哪個雲計算平台？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#為什麼要-VPS？"><span class="nav-number">2.2.</span> <span class="nav-text">為什麼要 VPS？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置呢？"><span class="nav-number">2.3.</span> <span class="nav-text">配置呢？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VPS-上的操作系統用什麼？"><span class="nav-number">2.4.</span> <span class="nav-text">VPS 上的操作系統用什麼？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有-VPS-了，然後呢？"><span class="nav-number">2.5.</span> <span class="nav-text">有 VPS 了，然後呢？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#僅僅是準備一個-Minecraft-伺服端"><span class="nav-number">3.</span> <span class="nav-text">僅僅是準備一個 Minecraft 伺服端</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#預防針"><span class="nav-number">3.1.</span> <span class="nav-text">預防針</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#先從最簡單的原版開始"><span class="nav-number">3.2.</span> <span class="nav-text">先從最簡單的原版開始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伺服端配置與指令"><span class="nav-number">3.3.</span> <span class="nav-text">伺服端配置與指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接下來是稍微複雜一點的插件服（Plugin-Server）"><span class="nav-number">3.4.</span> <span class="nav-text">接下來是稍微複雜一點的插件服（Plugin Server）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#歷史介紹"><span class="nav-number">3.4.1.</span> <span class="nav-text">歷史介紹(?)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spigot"><span class="nav-number">3.4.2.</span> <span class="nav-text">Spigot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PaperMC-PaperSpigot"><span class="nav-number">3.4.3.</span> <span class="nav-text">PaperMC (PaperSpigot)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#再稍微麻煩一點的模組服-Modded-Server"><span class="nav-number">3.5.</span> <span class="nav-text">再稍微麻煩一點的模組服 (Modded Server)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#預防針-1"><span class="nav-number">3.5.1.</span> <span class="nav-text">預防針</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#又講歷史"><span class="nav-number">3.5.2.</span> <span class="nav-text">又講歷史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Forge，非常普遍的-Modded-Server"><span class="nav-number">3.5.3.</span> <span class="nav-text">Forge，非常普遍的 Modded Server</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一些基礎"><span class="nav-number">3.5.3.1.</span> <span class="nav-text">一些基礎</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意-Mod-衝突問題"><span class="nav-number">3.5.3.2.</span> <span class="nav-text">注意 Mod 衝突問題</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#再高級一點的混合伺服端"><span class="nav-number">3.6.</span> <span class="nav-text">再高級一點的混合伺服端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Cauldron-KCauldron-Thermos"><span class="nav-number">3.6.1.</span> <span class="nav-text">Cauldron &#x2F; KCauldron &#x2F; Thermos</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Magma"><span class="nav-number">3.6.2.</span> <span class="nav-text">Magma</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一點廢話"><span class="nav-number">3.6.2.1.</span> <span class="nav-text">一點廢話</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小介紹"><span class="nav-number">3.6.2.2.</span> <span class="nav-text">小介紹</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#協議轉換插件"><span class="nav-number">3.7.</span> <span class="nav-text">協議轉換插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#這是什麼東西？"><span class="nav-number">3.7.1.</span> <span class="nav-text">這是什麼東西？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可以怎麼用？"><span class="nav-number">3.7.2.</span> <span class="nav-text">可以怎麼用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有潛在的問題嗎？"><span class="nav-number">3.7.3.</span> <span class="nav-text">有潛在的問題嗎？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它伺服端？"><span class="nav-number">3.8.</span> <span class="nav-text">其它伺服端？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#並沒有提到的-Liteloader-Rift-Fabric"><span class="nav-number">3.9.</span> <span class="nav-text">並沒有提到的 Liteloader &#x2F; Rift &#x2F; Fabric</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#這個系列的歷史"><span class="nav-number">3.9.1.</span> <span class="nav-text">這個系列的歷史</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Modded-Server-的-Mod-衝突或報錯問題"><span class="nav-number">3.10.</span> <span class="nav-text">Modded Server 的 Mod 衝突或報錯問題</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#最基礎的報錯"><span class="nav-number">3.10.0.1.</span> <span class="nav-text">最基礎的報錯</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#好定位的報錯"><span class="nav-number">3.10.0.2.</span> <span class="nav-text">好定位的報錯</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最慘的情況"><span class="nav-number">3.10.0.3.</span> <span class="nav-text">最慘的情況</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#你的伺服端需要更多"><span class="nav-number">4.</span> <span class="nav-text">你的伺服端需要更多</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Gamerule-部分"><span class="nav-number">4.1.</span> <span class="nav-text">Gamerule 部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#小簡介"><span class="nav-number">4.1.1.</span> <span class="nav-text">小簡介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mobGriefing"><span class="nav-number">4.1.2.</span> <span class="nav-text">mobGriefing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#keepInventory"><span class="nav-number">4.1.3.</span> <span class="nav-text">keepInventory</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通常必備"><span class="nav-number">4.2.</span> <span class="nav-text">通常必備</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插件部分"><span class="nav-number">4.2.1.</span> <span class="nav-text">插件部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模組部分"><span class="nav-number">4.2.2.</span> <span class="nav-text">模組部分</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何測試伺服端"><span class="nav-number">5.</span> <span class="nav-text">如何測試伺服端</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#通常測試"><span class="nav-number">5.1.</span> <span class="nav-text">通常測試</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件服權限問題"><span class="nav-number">5.2.</span> <span class="nav-text">插件服權限問題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模組服-Mod-全面測試"><span class="nav-number">5.3.</span> <span class="nav-text">模組服 Mod 全面測試</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#有什麼可能的方面需要測試？"><span class="nav-number">5.3.1.</span> <span class="nav-text">有什麼可能的方面需要測試？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#那麼如何來做測試？"><span class="nav-number">5.3.2.</span> <span class="nav-text">那麼如何來做測試？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Essentials-系列測試"><span class="nav-number">5.3.2.1.</span> <span class="nav-text">Essentials 系列測試</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插件-Mod-測試"><span class="nav-number">5.3.2.2.</span> <span class="nav-text">插件&#x2F; Mod 測試</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#壓力測試"><span class="nav-number">5.3.2.3.</span> <span class="nav-text">壓力測試</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部署測試好的伺服端到-VPS-上"><span class="nav-number">6.</span> <span class="nav-text">部署測試好的伺服端到 VPS 上</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Centos-下安裝-並配置vsftpd"><span class="nav-number">6.1.</span> <span class="nav-text">Centos 下安裝 並配置vsftpd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#怎麼用呢"><span class="nav-number">6.2.</span> <span class="nav-text">怎麼用呢</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地開服和在伺服器開服的區別"><span class="nav-number">6.3.</span> <span class="nav-text">本地開服和在伺服器開服的區別</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#優化網絡連接"><span class="nav-number">7.</span> <span class="nav-text">優化網絡連接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#為什麼要優化"><span class="nav-number">7.1.</span> <span class="nav-text">為什麼要優化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#現實世界的例子"><span class="nav-number">7.2.</span> <span class="nav-text">現實世界的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#怎麼實現"><span class="nav-number">7.3.</span> <span class="nav-text">怎麼實現</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最後"><span class="nav-number">8.</span> <span class="nav-text">最後</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ceplavia"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Ceplavia</p>
+  <div class="site-description" itemprop="description">遊戲是潛在抑鬱症患者最後的避風港。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">105</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">118</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://insbex.jixun.moe/" title="https://insbex.jixun.moe/" rel="noopener" target="_blank">Insb 的思维过山车</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://jixun.moe/" title="https://jixun.moe/" rel="noopener" target="_blank">季寻日志</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://laplacence.github.io/" title="https://laplacence.github.io/" rel="noopener" target="_blank">Laplacence's Trash Can</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://penguinliong.moe/" title="https://penguinliong.moe/" rel="noopener" target="_blank">Liong 的技术博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://sunnyrx.com/" title="https://sunnyrx.com/" rel="noopener" target="_blank">热心的周末</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.tcdw.net/" title="https://www.tcdw.net/" rel="noopener" target="_blank">吐槽大王部落格</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ceplavia</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://ceplaviablog.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://www.ceplavia.com/2021/02/12/2021-02-12_%E5%9C%A8CentOS%E4%B8%8A%E9%96%8B%E8%A8%ADMinecraft%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%9A%84%E7%B5%82%E6%A5%B5%E8%81%AF%E6%A9%9F%E6%95%99%E7%A8%8B/";
+    this.page.identifier = "2021/02/12/2021-02-12_在CentOS上開設Minecraft伺服器的終極聯機教程/";
+    this.page.title = "在CentOS上開設Minecraft伺服器的終極聯機教程";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://ceplaviablog.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
