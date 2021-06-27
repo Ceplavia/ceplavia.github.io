@@ -34,7 +34,7 @@ I'm not Tom, not John, not anyone. I'm Ceplavia.
 
 自稱 Game Designer。為了做遊戲，什麼都在學。
 
-而這個遊戲叫做「Cyan」。
+而這個遊戲的核心是「CYAN」。
 
 衹會有三個章節，分別是「Cyan's Call」、「Cyan's Catalyst」和「Cyan's Cause」。
 
