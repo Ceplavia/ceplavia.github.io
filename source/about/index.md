@@ -66,11 +66,12 @@ echo YWRtaW5AY2VwbGF2aWEuY29t | base64 -d
 
 ### About My Server - Prototype (19/11/20)
 
-MELCHIOR
+~~MELCHIOR~~
 
-BALTHASAR
+~~BALTHASAR~~
 
-CASPER
+~~CASPER~~
 
-三者合而為一，組成了 Multi Agent Data Process Cluster。
+~~三者合而為一，組成了 Multi Agent Data Process Cluster。~~
 
+Multi Agent 才是唯一的出路，為此，The CYAN Cluster 應運而生。
