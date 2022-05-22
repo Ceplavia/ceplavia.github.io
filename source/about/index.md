@@ -18,15 +18,13 @@ date: 2019-09-15 12:53:03
 </details>
 ------
 
-### About Me - 0.2 Type (19/11/20)
+### About Me - 0.3 Type (22/05/22)
 
 Hi, I'm Ceplavia.
 
 這個名字原本沒有意義，只是在我大腦中突然出現的詞，因為我很討厭與他人一致。
 
-I'm not Tom, not John, not anyone. I'm Ceplavia.
-
-19 年初在廣州暨南大學本科畢業，取得計算機科學與技術學士學位。
+*I'm not Tom, not John, not anyone. I'm Ceplavia.*
 
 激進型無神論者。
 
@@ -34,9 +32,11 @@ I'm not Tom, not John, not anyone. I'm Ceplavia.
 
 自稱 Game Designer。為了做遊戲，什麼都在學。
 
-而這個遊戲的核心是「CYAN」。
+而這個遊戲的核心是「CYAN」，aka「青」，非常青色的青，#00FFFF 程度的青。
 
 衹會有三個章節，分別是「Cyan's Call」、「Cyan's Catalyst」和「Cyan's Cause」。
+
+為此我特地創建了一間公司，名叫「GRAND CYAN LTD」，如果硬要一個中文名稱的話，是尚青。沒錯，尚青有限公司。
 
 我的大腦中經常出現很多有趣的想法，在本 Blog 記錄下來之後，在不久的將來就會出現在新遊戲當中。我知道這句話沒人信，但這是事實。
 
@@ -45,7 +45,7 @@ I'm not Tom, not John, not anyone. I'm Ceplavia.
 如果看了一些文章後有什麼想法，歡迎透過郵件與我交流：
 
 ```
-echo YWRtaW5AY2VwbGF2aWEuY29t | base64 -d
+Y2VwbGF2aWFAZ3JhbmRjeWFuLmNvLnVr
 ```
 
 ---
