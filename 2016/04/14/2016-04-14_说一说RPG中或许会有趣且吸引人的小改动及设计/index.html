@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 6.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/Cyan-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/Cyan-16x16.png">
@@ -21,12 +21,12 @@
   </script>
 
 <script data-ad-client="ca-pub-8675315982671307" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <meta name="description" content="本文中的“*[数字]”均会在文章的稍后部分提及。 开始之前先来看看我为自己想要做出的游戏而设计的一个技能（括号内均为说明，在若在实际游戏中是不会显示的）：  星火 咏唱时间：2秒（随地区&#x2F;火系法术加成浮动） 消耗：少量精神值 效果：凝聚出一团火苗，并可投掷至5码内任意位置。凝聚后3秒内不投掷则会自然消散。  首先，咏唱时间与复唱时间这个概念，我借用了FFXIV中对技能释放时间及冷却时间的设定*1。">
+  <meta name="description" content="本文中的“***[数字]**”均会在文章的稍后部分提及。 开始之前先来看看我为自己想要做出的游戏而设计的一个技能（括号内均为说明，在若在实际游戏中是不会显示的）：  星火 咏唱时间：2秒（随地区&#x2F;火系法术加成浮动） 消耗：少量精神值 效果：凝聚出一团火苗，并可投掷至5码内任意位置。凝聚后3秒内不投掷则会自然消散。  首先，咏唱时间与复唱时间这个概念，我借用了FFXIV中对技能释放时间及冷">
 <meta property="og:type" content="article">
 <meta property="og:title" content="说一说RPG中或许会有趣且吸引人的小改动及设计。">
 <meta property="og:url" content="https://www.ceplavia.com/2016/04/14/2016-04-14_%E8%AF%B4%E4%B8%80%E8%AF%B4RPG%E4%B8%AD%E6%88%96%E8%AE%B8%E4%BC%9A%E6%9C%89%E8%B6%A3%E4%B8%94%E5%90%B8%E5%BC%95%E4%BA%BA%E7%9A%84%E5%B0%8F%E6%94%B9%E5%8A%A8%E5%8F%8A%E8%AE%BE%E8%AE%A1/index.html">
 <meta property="og:site_name" content="Ceplavia&#39;s Gaming Blog">
-<meta property="og:description" content="本文中的“*[数字]”均会在文章的稍后部分提及。 开始之前先来看看我为自己想要做出的游戏而设计的一个技能（括号内均为说明，在若在实际游戏中是不会显示的）：  星火 咏唱时间：2秒（随地区&#x2F;火系法术加成浮动） 消耗：少量精神值 效果：凝聚出一团火苗，并可投掷至5码内任意位置。凝聚后3秒内不投掷则会自然消散。  首先，咏唱时间与复唱时间这个概念，我借用了FFXIV中对技能释放时间及冷却时间的设定*1。">
+<meta property="og:description" content="本文中的“***[数字]**”均会在文章的稍后部分提及。 开始之前先来看看我为自己想要做出的游戏而设计的一个技能（括号内均为说明，在若在实际游戏中是不会显示的）：  星火 咏唱时间：2秒（随地区&#x2F;火系法术加成浮动） 消耗：少量精神值 效果：凝聚出一团火苗，并可投掷至5码内任意位置。凝聚后3秒内不投掷则会自然消散。  首先，咏唱时间与复唱时间这个概念，我借用了FFXIV中对技能释放时间及冷">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2016-04-14T13:11:56.000Z">
 <meta property="article:modified_time" content="2020-07-30T13:52:54.828Z">
@@ -243,18 +243,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>本文中的“<strong>*[数字]</strong>”均会在文章的稍后部分提及。</p>
+        <p>本文中的“***[数字]**”均会在文章的稍后部分提及。</p>
 <p>开始之前先来看看我为自己想要做出的游戏而设计的一个技能（括号内均为说明，在若在实际游戏中是不会显示的）：</p>
 <blockquote>
 <p><em>星火</em></p>
-<p><em>咏唱时间：2秒（随地区/火系法术加成浮动）</em></p>
+<p><em>咏唱时间：2秒（随地区&#x2F;火系法术加成浮动）</em></p>
 <p><em>消耗：少量精神值</em></p>
 <p><em>效果：凝聚出一团火苗，并可投掷至5码内任意位置。凝聚后3秒内不投掷则会自然消散。</em></p>
 </blockquote>
-<p>首先，咏唱时间与复唱时间这个概念，我借用了FFXIV中对技能释放时间及冷却时间的设定<strong>*1</strong>。</p>
-<p>为了方便说明，在之后均用咏唱及复唱来表示施放与冷却。 可以注意到，我并没有为此技能设计复唱时间，并不是因为这技能十分低级，可以任意施放，事实上在我个人所想策划的游戏当中，此技能算是次级技能<strong>*2</strong>。 </p>
+<p>首先，咏唱时间与复唱时间这个概念，我借用了FFXIV中对技能释放时间及冷却时间的设定*<strong>1</strong>。</p>
+<p>为了方便说明，在之后均用咏唱及复唱来表示施放与冷却。 可以注意到，我并没有为此技能设计复唱时间，并不是因为这技能十分低级，可以任意施放，事实上在我个人所想策划的游戏当中，此技能算是次级技能*<strong>2</strong>。 </p>
 <p><strong>括号中的地区：</strong></p>
-<p>在游戏当中的大部分地图，副本等地方中，并不会对咏唱时间有所增加或是减少，但在譬如火山，冰原等地区中，此技能的咏唱时间则会小幅减少/大幅增加。</p>
+<p>在游戏当中的大部分地图，副本等地方中，并不会对咏唱时间有所增加或是减少，但在譬如火山，冰原等地区中，此技能的咏唱时间则会小幅减少&#x2F;大幅增加。</p>
 <p>只要稍微一想就觉得理所当然：在火山地区咏唱火系法术当然得心应手，想要在冰原随手放出火系法术当然并不合理。</p>
 <p><strong>括号中的加成：</strong></p>
 <blockquote>
@@ -263,27 +263,27 @@
 <p>故我的设计为，能够增幅这个技能效果（注意是效果而并不是伤害）的只有装备及火系法术熟练度（以游戏真实感来考虑的话，火系法术熟练度基本就是一个火系输出型法师的“等级”了）。就输出向法术而言，增幅的部分包括：</p>
 <p>1.减少咏唱时间且减少攻击范围</p>
 <p>2.增加咏唱时间且增加攻击范围</p>
-<p>3.法术具有不稳定性，可能在投掷过程中爆炸（也会炸到你自己<strong>*3</strong>），攻击范围增加</p>
+<p>3.法术具有不稳定性，可能在投掷过程中爆炸（也会炸到你自己*<strong>3</strong>），攻击范围增加</p>
 <p>4.更多……？</p>
 <p>如果是典型的数值化RPG中一定会有增加x%伤害这一条，但，前文已提及，RPG应当重视玩家的代入感，尤其是现在这个年代VR设备的发展十分迅速，人们花费数个小时戴着VR设备来游戏并不是天方夜谭。</p>
-<p>代入感能够引申为这个游戏的真实性，一发星火打到一只小兔子身上，不去考虑这个技能是否会有数值上的伤害，也不去考虑这只兔子是否会有数值上的血量/体力，这只兔子必然是要死亡的；一发星火打到巨龙身上，若是传统的数值化RPG定会打掉一丝血，但，当星火真面对巨龙时，对巨龙会有威胁吗？</p>
+<p>代入感能够引申为这个游戏的真实性，一发星火打到一只小兔子身上，不去考虑这个技能是否会有数值上的伤害，也不去考虑这只兔子是否会有数值上的血量&#x2F;体力，这只兔子必然是要死亡的；一发星火打到巨龙身上，若是传统的数值化RPG定会打掉一丝血，但，当星火真面对巨龙时，对巨龙会有威胁吗？</p>
 <p>关于消耗： 若是明确告知精神值为100点，这个法术的消耗为10点，显而易见的，大家都知道这个法术能够连续咏唱10次（实战中并不能，因为周围元素会被消耗，而元素间转化则不是只能咏唱星火的法师所能学会的）。</p>
 <p>但若是不告知，会出现一个什么样的情况呢？咏唱一个技能，消耗了精神值的一小部分，喝下一瓶精力刺激药水，能够在短时间内增加精神值在不冥想状态下的自恢复速度，但会在一定时间内减小精神值的最大值，这样又是不是让你更有代入感呢？</p>
 <hr>
-<p>  <strong>*1：</strong> FFXIV事实上就主要玩法而言并不是一个好的RPG，但其在游戏中加入了一些小游戏（我个人并没有深入去玩，此为向其他玩家了解），一些有趣的设定及一些次要玩法（多职业系统，副职业系统等），那么这个游戏就变得有趣了。</p>
+<p>  *<strong>1：</strong> FFXIV事实上就主要玩法而言并不是一个好的RPG，但其在游戏中加入了一些小游戏（我个人并没有深入去玩，此为向其他玩家了解），一些有趣的设定及一些次要玩法（多职业系统，副职业系统等），那么这个游戏就变得有趣了。</p>
 <p>首先就像我在前文所说的，将施放和冷却写作咏唱和复唱。虽然只是几个字的变化，但第一次接触此游戏玩家第一眼看到，或许不会直接就了解到这说的就是施放和冷却，而是认真一看。</p>
-<p>或许把主线任务中的剧情写的再长，过场CG/即时演算做得再精美，也不及这几个字的修改能让玩家多注视一会。 <strong>*2：</strong> 为什么说星火是一个次级技能呢。为了直观表达，先把我个人的等级划分介绍一下（个人偏爱法师，先说说这方面，且我所设想的世界观也是一个完全的法师至上的世界，但当然不会只有“法师”这么简单，注意“法”字多义）：</p>
+<p>或许把主线任务中的剧情写的再长，过场CG&#x2F;即时演算做得再精美，也不及这几个字的修改能让玩家多注视一会。 *<strong>2：</strong> 为什么说星火是一个次级技能呢。为了直观表达，先把我个人的等级划分介绍一下（个人偏爱法师，先说说这方面，且我所设想的世界观也是一个完全的法师至上的世界，但当然不会只有“法师”这么简单，注意“法”字多义）：</p>
 <blockquote>
 <p><em>零级——学徒法术（如清洁术，分解术等）——此项对应尚未成为法师，作为学徒阶段所能习得的法术</em> <em>一级——低级法术（气泡术，聚水术等）——刚刚成为法师，此阶段的法师因元素调动不熟练，故会调动任何元素（你没有看错）</em> <em>二级——次级法术（水箭，星火，土坠，风击等）——法师在多次咏唱技能的过程中，对元素的控制越发精确，能够调动的元素种类开始减少。</em> <em>三级——中级法术（法术断言）——这阶段的法师在野外已经拥有保命的资本，可以到佣兵协会接受任务了，如清理周边怪物等。</em></p>
 </blockquote>
 <p>任何一个刚创建出来的角色，在面前的NPC接了一个任务，抬手就是一发火球术把远处的一个人型怪打死了，然后乐呵的回去找NPC交任务，获得了很多经验，升了一级，然后自动学得了一个新技能……</p>
 <p><strong>起点西方奇幻小说里的主角也没这么强吧？！</strong></p>
 <p>这样把角色初期设立的过于强势的后果就是，后面的怪物，和角色习得的技能十分强大，其曲线简直呈指数级别上升。</p>
-<p><strong>*3：</strong> 你的输出型法术若是受到了“不稳定”这项增幅，在咏唱的过程中会发生元素冲突而产生爆炸，这是理所当然的。即便是大法师也不能保证每次释放的零级法术会成功，狮子搏兔亦用全力。或许有人觉得这设计并不符合实战，例如会炸到旁人，炸到自己等。</p>
+<p>*<strong>3：</strong> 你的输出型法术若是受到了“不稳定”这项增幅，在咏唱的过程中会发生元素冲突而产生爆炸，这是理所当然的。即便是大法师也不能保证每次释放的零级法术会成功，狮子搏兔亦用全力。或许有人觉得这设计并不符合实战，例如会炸到旁人，炸到自己等。</p>
 <p>这就要引入另一个设定了：若是队伍中有多名法师，站得互相靠近的话，咏唱法术将会极其缓慢且大幅增加精神值消耗（请参考前文提及咏唱法术消耗周围元素的设定）。</p>
 <p>另：炸到自己？一个火系法师能把自己烧着了……？</p>
 <hr>
-<p>下一篇文章或在近期内贴出，近期会针对游戏中的装备及主/次职业划分进行一次大讨论。</p>
+<p>下一篇文章或在近期内贴出，近期会针对游戏中的装备及主&#x2F;次职业划分进行一次大讨论。</p>
 
     </div>
 
@@ -406,7 +406,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-count">114</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -419,7 +419,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">128</span>
+        <span class="site-state-item-count">131</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -432,25 +432,25 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="https://insbex.jixun.moe/" title="https://insbex.jixun.moe/" rel="noopener" target="_blank">Insb 的思维过山车</a>
+          <a href="https://insbex.jixun.moe/" title="https:&#x2F;&#x2F;insbex.jixun.moe&#x2F;" rel="noopener" target="_blank">Insb 的思维过山车</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://jixun.moe/" title="https://jixun.moe/" rel="noopener" target="_blank">季寻日志</a>
+          <a href="https://jixun.moe/" title="https:&#x2F;&#x2F;jixun.moe&#x2F;" rel="noopener" target="_blank">季寻日志</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://laplacence.github.io/" title="https://laplacence.github.io/" rel="noopener" target="_blank">Laplacence's Trash Can</a>
+          <a href="https://laplacence.github.io/" title="https:&#x2F;&#x2F;laplacence.github.io&#x2F;" rel="noopener" target="_blank">Laplacence's Trash Can</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://penguinliong.moe/" title="https://penguinliong.moe/" rel="noopener" target="_blank">Liong 的技术博客</a>
+          <a href="https://penguinliong.moe/" title="https:&#x2F;&#x2F;penguinliong.moe&#x2F;" rel="noopener" target="_blank">Liong 的技术博客</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://sunnyrx.com/" title="https://sunnyrx.com/" rel="noopener" target="_blank">热心的周末</a>
+          <a href="https://sunnyrx.com/" title="https:&#x2F;&#x2F;sunnyrx.com&#x2F;" rel="noopener" target="_blank">热心的周末</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://www.tcdw.net/" title="https://www.tcdw.net/" rel="noopener" target="_blank">吐槽大王部落格</a>
+          <a href="https://www.tcdw.net/" title="https:&#x2F;&#x2F;www.tcdw.net&#x2F;" rel="noopener" target="_blank">吐槽大王部落格</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://blog.grandcyan.com/" title="https://blog.grandcyan.com/" rel="noopener" target="_blank">Ceplavia's Thinking Blog</a>
+          <a href="https://blog.grandcyan.com/" title="https:&#x2F;&#x2F;blog.grandcyan.com&#x2F;" rel="noopener" target="_blank">Ceplavia's Thinking Blog</a>
         </li>
     </ul>
   </div>
@@ -474,13 +474,13 @@
 <div class="copyright">
   
   &copy; 2016 – 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Ceplavia</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
         

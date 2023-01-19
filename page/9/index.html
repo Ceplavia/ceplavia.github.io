@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 6.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/Cyan-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/Cyan-16x16.png">
@@ -29,9 +29,7 @@
 <meta property="og:description" content="遊戲是潛在抑鬱症患者最後的避風港。">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="Ceplavia">
-<meta property="article:tag" content="玩家心理学">
-<meta property="article:tag" content="游戏视点">
-<meta property="article:tag" content="游戏评测">
+<meta property="article:tag" content="玩家心理学,游戏视点,游戏评测">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://www.ceplavia.com/page/9/">
@@ -175,6 +173,374 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.ceplavia.com/2018/06/25/2018-06-25_minecraft%E8%81%AF%E6%A9%9F%E5%85%A5%E9%96%80%E7%AF%87%EF%BC%9A%E5%90%88%E6%A0%BC%E7%9A%84%E4%BC%BA%E6%9C%8D%E7%AB%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Ceplavia">
+      <meta itemprop="description" content="遊戲是潛在抑鬱症患者最後的避風港。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ceplavia's Gaming Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/06/25/2018-06-25_minecraft%E8%81%AF%E6%A9%9F%E5%85%A5%E9%96%80%E7%AF%87%EF%BC%9A%E5%90%88%E6%A0%BC%E7%9A%84%E4%BC%BA%E6%9C%8D%E7%AB%AF/" class="post-title-link" itemprop="url">Minecraft 聯機入門篇：合格的伺服端</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-06-25 16:50:47" itemprop="dateCreated datePublished" datetime="2018-06-25T16:50:47+08:00">2018-06-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-30 21:52:54" itemprop="dateModified" datetime="2020-07-30T21:52:54+08:00">2020-07-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/06/25/2018-06-25_minecraft%E8%81%AF%E6%A9%9F%E5%85%A5%E9%96%80%E7%AF%87%EF%BC%9A%E5%90%88%E6%A0%BC%E7%9A%84%E4%BC%BA%E6%9C%8D%E7%AB%AF/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/06/25/2018-06-25_minecraft聯機入門篇：合格的伺服端/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>原開頭：</p>
+<p>最近在准备服务器的10周目，然后想起了之前写过的联机篇。</p>
+<p>说是过几天发，实际有2个月了吧？答辩真是一个很好用来消磨(?)时间的东西。</p>
+</blockquote>
+<hr>
+<p>本文介紹我製作伺服端的方式。本文重寫於 2020 年 5 月初。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/06/25/2018-06-25_minecraft%E8%81%AF%E6%A9%9F%E5%85%A5%E9%96%80%E7%AF%87%EF%BC%9A%E5%90%88%E6%A0%BC%E7%9A%84%E4%BC%BA%E6%9C%8D%E7%AB%AF/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.ceplavia.com/2018/06/09/2018-06-09_%E5%8D%A0%E6%AF%94%E5%93%AA%E6%9C%89%E9%82%A3%E4%B9%88%E9%87%8D%E8%A6%81%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Ceplavia">
+      <meta itemprop="description" content="遊戲是潛在抑鬱症患者最後的避風港。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ceplavia's Gaming Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/06/09/2018-06-09_%E5%8D%A0%E6%AF%94%E5%93%AA%E6%9C%89%E9%82%A3%E4%B9%88%E9%87%8D%E8%A6%81%EF%BC%9F/" class="post-title-link" itemprop="url">占比哪有那么重要？</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-06-09 18:01:49" itemprop="dateCreated datePublished" datetime="2018-06-09T18:01:49+08:00">2018-06-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-30 21:52:54" itemprop="dateModified" datetime="2020-07-30T21:52:54+08:00">2020-07-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%A7%86%E7%82%B9/" itemprop="url" rel="index"><span itemprop="name">视点</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/06/09/2018-06-09_%E5%8D%A0%E6%AF%94%E5%93%AA%E6%9C%89%E9%82%A3%E4%B9%88%E9%87%8D%E8%A6%81%EF%BC%9F/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/06/09/2018-06-09_占比哪有那么重要？/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>写完之后发现整篇都在反讽，所以我先把我的看法写在前面。</p>
+<p>我的看法是： 游戏开发过程中的每一个部分都很重要，大到核心玩法的固定，小到一个按钮的大小，甚至一个标点符号。</p>
+<hr>
+<p>前段时间（有好几年了）喜欢玩一个叫做Game Dev Tycoon的游戏，通俗地讲，这就是一个Game Develop Simulator。</p>
+<p>要做的就是不停地变更类型搭配，出游戏，赚钱。 里面有一个环节，在游戏开发时要调节各部分占比，比如画面，音乐的占比，会影响成品质量和销量什么的。</p>
+<p>这段情节让我想起了现在的GameJam，以及国内目前各大公司的一些游戏创意比赛。</p>
+<p>目的？当然是在其中挑选好的创意，然后投资，做出成品拿来卖了，至于说推动国内独立游戏发展……这句话我打出来自己都想笑。</p>
+<p>假定这样一个情况：有一队做出了超棒的创意，前所未有，拿了第一，举办这个比赛的公司也进行了投资，那么这个成品游戏真的会好玩吗？</p>
+<p>其实是不会。</p>
+<p>真的不会。</p>
+<p>可以看看近几年来国内的这类游戏创意大赛，参加者的要求是大学生。而国内的大学生普遍有着什么样的特点呢？</p>
+<p>自大。</p>
+<p>不是说他们的游戏创意差到了一个不能接受的地步，而是那种进了决赛，或是最后拿到名次，得到投资之后做出来成品的过程。</p>
+<p>仔细一想，这整个过程，其实和那些天天与学校的比赛搞来搞去没有本质关系。</p>
+<p>“这个创业比赛我都拿到第一了，上课的部分就先放一下，反正能拿到风投，毕业创业一波美滋滋。”</p>
+<p>“这个10美分的比赛我都第一了，……”</p>
+<p>是吧？一样的情况。</p>
+<p>只是做梦的人和做的梦不同。</p>
+<hr>
+<p>那么又回到了标题，不同部分的占比，在游戏开发过程中有那么重要吗？</p>
+<p>最近在做自己的游戏，我没打算先把核心的玩法做出来，而是打算从打开游戏，直到看到开发商Logo画面，游戏主菜单画面……按这样的顺序做。</p>
+<p>有什么好处呢？我不敢确认地说，但我花了很多心思在打开游戏直至完全进入这个部分。</p>
+<p>最后出来的成果，至少是我个人满意的。</p>
+<p>所以我才会想起时间占比这个问题。</p>
+<p>独立游戏在我这里的定义已经是个贬义词了，泛指所有：</p>
+<ul>
+<li>Unity制作</li>
+<li>主场景像素风</li>
+<li>立绘是画师手绘</li>
+<li>主角有莫名奇妙的能力</li>
+<li>而且主角不一定是人</li>
+<li>架空的超能力世界</li>
+<li>出现的路人角色极少</li>
+<li>剧情是找亲人或找什么鬼东西</li>
+<li>或者做到最后变成了教育向的剧情</li>
+<li>收集品超多，或是难找到夭寿</li>
+<li>设置界面一如既往地只有音量音效是否全屏</li>
+<li>全收集后有新关卡</li>
+<li>低级趣味彩蛋</li>
+</ul>
+<p>每个独立游戏都想表达出自己的“剧情”，于是就变成了这样的流水线产物。每个所谓「策划」都说自己有屌到夭寿的剧情和设计。</p>
+<p>实际上能卖的有多少嘛……(手动姚明脸)</p>
+<p>花费时间最多的部分变成了核心玩法部分，试BUG，试这个那个。</p>
+<p>音乐？外包。美术？外包。（喔这里的美术只是画(动词)哦，国内的独立游戏我真没见到会做建模的。）</p>
+<p>开始界面？随便做做就算了，反正核心玩法才是重点。</p>
+<p>然后他们最擅长的就是埋彩蛋，低级趣味的那种。就是会让你露出&#x3D;_,&#x3D;表情的那种。</p>
+<p>流程也短到夭寿，要么就是死堆关卡量。线性剧情的那种就物品加到有至少3~4小时的游戏时间。 “啊你都没做过游戏，你怎么会知道核心玩法要做多久？那个什么东西要做好久的，开始菜单有个进入的按钮和设置就好了。”</p>
+<p>……觉得不重要的人全是这样想的。</p>
+<p>在我看来，即使是开始画面，或是游戏进行过程中的载入画面，在制作时的时间占比应当要和写剧情的时间相仿的。注意是剧情，不是独立游戏那种突然让你做这个做那个架空世界观根本不稳自己都解释不通的那种垃圾剧情。</p>
+<p>菜单，载入有助于世界观的建构，这就是我的观点。 最近很火的Detroit: Become Human，很多「媒体」和云评测都在吹，说是从来都是云玩家的人甚至买了ps4特地体验这个游戏。</p>
+<p>这些对游戏不热爱的人都这样想，那我是怎么想的呢？ 这游戏世界观根本不稳，一边玩一边吐槽，这就是我的游戏流程。</p>
+<p>只把游戏中的其中一点表现出来真的很重要吗？为了这一点就可以抛弃其他一切？</p>
+<p>对于有剧情的游戏来说，一个好的演绎故事的机制、配合好的故事，这才是那些所谓「创意大赛」所应当考核的地方。</p>
+<p>当整个生态圈都他O的在微创新，说什么创意大赛这种丢人的东西呢？</p>
+<p>有多少参加这种比赛的「策划」都是那种「哇这个加上这个会不会很好玩？」「我就是想表达这种剧情」的人呢？</p>
+<p>反正我是能遇到不少这样的天天异想天开的人。 整个国内的游戏圈给我的感觉就是这样。</p>
+<p>「大佬说这个好玩，大佬6666，这游戏真好玩」</p>
+<p>「网游？做个剑侠风吧，现在挺火的」</p>
+<p>「独立游戏？你要表现你内心的想法，比如用偏黑暗风的场景」</p>
+<hr>
+<p>我可去你们妈的吧，这样的废物也配做游戏？</p>
+<p>你们(指这些所谓大佬，顺便一提我很讨厌别人称他为大佬他还真的就这么接受的人，谦逊之心人当有之，没有的人是狗东西。)做的游戏，在国内请媒体写点水文，然后骗骗有钱的人，仅此而已。</p>
+<p>少他妈以钱为理由继续做这些垃圾。</p>
+<p>我宁可饱受折磨地做我自己的游戏，也不愿被这种烂生态改变。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.ceplavia.com/2018/05/08/2018-05-08_%E6%B5%85%E8%B0%88%E5%9B%BD%E6%9C%8DEVE%E5%89%8D%E6%99%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Ceplavia">
+      <meta itemprop="description" content="遊戲是潛在抑鬱症患者最後的避風港。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ceplavia's Gaming Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/08/2018-05-08_%E6%B5%85%E8%B0%88%E5%9B%BD%E6%9C%8DEVE%E5%89%8D%E6%99%AF/" class="post-title-link" itemprop="url">浅谈国服EVE前景</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-05-08 17:10:55" itemprop="dateCreated datePublished" datetime="2018-05-08T17:10:55+08:00">2018-05-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-30 21:52:54" itemprop="dateModified" datetime="2020-07-30T21:52:54+08:00">2020-07-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%A7%86%E7%82%B9/" itemprop="url" rel="index"><span itemprop="name">视点</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/05/08/2018-05-08_%E6%B5%85%E8%B0%88%E5%9B%BD%E6%9C%8DEVE%E5%89%8D%E6%99%AF/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/05/08/2018-05-08_浅谈国服EVE前景/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>写了篇小短文。</p>
+<p>先说结论，我所认为的国服有救的三条办法是：</p>
+<p>1.清除数据，全部重来；</p>
+<p>2.同步欧服(国际服)内容；</p>
+<p>3.代理运营商重视游戏的可持续发展，建立完善的新手教学机制；</p>
+<hr>
+<h2 id="为什么要清除数据从头再来"><a href="#为什么要清除数据从头再来" class="headerlink" title="为什么要清除数据从头再来"></a>为什么要清除数据从头再来</h2><p>原因有很多，慢慢说。</p>
+<p>首先是<strong>通货膨胀</strong>，这点在很多人看来没什么必要，比如说新手，同样都是挖矿多少个小时能拼得起自己的第一条战斗船，数字的大小有什么必要？</p>
+<p>没有必要的话魔兽何必总是搞数据压缩对不对？</p>
+<p>每个人不论是现实生活，还是游戏，都喜欢把资产存起来，不管日后是用还是不用。在游戏的过程中，赚到多少就花多少的情况很少见，特别是在eve这个容易爆船的游戏当中，对于新人来说，在拼下一条船时最好要有这条船成本的2倍才好开始。</p>
+<p>这个习惯继承下来，到后期每个人都有不少的资产。但是又不花，同一个货物的价值虽然不变，但需要花费的通货越来越多。</p>
+<p>再者10多年的资产累积，新人唯一的选择就是加入老组织，新的大组织出现的希望就只有老的中组织自立。当eve这个社会只有一个势力时，强制pvp也就失去了意义。</p>
+<p>其次是馒皇独大，贴吧天天反馒，会战的时候旗舰在哪里？在，哪，里？</p>
+<p>高等级的船要建造，首先要在00地区建造起属于玩家自己的建筑——堡垒。</p>
+<p>但，建造堡垒需要老大的同意。一个个不同的军团(Company，原词翻译应该是公司)就像我们生活的地球上的一个个国家一样。每个国家要有属于自己的武力才有立足之地。这始终是个游戏当中的社会，而不是普普通通的游戏。</p>
+<h2 id="为什么要同步内容"><a href="#为什么要同步内容" class="headerlink" title="为什么要同步内容"></a>为什么要同步内容</h2><p>除了游戏内容本身的更新之外，还有一些相对重要的便利性更新内容。UI、新手引导等等。</p>
+<p>以及最重要的：Alpha与Omega。</p>
+<p>Alpha帐号永久免费，但不能使用一些高等级的船、装备、弹药，同时也不能学习高等级的技能。</p>
+<p>升级到Omega帐号的方法就是用现实货币买Plex，或者在游戏中用游戏货币ISK买Plex。这个设定最重要的地方是给了新玩家能够一直体验，或者说是学习游戏的内容，等到觉得这游戏有趣了，再充月卡。</p>
+<p>这种收费方式我觉得和游戏免费道具收费相仿。 另一个方面，游戏版本停滞不前，玩家积累的财产没有新的回收手段，对于馒皇独大又有了新的助力。</p>
+<h2 id="新手教程到底有多重要"><a href="#新手教程到底有多重要" class="headerlink" title="新手教程到底有多重要"></a>新手教程到底有多重要</h2><p>虽然现在天成有ISD，但是ISD多数也不在，对玩家一般问题的解答也还可以。</p>
+<p>但其实这个观点要从新玩家的体验来看。</p>
+<p>eve的这种游戏机制不像其他游戏一样。新玩家看到任务，第一想法是完成，当任务链都完成了，就会无所事事。至少我拉了好几个人来玩都是如此。「任务做完了不知道做什么好」——这是原话。</p>
+<p>完整的教学机制需要教导玩家可以做什么，尽快告诉玩家可以做什么。以及如何延长新玩家在第一次游戏时的游玩时间，提高留存率才对。</p>
+<p>现在的eve无论是国服的旧内容还是欧服在这方面都没有做得很好。</p>
+<p>eve中有4种伤害4种抗性，不同弹药自己有不同的因素决定dps和是否命中，这一点其实相对来说也很重要。即使是伤害和抗性这一点简单的设计，很多人在配船的时候也是无脑堆盾，无视了抗性。 00&#x2F;低安pvp除去经验外，配船如何采用不同的配置也很重要。 也没教。</p>
+<p>可能开发商所希望的是老玩家教新玩家，但国服目前这样子真没办法。</p>
+<hr>
+<p>完。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://www.ceplavia.com/2018/04/24/2018-04-24_minecraft%E8%81%AF%E6%A9%9F%E9%80%B2%E9%9A%8E%E7%AF%87%EF%BC%9A%E6%9E%B6%E8%A8%AD%E4%BC%BA%E6%9C%8D%E7%AB%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -244,13 +610,13 @@
 
       
           <blockquote>
-<p>01/05/20 開始重寫，並準備在近期內補上後期維護篇。</p>
+<p>01&#x2F;05&#x2F;20 開始重寫，並準備在近期內補上後期維護篇。</p>
 <p>19年9月2日修排版：</p>
 <p>而维护篇我没写……</p>
-<p>这系列东西最初是友人 <a href="https://sunnyrx.com/" target="_blank" rel="noopener">SunnyRx</a> 想知道怎么在 linux 系统上跑起客户端然后我就写了一点……</p>
+<p>这系列东西最初是友人 <a target="_blank" rel="noopener" href="https://sunnyrx.com/">SunnyRx</a> 想知道怎么在 linux 系统上跑起客户端然后我就写了一点……</p>
 </blockquote>
 <p>打算寫一系列關於 Minecraft (Java Edition) 的聯機教程，包括如何整合 Server Pack 到在伺服器上運行。</p>
-<p>分為入門篇/聯機進階篇/後期維護篇。</p>
+<p>分為入門篇&#x2F;聯機進階篇&#x2F;後期維護篇。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/04/24/2018-04-24_minecraft%E8%81%AF%E6%A9%9F%E9%80%B2%E9%9A%8E%E7%AF%87%EF%BC%9A%E6%9E%B6%E8%A8%AD%E4%BC%BA%E6%9C%8D%E7%AB%AF/#more" rel="contents">
@@ -532,7 +898,7 @@
 <p>- 场景中还有一些令人会说“嗯？这东西还能按？”的物品，但其实更多的是“嗯？这里为什么没有东西？”比如牧场房，楼梯处有个隐藏门，我走的是放马路线，那个门可能是潜入用的？这种让你想再打一次的设定令人反感。</p>
 <hr>
 <h2 id="操控"><a href="#操控" class="headerlink" title="操控"></a>操控</h2><p>我只要说一下手柄上的按键设定，读者或许就能发现问题。</p>
-<p>以 Xbox 手柄举例： X是大部分交互、近身攻击，A是上/下障碍，Y是躲避攻击，B没有用到。</p>
+<p>以 Xbox 手柄举例： X是大部分交互、近身攻击，A是上&#x2F;下障碍，Y是躲避攻击，B没有用到。</p>
 <p>对，B没用到，甚至是在农场里的房子演奏乐器时也只用XYA。</p>
 <p>L2是镜头拉近及武器瞄准，L1没有使用。</p>
 <p>R2是武器开火及潜行时捉人，R1是武器换弹。</p>
@@ -540,7 +906,7 @@
 <p>明白了吧？</p>
 <p>- 我最讨厌把左摇杆设为奔跑的按键配置。有空的按键不用，非要用这个按的时候可能会碰到左摇杆输入的部分，本来左摇杆控制直行都艰难。</p>
 <hr>
-<p>7/10。</p>
+<p>7&#x2F;10。</p>
 <p>推荐程度：值得找好友平分购买这份游戏。但最好2人在同一台电脑上进行游玩。不要太相信EA的服务器。下载速度真的非常非常快。</p>
 <p>不推荐预先看“攻略视频”来了解。 有英语阅读能力的不推荐使用国内的汉化补丁，有些翻译会瞬间出戏。</p>
 
@@ -636,7 +1002,7 @@ _Counterattack - 平松建治 (Xenoblade 2 Sound Selection)_
 <p><em>00:55~01:14的那一小段，很好听，后面也会重复出现。</em></p>
 <blockquote>
 <p>19年9月1日修排版：</p>
-<p>这里也像之前的文章一样，把自行上传的媒体修改成了引用网易云音乐。不在国内的请<a href="https://www.youtube.com/watch?v=aElM_uHL00E" target="_blank" rel="noopener">点我</a>。</p>
+<p>这里也像之前的文章一样，把自行上传的媒体修改成了引用网易云音乐。不在国内的请<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=aElM_uHL00E">点我</a>。</p>
 </blockquote>
 <p>我为什么用这样的标题呢？因为只有音乐和剧情方面我是满意的。</p>
 <p>这篇文章是最近参加微软ibox的比赛的时候，算是百忙之中抽时间写出来的。</p>
@@ -675,7 +1041,7 @@ _Counterattack - 平松建治 (Xenoblade 2 Sound Selection)_
 <p>- 长时间游玩时随机出现的崩溃 Bug 如果说会崩溃是没有长时间测试还情有可原，前3条简直是开发时就没有为玩家考虑。</p>
 <p>系统扣3分。</p>
 <hr>
-<h2 id="场景-UI"><a href="#场景-UI" class="headerlink" title="场景 / UI"></a><strong>场景 / UI</strong></h2><p><em>考虑到 NS 机能实在有限，故关于 “720p”、“30帧”的问题我尽量不提及。</em></p>
+<h2 id="场景-x2F-UI"><a href="#场景-x2F-UI" class="headerlink" title="场景 &#x2F; UI"></a><strong>场景 &#x2F; UI</strong></h2><p><em>考虑到 NS 机能实在有限，故关于 “720p”、“30帧”的问题我尽量不提及。</em></p>
 <p><em>但注意：其他同类游戏没有这种懒得优化的情况。</em></p>
 <p>场景应该说是不错，但镜头可以后拉的范围太过有限，本来分辨率就不算高，拉太远容易眼花看不到人物在哪里。</p>
 <p>并且，场景摆放的物体在数量上比较多，虽然在代入感上有较好表现，但与地图相性不和。</p>
@@ -696,17 +1062,17 @@ _Counterattack - 平松建治 (Xenoblade 2 Sound Selection)_
 <p>你一定这样想吧？</p>
 <p>实际上很多游戏的实现方式是，如果控制人物向非正前方行走比较长时间，那么摄像机会自动根据人物行走的方向，慢慢移动到人物的后方。</p>
 <p>仔细想想是不是这样的？</p>
-<p>右摇杆的功能更多的是微调视角，或是需要观察其他地方时，才需要去转动。而且 joycon 的设计并不人性化，移动右摇杆时的输入往往不是正左/右，而是会带有一点上下的输入。</p>
+<p>右摇杆的功能更多的是微调视角，或是需要观察其他地方时，才需要去转动。而且 joycon 的设计并不人性化，移动右摇杆时的输入往往不是正左&#x2F;右，而是会带有一点上下的输入。</p>
 <p>splatoon2这样设计也就算了，毕竟射击游戏需要更多视野。RPG 这样设计说不过去。</p>
 <p>- 我自己凭本事做的游戏我就是不玩，不管体验。</p>
 <hr>
-<p>7/10。剧情佳作。 推荐程度：值得为了这个游戏而专程购买 NS。</p>
+<p>7&#x2F;10。剧情佳作。 推荐程度：值得为了这个游戏而专程购买 NS。</p>
 <p>游戏好玩的程度随游戏时长成正比关系。</p>
-<p>与1代及动画/游戏“命运石之门”一样，只要坚持过了最难过的时期，就是漫天彩虹。</p>
+<p>与1代及动画&#x2F;游戏“命运石之门”一样，只要坚持过了最难过的时期，就是漫天彩虹。</p>
 <blockquote>
 <p>19年9月1日改排版：</p>
 <p>我第一次通关的时候仍然给予剧情很正面的评价。即使是使用 NS 在掌机模式的情况下游玩，字幕看起来很难受的情况下，我也坚持通关。</p>
-<p>但最近第二次通关后，我的评价是，这个游戏榨干了玩家的同情心。5/10。</p>
+<p>但最近第二次通关后，我的评价是，这个游戏榨干了玩家的同情心。5&#x2F;10。</p>
 </blockquote>
 
       
@@ -867,7 +1233,7 @@ _Counterattack - 平松建治 (Xenoblade 2 Sound Selection)_
 <p>但实际上☐是拳，△是腿。</p>
 <p>如果使用重复的招数，比方说一直出拳头，就会被格挡。</p>
 <p>但，无脑L1+△就不会被格挡。这是跳起来踢的动作。但会被电击兵攻击到。</p>
-<p>有很多攻击招数，再比如左摇杆←/→+△则是把敌人往←/→方向踢，旁边的敌人会被你的攻击目标撞到，一起扣血。←/→+R2是以敌人为中心，自己在外圈旋转90度。</p>
+<p>有很多攻击招数，再比如左摇杆←&#x2F;→+△则是把敌人往←&#x2F;→方向踢，旁边的敌人会被你的攻击目标撞到，一起扣血。←&#x2F;→+R2是以敌人为中心，自己在外圈旋转90度。</p>
 <p>……呃其实这个招式被我玩坏了，对着一个敌人左踹，右转，不停循环就能打死敌人了。甚至把敌人卡在墙角的话直接左右来回踹就完事了。</p>
 <p>所以说策划想出来的这些招式么……我是不知道他自己有玩过没有。</p>
 <p>此外关于跑酷战斗有这样的设定： 奔跑时会慢慢充满专注护盾，这就是一个抵挡伤害的盾。在有盾的情况下不会扣血量。</p>
@@ -889,7 +1255,7 @@ _Counterattack - 平松建治 (Xenoblade 2 Sound Selection)_
 <p>- 谜样的天赋系统，开头就让你点出一点能看全地图。后面就是做支线赚经验，经验变天赋点。加血量，加伤害……看门狗2的好歹做成了不靠这个也能通关游戏，这个则是做成不去点根本不能做某些任务。因为很重要的R1转身居然放在了天赋点里。我说这策划搞不好是魔兽世界过来的，把玩家的技能删了，改到升级过程里还你。</p>
 <p>+ City of Glass，这个城市的气氛还在，依旧令人感动。</p>
 <p>+ 多样的战斗机制，透过不同的组合技来打倒敌人很有趣。(补充：这是个跑酷游戏)</p>
-<p>综上， 其实我想给4.5/10，因为这始终是个跑酷游戏，不同组合技来打倒敌人也能算+1分？ 不过看在1代的面子上， 5/10。</p>
+<p>综上， 其实我想给4.5&#x2F;10，因为这始终是个跑酷游戏，不同组合技来打倒敌人也能算+1分？ 不过看在1代的面子上， 5&#x2F;10。</p>
 
       
     </div>
@@ -1031,7 +1397,7 @@ _Counterattack - 平松建治 (Xenoblade 2 Sound Selection)_
 <p>-  每个副本最多刷3次，基本是2次，有的竟然是1次。怪物再有特色玩家也不可能留下什么记忆，这改得还不如转移世界的剧情副本。</p>
 <p>+ 剧情上能感受到那么想要挽回老玩家的诚意。</p>
 <p>* 我实在想不到有什么加分点，情怀吧，这条算加0.5。</p>
-<p><strong>综合评分：5.5 / 10。</strong></p>
+<p><strong>综合评分：5.5 &#x2F; 10。</strong></p>
 
       
     </div>
@@ -1162,358 +1528,6 @@ _Counterattack - 平松建治 (Xenoblade 2 Sound Selection)_
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://www.ceplavia.com/2018/01/23/2018-01-23_%E6%88%91%E5%87%AD%E6%9C%AC%E4%BA%8B%E4%B9%B0%E7%9A%84%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%8E%A9%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Ceplavia">
-      <meta itemprop="description" content="遊戲是潛在抑鬱症患者最後的避風港。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ceplavia's Gaming Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/01/23/2018-01-23_%E6%88%91%E5%87%AD%E6%9C%AC%E4%BA%8B%E4%B9%B0%E7%9A%84%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%8E%A9%EF%BC%9F/" class="post-title-link" itemprop="url">我凭本事买的，为什么要玩？</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2018-01-23 21:00:50" itemprop="dateCreated datePublished" datetime="2018-01-23T21:00:50+08:00">2018-01-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-30 21:52:54" itemprop="dateModified" datetime="2020-07-30T21:52:54+08:00">2020-07-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%A7%86%E7%82%B9/" itemprop="url" rel="index"><span itemprop="name">视点</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2018/01/23/2018-01-23_%E6%88%91%E5%87%AD%E6%9C%AC%E4%BA%8B%E4%B9%B0%E7%9A%84%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%8E%A9%EF%BC%9F/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/01/23/2018-01-23_我凭本事买的，为什么要玩？/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>即便是不联网的单机游戏，想要留下玩家也很难。</p>
-<p>这里的留下，指的是玩家在关掉这个游戏之后，并且游戏还没有被玩完，而玩家下一次想要打开任意一个游戏的时候，还能继续打开这个游戏来继续游玩。</p>
-<p>今天很偶然地想到了这个题目，略一想，还真挺难的。另外还在有的群里看到了关于“青蛙旅游”这个这几天突然火起来的手游的分析，待会也会一并提到。</p>
-<p>既然提到了手游，我们来说说很早很早以前的单机手游。 在国内著名的安卓版本有两个，一个是2.3，一个是4.4。无论是两者之中的哪个版本，当时都有些著名的，令人上瘾的游戏。比方说涂鸦跳跃、西瓜忍者、鳄鱼小顽皮爱洗澡、化学大冒险、100层(不是“是xx就下100层”，而是想办法打开门到上一层楼的那种解谜游戏)等等，这是一个时期。</p>
-<p>以扩散性MA为分界线，后面开始火的游戏就开始偏向养成了，比如说草泥马养成，猫咪后院等等。</p>
-<p>以这些游戏当时所在的时间背景来看，前者倾向于刷新分数，而后者倾向于“过段时间再来看看”的类型，这点与扩散性MA很类似。</p>
-<p>刷新分数类型的游戏怎样留住玩家呢……？说实在的很难。我仔细回想了一下，这类游戏能够火得持续一段时间的原因大概是周围的人都在玩，也就是和“为什么大家都喜欢喝一点点”这个问题同样的道理——从众心理。</p>
-<p>就90后来说，早期还在用塞班的那个年代，每个人手机都喜欢装上几个游戏，到了安卓2.3到4.4的那个年代，大家还有着这个习惯。而后来，几乎每个人的手机里都不会特地去安装这些游戏了。取而代之的是，一个个不再额外占用你时间的“挂机”游戏。但即便是这类挂机游戏，在过了一段时间，或者是玩到最后，我们就不会去打开，然后在清理空间的时候顺便删掉。</p>
-<p>这就引申出了一个问题，不管是手机还是PC，还是主机，一个游戏要怎么留下玩家呢？ 就我个人所见，目前很多人Steam库里的游戏，除去囍+1的游戏以外，很多游戏买回来，就只是买而已，在黑五，或是季节特惠看着很便宜，买回来，然后玩了可能20%不到，就放置。</p>
-<p>这类情况并不罕见，事实上，一些联机游戏也是这样的情况。比如MH系列，就我所认识的人里，MHXX联机打猎几乎是两三个月才进行一次的活动，这是因为网络问题——而且还不好解决。</p>
-<p>和GTAVOL一样，一个任务或许只需要半小时来完成，但实际考虑掉线，连接，载入，可能要做一个下午甚至到晚上。 让一个玩家放下一款游戏的因素有很多，重复性太高是一个方面。</p>
-<p>以我玩过的来举例子，GTAV的单机剧情我在PS4上反复体验了超过5次，看门狗也玩了3次。虽然剧情都记得，但就是想再玩一次，但GTAV的收集任务我反而做起来很腻，虽然网上都有攻略，但比如收集信件这种任务，一共是50个，我每次收集了5个就已经有种想关掉PS4的冲动。</p>
-<p>而看门狗虽然也有这种情况，但至少比如收集QR Code则是因为有剧情相关的录音可以听一下。</p>
-<p>那么问题是什么呢。</p>
-<p>综上，不管是什么游戏都会有玩一段时间之后完全不想再开。</p>
-<p>我总结了一下，其实原因并不复杂，就只有三点。</p>
-<p>1.任务，或是玩法、关卡，过于拖沓 这个问题在很多游戏里都有呈现，比如强制线性剧情的游戏，有的剧情是强制这段必须完成的，有的则不是。玩家在过剧情的时候，想离开这片区域</p>
-<blockquote>
-<p>19年8月31日修排版补充：</p>
-<p>这里不知道为什么缺了一句。</p>
-<p>事实上这种现象很多见，当玩家处于「临时有事要先不玩了」，但游戏的剧情一直不停地在演，或者任务中不让存盘，玩家就被迫延长游戏时间。</p>
-</blockquote>
-<p>2.玩法本身重复性太高</p>
-<p>很有趣的是，OW，CS:GO这种自不必说，因为地图完全一模一样，玩法也一模一样。LOL其实也可以算，因为特定英雄能做的角色定位只有一到两个。</p>
-<p>吃鸡也可以做例子，虽然玩法重复性高，但地图太大，每局中发生的事基本不同，重复性反倒可以接受。</p>
-<p>但像之前出的Bridge Constructor Portal，出的几天内几个游戏群里大家在玩，几天之后我都问了一下，几个人连打开的欲望都没了，游戏进度一半都没到。</p>
-<p>3.一些设定本身过于透明，令玩家完全知道接下来会发生什么</p>
-<p>队友突然开始立flag就说明……</p>
-<p>4.网游中的一些定时任务/玩法</p>
-<p>比如一些手游中常有的，中午或者是特定时分一次免费抽卡，错过了第一次就会有第二次。</p>
-<p>又或者说暗黑世界：军团再临里的世界任务，都是一些容易令人厌烦的点，当一个人对游戏厌烦，离AFK也不远了。</p>
-<hr>
-<p>总结一下的话，其实原因相当简单。</p>
-<p>“我”玩着觉得“烦”了。</p>
-<p>关键是解决令人觉得“烦”的部分。难的关卡，或许玩家愿意钻研，两次，三次，没有关系。五次、六次，还是没有头绪……后果很有可能是“烦”了，宁可去看个直播。玩家从看游戏变成喜欢看别人玩游戏，我觉得同样也是这个道理。</p>
-<p>比如一个任务，玩家没有找到正确的完成方式，试了几次，在终于快要过的时候死了，会产生极大的负面情绪，因为再来一次也不一定有这么好的进度。</p>
-<hr>
-<p>凭本事买的游戏，为什么要玩？</p>
-<p>玩起来烦得一比，为什么要玩？</p>
-<p>游戏的本质从来都没有变过，就是为了让人放松。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://www.ceplavia.com/2017/12/21/2017-12-21_%E5%89%91%E4%BE%A0%E9%A3%8EMMORPG%EF%BC%9A%E4%BD%A0%E6%88%90%E5%B0%B1%E4%BA%86%E8%87%AA%E5%B7%B1%E7%9A%84%E6%A2%A6%EF%BC%8C%E5%8D%B4%E7%A0%B4%E7%A2%8E%E4%BA%86%E5%88%AB%E4%BA%BA%E7%9A%84%E6%A2%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Ceplavia">
-      <meta itemprop="description" content="遊戲是潛在抑鬱症患者最後的避風港。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ceplavia's Gaming Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/12/21/2017-12-21_%E5%89%91%E4%BE%A0%E9%A3%8EMMORPG%EF%BC%9A%E4%BD%A0%E6%88%90%E5%B0%B1%E4%BA%86%E8%87%AA%E5%B7%B1%E7%9A%84%E6%A2%A6%EF%BC%8C%E5%8D%B4%E7%A0%B4%E7%A2%8E%E4%BA%86%E5%88%AB%E4%BA%BA%E7%9A%84%E6%A2%A6/" class="post-title-link" itemprop="url">剑侠风MMORPG：你成就了自己的梦，却破碎了别人的梦</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-12-21 20:00:40" itemprop="dateCreated datePublished" datetime="2017-12-21T20:00:40+08:00">2017-12-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-30 21:52:54" itemprop="dateModified" datetime="2020-07-30T21:52:54+08:00">2020-07-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%A7%86%E7%82%B9/" itemprop="url" rel="index"><span itemprop="name">视点</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2017/12/21/2017-12-21_%E5%89%91%E4%BE%A0%E9%A3%8EMMORPG%EF%BC%9A%E4%BD%A0%E6%88%90%E5%B0%B1%E4%BA%86%E8%87%AA%E5%B7%B1%E7%9A%84%E6%A2%A6%EF%BC%8C%E5%8D%B4%E7%A0%B4%E7%A2%8E%E4%BA%86%E5%88%AB%E4%BA%BA%E7%9A%84%E6%A2%A6/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/21/2017-12-21_剑侠风MMORPG：你成就了自己的梦，却破碎了别人的梦/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>前阵子有个把国内主播界的主机区炸得不轻的游戏，叫做：Getting Over It with Bennett Foddy。</p>
-<p>就像作者所说的那样，这是一款伤害特定类型的人的游戏。</p>
-<p>其实国内的游戏也在伤害特定的一群人，当你把国内的几个比较出名的手游、端游分类之后，不难发现：手游对应二刺螈，端游对应80后/85后仙侠党，有一个很明显的年龄段明显被伤害了。</p>
-<p>哦，我忘了，前几天微博上还在用一个莫名其妙从来没听说过不知道从哪里蹦出来的词：“佛系”，用来形容90后。佛系生活等等……</p>
-<p>伤口上撒盐了哦？ 二刺螈嘤嘤嘤仅适合一个特定年龄段的人，就是00后出生的，至于95~99这一段时间出生的人，除了女性玩家之外我真找不到理由怎么竟然会玩这种纯骗课游戏，或许是心智成熟得慢。</p>
-<p>仙侠更是，90~99年出生的人能跟仙侠扯在一起，哪里可能呢？ 出生的年代正好撞上国内大量引进日本动画片，于是青少年期会倾向于观看日本的动画，这绝不是二刺螈。二刺螈脑残说Q.E.D.。</p>
-<p>青少年期能够观看的东西也就仅剩于这些了，另外可以加上日韩的电视剧和综艺。这个年代的人在青少年时期，国内的动画业是极其拒绝发展的，拿了经费就是3d建模做动作，这样的东西仅仅是小屁孩乐意收看的智障动画。</p>
-<p>这整整一个年代的人都直接被伤害了。 连游戏都找不到好玩的。</p>
-<p>脑子有点问题的天天吃鸡，把Steam当吃鸡启动器。 特定的一小部分群体只能在引进的一些国外端游和Steam之间苟延残喘。 伤害。</p>
-<hr>
-<h2 id="“你成就了自己的梦”"><a href="#“你成就了自己的梦”" class="headerlink" title="“你成就了自己的梦”"></a><strong>“你成就了自己的梦”</strong></h2><p>腾讯已经开始转型了，不再在传统端游这方面和其他厂商竞争了，而是搞出来一个WeGame，倾向引进外国游戏普及正版和让国内的独立开发者有大腿可抱，这是对国内独立游戏开发者来说一个好的、能够让这个圈子实现正循环的举措。</p>
-<p>有些厂商是从来不知道什么叫竭泽而渔的，一个又一个的脑残手游3个月，按批来出，端游更是可笑得无尽的仙侠，无尽的唐朝。 现在好了，我对80后策划唯一的认知就是：您从唐朝来的吧？</p>
-<p>我实在是想不通一个成功的策划怎么会在游戏如何收费上，竟敢发起投票问玩家是想要点卡收费制还是免费游戏道具收费制。</p>
-<p>免费游戏其实更贵这个论点被堂而皇之地放到了桌面上。</p>
-<p>逆水寒我不去看他的世界观，其实场景搭得已经很有让人想玩的欲望了。 但是网易策划你这个举措，我该想什么好呢，我又觉得策划不该分家了。在我的印象中已经有很多游戏被运营搞黄了。不管是国内、还是国外引进的网游，太多太多的游戏喜欢采用装备等级和装备品级这个制度了。</p>
-<p>这就像是一个魔洞，外面的人想进来，里面的人出不去。</p>
-<p>已经进去的人，想尽办法把自己的美好童年、美好追忆在游戏中重新描绘，并以此吸引一些能产生共鸣的玩家，以及那些剑3约炮约不到转别的游戏继续约的玩家。</p>
-<hr>
-<h2 id="“却破碎了别人的梦”"><a href="#“却破碎了别人的梦”" class="headerlink" title="“却破碎了别人的梦”"></a>“却破碎了别人的梦”</h2><p>那个特定年龄阶层的人还在被伤害。</p>
-<p>我们要科幻。 我们渴望未来科技，在这个理论物理不管怎么发展也不顾改善人民生活的时代。</p>
-<p>我们想要活在科幻世界里，理所应当地：科幻的场景、科幻的故事、科幻的设备 不是像PREY那样好好的一个未来城市突变成长满外星奇葩怪物的太空船。</p>
-<p>不是像EVE那样披着科幻外皮的强制PVP。 更不是星际公民这种暴力吸金最后做出来谁的电脑都跑不动的东西。</p>
-<p>我们想要的，仅仅是科幻。每个人都有梦，而我们想要的是：活在未来。</p>
-<p>各大小说网上科幻题材的小说不在小数，除去一些一天到晚不是仙侠就是腐女向的垃圾作者之外，科幻题材小说真的很受欢迎。不管是数千年、数万年以后的现代，还是已经发现其他星系和星际旅行技术的数十年之后。</p>
-<hr>
-<h1 id="请不要仅仅因为自己的梦很重要就去破碎别人的梦，每个人的梦都是一个世界，而世界，值得被尊重。"><a href="#请不要仅仅因为自己的梦很重要就去破碎别人的梦，每个人的梦都是一个世界，而世界，值得被尊重。" class="headerlink" title="请不要仅仅因为自己的梦很重要就去破碎别人的梦，每个人的梦都是一个世界，而世界，值得被尊重。"></a><strong>请不要仅仅因为自己的梦很重要就去破碎别人的梦，每个人的梦都是一个世界，而世界，值得被尊重。</strong></h1>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://www.ceplavia.com/2017/12/11/2017-12-11_MMORPG%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%96%87%E5%AD%97%E7%9A%84%E6%84%8F%E4%B9%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Ceplavia">
-      <meta itemprop="description" content="遊戲是潛在抑鬱症患者最後的避風港。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ceplavia's Gaming Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/12/11/2017-12-11_MMORPG%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%96%87%E5%AD%97%E7%9A%84%E6%84%8F%E4%B9%89/" class="post-title-link" itemprop="url">MMORPG：语言/文字的意义</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-12-11 13:22:12" itemprop="dateCreated datePublished" datetime="2017-12-11T13:22:12+08:00">2017-12-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-30 21:52:54" itemprop="dateModified" datetime="2020-07-30T21:52:54+08:00">2020-07-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%A7%86%E7%82%B9/" itemprop="url" rel="index"><span itemprop="name">视点</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2017/12/11/2017-12-11_MMORPG%EF%BC%9A%E8%AF%AD%E8%A8%80%E6%96%87%E5%AD%97%E7%9A%84%E6%84%8F%E4%B9%89/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/11/2017-12-11_MMORPG：语言文字的意义/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=4940455&auto=1&height=32"></iframe>
-↑ KOKIA - EXEC\_COSMOFLIPS/
-
-<p>这是以Hymmnos语演唱的最广为人知的一首歌，虽然我更喜欢IMPLANTA……</p>
-<p><a href="https://zh.wikipedia.org/wiki/Hymmnos%E8%AF%AD" target="_blank" rel="noopener">点此</a>前往Hymmnos语的维基百科。</p>
-<blockquote>
-<p>19年8月31日修排版：这里原本引用的是我自己上传到 WordPress 媒体的音频。考虑到可能存在的版权问题，改为引用网易云音乐。</p>
-<p>而网易云音乐很多音乐是仅限位置在国内才能播放的。不在国内的请<a href="https://www.youtube.com/watch?v=XJyzdbTor9k" target="_blank" rel="noopener">点我</a>在 Youtube 听。</p>
-</blockquote>
-<p>最近觉得，在MMORPG中语言及文字的地位不容小觑。文字是载体，在其之上先承载着语言，而语言又承载着文化，继而承载着整个游戏的世界观，世界观才承载着游戏发生的故事。</p>
-<p>自从玩游戏以来前前后后算是玩了有接近50款RPG，能有自己文字的游戏真的很少。 早前开始试着做一个基于普通话发音的表音文字，（<a href="https://github.com/Ceplavia/Le-Evolver-Project/blob/master/%E8%87%AA%E5%88%9B%E5%AD%97.md" target="_blank" rel="noopener">点此</a>跳转到github说明）虽然做得很简陋，但已经可以试着用来书写出中文了，而且是一种书写规则尚且算完备的文字。</p>
-<p>只有文字的话是不够的。 就承载的级别来看，最终要承载的是游戏的剧情。有一些RPG的剧情除去起bug的部分都很完美，世界观或是基于现实，或是基于“上古XXX时代毁灭之后……”。虽然这是一个完美的偷懒方式，但我觉得这样的游戏活不长。或者说，这样做出来的是商品，有其预先设定好的运营周期，就算套上现在大家都用的等级制度来看，也不必担心数值膨胀的问题，因为在膨胀出现之前这游戏搞不好就已经凉了，换皮继续骗课金之路。</p>
-<p>可是这又和EA的年货COD有什么区别呢？流水线方式制造出来的产品终究不如手工制产品好，即使流水线生产出来的东西再好，始终也是大路货。</p>
-<p>或许是这样的“大作”，因其口碑，没人去深究这些方面吗？剧情什么的，过得去就行？反正我要的是玩法？</p>
-<p>这样的话，原本那些本就不多的，质量极佳的RPG游戏，地位迟早会和粤语一样吧。</p>
-<h2 id="消失殆尽。"><a href="#消失殆尽。" class="headerlink" title="消失殆尽。"></a><strong>消失殆尽。</strong></h2><p>文字-&gt;语言-&gt;文化-&gt;世界观-&gt;剧情</p>
-<p>这是我认为的层级关系。之前曾经写过一个都市异能的世界观(而且不是什么异能空前发展，科技停滞不前的奇怪世界观)，因此才做出了Cualific这个文字，因为我认为，要体现出异能者如何有他们自己的生活，异能者要如何与普通人共存，异能者的日常生活又该是如何。要为什么人工作吗？和执法机关的冲突又要如何解决？忙碌吗？这一切都可以通过文字来表现。</p>
-<p>异能者要有属于自己的文化，因而对应出现的就是异能者所使用的文字(Cualific作为例子)，直来直去的直线允许异能者直接使用异能进行书写。</p>
-<p>异能者要与普通人共存，所以在文字方面也显得是个方块字，便于与汉字共同书写。</p>
-<p>异能者的日常生活或是忙碌，故而文字也显得更为简单，只表示发音。</p>
-<p>一切都能在文字中体现(虽然语言方面我还没想出解决方案)。</p>
-<hr>
-<p>我绝不认为每个游戏都要配上其专有的语言或是文字，但应有其对应的，将与普通人区别(基于现实)，或是该世界特有的(架空)文化展现出来。</p>
-<p>拿DNF来举例，最初是有阿拉德语这个设定的，swis是水，loo是火，如果我没记错的话虚空、光暗水火都有其对应的语言。阿拉德大陆上有不同的语言，有看不起异能者的文化，这才突显出这像是个实际存在的世界。</p>
-<hr>
-<p><strong>現實和遊戲，哪邊才是真實呢？別想多了，人多的那邊就是真實。誰有本事把人都吸引過去，誰就主宰了真實。</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1585,7 +1599,7 @@ _Counterattack - 平松建治 (Xenoblade 2 Sound Selection)_
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-count">114</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1598,7 +1612,7 @@ _Counterattack - 平松建治 (Xenoblade 2 Sound Selection)_
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">128</span>
+        <span class="site-state-item-count">131</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1611,25 +1625,25 @@ _Counterattack - 平松建治 (Xenoblade 2 Sound Selection)_
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="https://insbex.jixun.moe/" title="https://insbex.jixun.moe/" rel="noopener" target="_blank">Insb 的思维过山车</a>
+          <a href="https://insbex.jixun.moe/" title="https:&#x2F;&#x2F;insbex.jixun.moe&#x2F;" rel="noopener" target="_blank">Insb 的思维过山车</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://jixun.moe/" title="https://jixun.moe/" rel="noopener" target="_blank">季寻日志</a>
+          <a href="https://jixun.moe/" title="https:&#x2F;&#x2F;jixun.moe&#x2F;" rel="noopener" target="_blank">季寻日志</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://laplacence.github.io/" title="https://laplacence.github.io/" rel="noopener" target="_blank">Laplacence's Trash Can</a>
+          <a href="https://laplacence.github.io/" title="https:&#x2F;&#x2F;laplacence.github.io&#x2F;" rel="noopener" target="_blank">Laplacence's Trash Can</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://penguinliong.moe/" title="https://penguinliong.moe/" rel="noopener" target="_blank">Liong 的技术博客</a>
+          <a href="https://penguinliong.moe/" title="https:&#x2F;&#x2F;penguinliong.moe&#x2F;" rel="noopener" target="_blank">Liong 的技术博客</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://sunnyrx.com/" title="https://sunnyrx.com/" rel="noopener" target="_blank">热心的周末</a>
+          <a href="https://sunnyrx.com/" title="https:&#x2F;&#x2F;sunnyrx.com&#x2F;" rel="noopener" target="_blank">热心的周末</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://www.tcdw.net/" title="https://www.tcdw.net/" rel="noopener" target="_blank">吐槽大王部落格</a>
+          <a href="https://www.tcdw.net/" title="https:&#x2F;&#x2F;www.tcdw.net&#x2F;" rel="noopener" target="_blank">吐槽大王部落格</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://blog.grandcyan.com/" title="https://blog.grandcyan.com/" rel="noopener" target="_blank">Ceplavia's Thinking Blog</a>
+          <a href="https://blog.grandcyan.com/" title="https:&#x2F;&#x2F;blog.grandcyan.com&#x2F;" rel="noopener" target="_blank">Ceplavia's Thinking Blog</a>
         </li>
     </ul>
   </div>
@@ -1653,13 +1667,13 @@ _Counterattack - 平松建治 (Xenoblade 2 Sound Selection)_
 <div class="copyright">
   
   &copy; 2016 – 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Ceplavia</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
         

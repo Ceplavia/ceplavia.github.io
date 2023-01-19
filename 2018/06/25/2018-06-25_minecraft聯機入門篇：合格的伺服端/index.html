@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 6.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/Cyan-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/Cyan-16x16.png">
@@ -250,20 +250,20 @@
 </blockquote>
 <hr>
 <p>本文介紹我製作伺服端的方式。本文重寫於 2020 年 5 月初。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h3 id="伺服端使用"><a href="#伺服端使用" class="headerlink" title="伺服端使用"></a>伺服端使用</h3><h4 id="小知識"><a href="#小知識" class="headerlink" title="小知識"></a>小知識</h4><p>伺服端包括原版、Bukkit系、Bukkit+Forge系、Forge系；</p>
 <p>原版自然不必多説，就是官方提供的版本。</p>
 <p>Bukkit 系的伺服端除了將地圖的文件結構進行修改以方便備份外，還可以讓玩家安裝插件。最早的是 Bukkit Server，現在通常默認 Spigot 是接班人。</p>
 <p>而 Forge 系則是在官方的版本上安裝 Forge API，以使用 Mod 來進行聯機。</p>
 <p>Bukkit+Forge 系是一個盛行於 1.7.10，發源於 beta 1.7 年代的東西，從 MCPC 到 Cauldron ，再到 Kcauldron，停於 Thermos。看名字就知道，是可以同時安裝 mod 與插件的伺服端。</p>
-<h4 id="原版生存"><a href="#原版生存" class="headerlink" title="原版生存"></a>原版生存</h4><p>原版生存意味着不安裝任何 Mod，我推薦使用 <a href="https://www.spigotmc.org/" target="_blank" rel="noopener">Spigot</a> 的分支 <a href="https://papermc.io/" target="_blank" rel="noopener">PaperSpigot</a> (aka. PaperMC)，原因就是優化，以及非常快的更新速度。</p>
-<h4 id="Mod服"><a href="#Mod服" class="headerlink" title="Mod服"></a>Mod服</h4><p>若是使用遊戲版本 1.7.10，建議使用 <a href="https://github.com/CyberdyneCC/ThermosServer" target="_blank" rel="noopener">Thermos</a>。但 Thermos 已經很久遠，也沒有多少人維護，最好不要使用此遊戲版本。</p>
-<p>若是 1.10.2~1.12.2，可以使用 <a href="https://files.minecraftforge.net/" target="_blank" rel="noopener">Forge</a>+<a href="https://www.spongepowered.org/" target="_blank" rel="noopener">Sponge</a>。Sponge 是一套基於 Forge 的 API。</p>
-<p>1.12 以上，如 1.14.4、1.15.2，則建議使用 <a href="https://files.minecraftforge.net/" target="_blank" rel="noopener">Forge</a>。</p>
+<h4 id="原版生存"><a href="#原版生存" class="headerlink" title="原版生存"></a>原版生存</h4><p>原版生存意味着不安裝任何 Mod，我推薦使用 <a target="_blank" rel="noopener" href="https://www.spigotmc.org/">Spigot</a> 的分支 <a target="_blank" rel="noopener" href="https://papermc.io/">PaperSpigot</a> (aka. PaperMC)，原因就是優化，以及非常快的更新速度。</p>
+<h4 id="Mod服"><a href="#Mod服" class="headerlink" title="Mod服"></a>Mod服</h4><p>若是使用遊戲版本 1.7.10，建議使用 <a target="_blank" rel="noopener" href="https://github.com/CyberdyneCC/ThermosServer">Thermos</a>。但 Thermos 已經很久遠，也沒有多少人維護，最好不要使用此遊戲版本。</p>
+<p>若是 1.10.2~1.12.2，可以使用 <a target="_blank" rel="noopener" href="https://files.minecraftforge.net/">Forge</a>+<a target="_blank" rel="noopener" href="https://www.spongepowered.org/">Sponge</a>。Sponge 是一套基於 Forge 的 API。</p>
+<p>1.12 以上，如 1.14.4、1.15.2，則建議使用 <a target="_blank" rel="noopener" href="https://files.minecraftforge.net/">Forge</a>。</p>
 <p>部署起來相當簡單，例如 Forge 服就是將 Forge 對着官方伺服端安裝。有自己動手裝過 Forge 的應該能理解。</p>
 <h4 id="不同版本的差異？"><a href="#不同版本的差異？" class="headerlink" title="不同版本的差異？"></a>不同版本的差異？</h4><p>在插件年代，有一個比較出名的插件系列叫做 Essentials，出名不是因為權限管理或是自帶經濟之類的設定，而是因為它提供了諸如<code>/home</code>、<code>/back</code>、<code>/tpa</code>之類的指令。</p>
-<p>到了沒有辦法使用插件的年代，就只能用 Mod 來實現。可以直接使用的有 <a href="https://www.curseforge.com/minecraft/mc-mods/forge-essentials-74735" target="_blank" rel="noopener">ForgeEssentials</a>(<del>1.12.2)，和 <a href="https://www.curseforge.com/minecraft/mc-mods/thut-essentials" target="_blank" rel="noopener">Thut Essentials</a>(</del>1.15.2)，這些比較適合親友服，人數不多的聯機，大家聯機只為遊玩，不需要太多權限設置等。</p>
+<p>到了沒有辦法使用插件的年代，就只能用 Mod 來實現。可以直接使用的有 <a target="_blank" rel="noopener" href="https://www.curseforge.com/minecraft/mc-mods/forge-essentials-74735">ForgeEssentials</a>(<del>1.12.2)，和 <a target="_blank" rel="noopener" href="https://www.curseforge.com/minecraft/mc-mods/thut-essentials">Thut Essentials</a>(</del>1.15.2)，這些比較適合親友服，人數不多的聯機，大家聯機只為遊玩，不需要太多權限設置等。</p>
 <p>如果需要一些更多的管理，就需要使用 Sponge 的 Mod 了，包括：</p>
 <ul>
 <li>Nucleus - 一個可以代替 Essentials 的 Mod，提供非常多的設置（包括權限分組等）及指令；</li>
@@ -273,28 +273,28 @@
 <p>但當然也有缺點，第一當然是只支持到 1.12.2，第二是當時我使用 Nucleus 時發現權限是加在玩家身上的，即使是在伺服端控制台也沒有權限執行特殊指令。因為接管了所有權限，我亦不知道對方塊直接操作（如變動）的權限是如何處理。部分會對方塊直接操作的 Mod 就沒有權限操作。例如 Project E 的賢者之石直接對方塊進行變換。以及伺服端配置中的<code>spawn-protection</code>對重生點進行保護，被保護的方塊沒有任何人可以破壞。</p>
 <h4 id="伺服端啟動"><a href="#伺服端啟動" class="headerlink" title="伺服端啟動"></a>伺服端啟動</h4><p>首先無論是上文提及的何種系伺服端，<strong>其啟動方式都是使用一句指令來啟動最核心的 .jar 檔案</strong>，具體到實際使用就變成了寫成 .bat 或 .sh 文件來偷懶。</p>
 <p>給出我常用的啟動指令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -d64 -server -XX:+UseG1GC -XX:MaxGCPauseMillis&#x3D;100 -XX:+UseStringDeduplication -Xms1G -Xmx2560M -XX:hashCode&#x3D;5 -Dfile.encoding&#x3D;UTF-8 -jar server.jar nogui</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -d64 -server -XX:+UseG1GC -XX:MaxGCPauseMillis=100 -XX:+UseStringDeduplication -Xms1G -Xmx2560M -XX:hashCode=5 -Dfile.encoding=UTF-8 -jar server.jar nogui</span><br></pre></td></tr></table></figure>
 
 <p>Xms 參數是初始分配記憶體。Xmx 參數是最大分配記憶體。jar 參數是指 Minecraft 的伺服器文件。</p>
 <p>此指令保存為 .bat (windows) 或 .sh (linux) 文件，保存在與核心 .jar 同一目錄下，執行即可啟動伺服端。</p>
 <h4 id="伺服端文件結構"><a href="#伺服端文件結構" class="headerlink" title="伺服端文件結構"></a>伺服端文件結構</h4><p>通常，伺服端的資料夾內包含很多文件，要關心的不多：</p>
 <ul>
-<li>plugins/mods 資料夾 - 插件或 Mod 擺放的地方</li>
+<li>plugins&#x2F;mods 資料夾 - 插件或 Mod 擺放的地方</li>
 <li>world 資料夾 - 默認的地圖命名，可以修改</li>
 <li>logs 資料夾 - 用來保存 log</li>
 <li>server.properties - 伺服端設置</li>
 </ul>
-<p>我電腦上未有保存原版伺服器的設置文件，於是請查看<a href="https://minecraft-zh.gamepedia.com/Server.properties" target="_blank" rel="noopener">官方百科</a>。此處只列出少數我覺得比較重要並可能會修改的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 地圖的隨機種子，若使用特定的就要輸入</span><br><span class="line">level-seed&#x3D;</span><br><span class="line"># 新玩家進入伺服器時的默認模式</span><br><span class="line">gamemode&#x3D;survival</span><br><span class="line"># 伺服器使用的連接埠</span><br><span class="line">server-port&#x3D;25565</span><br><span class="line"># 是否啟用命令方塊</span><br><span class="line">enable-command-block&#x3D;false</span><br><span class="line"># 世界名稱，通常不變動，但若使用其它存檔則需要修改</span><br><span class="line">level-name&#x3D;world</span><br><span class="line"># 此處的 MOTD 可以在 https:&#x2F;&#x2F;minecraft.tools&#x2F;en&#x2F;motd.php 製作</span><br><span class="line">motd&#x3D;A Minecraft Server</span><br><span class="line"># 難度</span><br><span class="line">difficulty&#x3D;easy</span><br><span class="line"># 世界類型</span><br><span class="line">level-type&#x3D;default</span><br><span class="line"># 重生點保護，具體為以重生點為中心的正方體</span><br><span class="line">spawn-protection&#x3D;16</span><br><span class="line"># 若有玩家使用非正版啟動遊戲，則需要設置為 false</span><br><span class="line">online-mode&#x3D;true</span><br></pre></td></tr></table></figure>
+<p>我電腦上未有保存原版伺服器的設置文件，於是請查看<a target="_blank" rel="noopener" href="https://minecraft-zh.gamepedia.com/Server.properties">官方百科</a>。此處只列出少數我覺得比較重要並可能會修改的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 地圖的隨機種子，若使用特定的就要輸入</span><br><span class="line">level-seed=</span><br><span class="line"># 新玩家進入伺服器時的默認模式</span><br><span class="line">gamemode=survival</span><br><span class="line"># 伺服器使用的連接埠</span><br><span class="line">server-port=25565</span><br><span class="line"># 是否啟用命令方塊</span><br><span class="line">enable-command-block=false</span><br><span class="line"># 世界名稱，通常不變動，但若使用其它存檔則需要修改</span><br><span class="line">level-name=world</span><br><span class="line"># 此處的 MOTD 可以在 https://minecraft.tools/en/motd.php 製作</span><br><span class="line">motd=A Minecraft Server</span><br><span class="line"># 難度</span><br><span class="line">difficulty=easy</span><br><span class="line"># 世界類型</span><br><span class="line">level-type=default</span><br><span class="line"># 重生點保護，具體為以重生點為中心的正方體</span><br><span class="line">spawn-protection=16</span><br><span class="line"># 若有玩家使用非正版啟動遊戲，則需要設置為 false</span><br><span class="line">online-mode=true</span><br></pre></td></tr></table></figure>
 
 <p>其餘設置項可以在上方給出的連結處查看。</p>
 <h4 id="其它注意"><a href="#其它注意" class="headerlink" title="其它注意"></a>其它注意</h4><p>另外，也有一些 Gamerule，單機玩家應該很熟悉，無非是 keepInventory 之類作弊指令。提出要注意的一點：只有 Bukkit 系的伺服端會將地圖按維度拆分，故每個維度都需要重複執行。</p>
-<h3 id="插件-Mod-選用"><a href="#插件-Mod-選用" class="headerlink" title="插件 / Mod 選用"></a>插件 / Mod 選用</h3><h4 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h4><p>插件通常是一些微改動遊玩方式，包括但不僅限於提供傳送指令等。自己挑選喜歡的即可。</p>
-<p>如果是插件生存，我通常只會使用提供 Essentials 系列指令的插件。前文提到用 PaperSpigot，但 Spigot 的插件也可使用，可<a href="https://www.spigotmc.org/resources/categories/spigot.4/" target="_blank" rel="noopener">在此</a>找到。需要注意遊戲版本。</p>
+<h3 id="插件-x2F-Mod-選用"><a href="#插件-x2F-Mod-選用" class="headerlink" title="插件 &#x2F; Mod 選用"></a>插件 &#x2F; Mod 選用</h3><h4 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h4><p>插件通常是一些微改動遊玩方式，包括但不僅限於提供傳送指令等。自己挑選喜歡的即可。</p>
+<p>如果是插件生存，我通常只會使用提供 Essentials 系列指令的插件。前文提到用 PaperSpigot，但 Spigot 的插件也可使用，可<a target="_blank" rel="noopener" href="https://www.spigotmc.org/resources/categories/spigot.4/">在此</a>找到。需要注意遊戲版本。</p>
 <h4 id="Mod"><a href="#Mod" class="headerlink" title="Mod"></a>Mod</h4><p>如果是 Mod 生存，就有比較多需要顧慮的。</p>
 <p>首先要注意一點：提供多方向遊玩。</p>
 <p>以實際舉例：若安裝了某工業 Mod，則要注意遊玩不應圍繞此工業 Mod，可以提供其它玩法的 Mod 也應一同考慮。可以使用主遊玩 Mod 搭配多個副 Mod 的方式。</p>
-<p>其次就是一些小的娛樂 Mod / 裝飾 Mod。</p>
+<p>其次就是一些小的娛樂 Mod &#x2F; 裝飾 Mod。</p>
 <h3 id="個人探討"><a href="#個人探討" class="headerlink" title="個人探討"></a>個人探討</h3><p>下方內容算是早期試圖探討玩家心理學的內容。但我重寫了一遍，略作了修改。</p>
 <p>首先需要注意一點：每一個玩家都傾向於做一個守財奴。此處並不是貶義，而是指玩家傾向於收集，在物品數量不多時更是如此。在物品充足後才會開始轉向建築（Mod 玩家）或是其它方面。</p>
 <p>我認為的好 Mod Pack 需要有以下幾類 Mod：</p>
@@ -316,7 +316,7 @@
 <p>針對後者，為了公平性起見，我會考慮增加原版素材獲取途徑，例如 Ex Nihilo 這個 Mod。</p>
 <h4 id="Optimal-Mod"><a href="#Optimal-Mod" class="headerlink" title="Optimal Mod"></a>Optimal Mod</h4><p>內存回收的 Mod 沒有什麼好提的，幾乎每次我都會安裝。無論是為他人電腦着想或是為自己電腦着想，這類 Mod 並沒有壞處。</p>
 <p>至於地圖 Mod，要看個人喜好，最好多備幾個地圖 Mod 讓玩家自行挑選，畢竟在聯機時這不算是必用 Mod。</p>
-<p>另外還有要使用 <a href="https://www.curseforge.com/minecraft/mc-mods/jei" target="_blank" rel="noopener">Just Enough Items</a> 的話，就最好順便加上 <a href="https://www.curseforge.com/minecraft/mc-mods/just-enough-calculation" target="_blank" rel="noopener">Just Enough Calculation</a>。</p>
+<p>另外還有要使用 <a target="_blank" rel="noopener" href="https://www.curseforge.com/minecraft/mc-mods/jei">Just Enough Items</a> 的話，就最好順便加上 <a target="_blank" rel="noopener" href="https://www.curseforge.com/minecraft/mc-mods/just-enough-calculation">Just Enough Calculation</a>。</p>
 <h4 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h4><p>測試非常重要。</p>
 <p>在 Minecraft 中測試 Mod 並不像現實的測試職位一樣有多種方法，只能循固定思路去做。</p>
 <p>除了要測試每一個機器的功能之外，還要注意一些方塊的功能。還有 Mod 間的衝突。</p>
@@ -432,7 +432,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#伺服端使用"><span class="nav-number">1.</span> <span class="nav-text">伺服端使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#小知識"><span class="nav-number">1.1.</span> <span class="nav-text">小知識</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原版生存"><span class="nav-number">1.2.</span> <span class="nav-text">原版生存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mod服"><span class="nav-number">1.3.</span> <span class="nav-text">Mod服</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不同版本的差異？"><span class="nav-number">1.4.</span> <span class="nav-text">不同版本的差異？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#伺服端啟動"><span class="nav-number">1.5.</span> <span class="nav-text">伺服端啟動</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#伺服端文件結構"><span class="nav-number">1.6.</span> <span class="nav-text">伺服端文件結構</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其它注意"><span class="nav-number">1.7.</span> <span class="nav-text">其它注意</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件-Mod-選用"><span class="nav-number">2.</span> <span class="nav-text">插件 &#x2F; Mod 選用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#插件"><span class="nav-number">2.1.</span> <span class="nav-text">插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mod"><span class="nav-number">2.2.</span> <span class="nav-text">Mod</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#個人探討"><span class="nav-number">3.</span> <span class="nav-text">個人探討</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Main-Mod"><span class="nav-number">3.1.</span> <span class="nav-text">Main Mod</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sub-Mod"><span class="nav-number">3.2.</span> <span class="nav-text">Sub Mod</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Optimal-Mod"><span class="nav-number">3.3.</span> <span class="nav-text">Optimal Mod</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Test"><span class="nav-number">3.4.</span> <span class="nav-text">Test</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%BA%E6%9C%8D%E7%AB%AF%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">伺服端使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%9F%A5%E8%AD%98"><span class="nav-number">1.1.</span> <span class="nav-text">小知識</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%89%88%E7%94%9F%E5%AD%98"><span class="nav-number">1.2.</span> <span class="nav-text">原版生存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mod%E6%9C%8D"><span class="nav-number">1.3.</span> <span class="nav-text">Mod服</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E7%89%88%E6%9C%AC%E7%9A%84%E5%B7%AE%E7%95%B0%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">不同版本的差異？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%BA%E6%9C%8D%E7%AB%AF%E5%95%9F%E5%8B%95"><span class="nav-number">1.5.</span> <span class="nav-text">伺服端啟動</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%BA%E6%9C%8D%E7%AB%AF%E6%96%87%E4%BB%B6%E7%B5%90%E6%A7%8B"><span class="nav-number">1.6.</span> <span class="nav-text">伺服端文件結構</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E6%B3%A8%E6%84%8F"><span class="nav-number">1.7.</span> <span class="nav-text">其它注意</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6-x2F-Mod-%E9%81%B8%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">插件 &#x2F; Mod 選用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mod"><span class="nav-number">2.2.</span> <span class="nav-text">Mod</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%80%8B%E4%BA%BA%E6%8E%A2%E8%A8%8E"><span class="nav-number">3.</span> <span class="nav-text">個人探討</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Main-Mod"><span class="nav-number">3.1.</span> <span class="nav-text">Main Mod</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sub-Mod"><span class="nav-number">3.2.</span> <span class="nav-text">Sub Mod</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Optimal-Mod"><span class="nav-number">3.3.</span> <span class="nav-text">Optimal Mod</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Test"><span class="nav-number">3.4.</span> <span class="nav-text">Test</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -448,7 +448,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-count">114</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -461,7 +461,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">128</span>
+        <span class="site-state-item-count">131</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -474,25 +474,25 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="https://insbex.jixun.moe/" title="https://insbex.jixun.moe/" rel="noopener" target="_blank">Insb 的思维过山车</a>
+          <a href="https://insbex.jixun.moe/" title="https:&#x2F;&#x2F;insbex.jixun.moe&#x2F;" rel="noopener" target="_blank">Insb 的思维过山车</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://jixun.moe/" title="https://jixun.moe/" rel="noopener" target="_blank">季寻日志</a>
+          <a href="https://jixun.moe/" title="https:&#x2F;&#x2F;jixun.moe&#x2F;" rel="noopener" target="_blank">季寻日志</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://laplacence.github.io/" title="https://laplacence.github.io/" rel="noopener" target="_blank">Laplacence's Trash Can</a>
+          <a href="https://laplacence.github.io/" title="https:&#x2F;&#x2F;laplacence.github.io&#x2F;" rel="noopener" target="_blank">Laplacence's Trash Can</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://penguinliong.moe/" title="https://penguinliong.moe/" rel="noopener" target="_blank">Liong 的技术博客</a>
+          <a href="https://penguinliong.moe/" title="https:&#x2F;&#x2F;penguinliong.moe&#x2F;" rel="noopener" target="_blank">Liong 的技术博客</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://sunnyrx.com/" title="https://sunnyrx.com/" rel="noopener" target="_blank">热心的周末</a>
+          <a href="https://sunnyrx.com/" title="https:&#x2F;&#x2F;sunnyrx.com&#x2F;" rel="noopener" target="_blank">热心的周末</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://www.tcdw.net/" title="https://www.tcdw.net/" rel="noopener" target="_blank">吐槽大王部落格</a>
+          <a href="https://www.tcdw.net/" title="https:&#x2F;&#x2F;www.tcdw.net&#x2F;" rel="noopener" target="_blank">吐槽大王部落格</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://blog.grandcyan.com/" title="https://blog.grandcyan.com/" rel="noopener" target="_blank">Ceplavia's Thinking Blog</a>
+          <a href="https://blog.grandcyan.com/" title="https:&#x2F;&#x2F;blog.grandcyan.com&#x2F;" rel="noopener" target="_blank">Ceplavia's Thinking Blog</a>
         </li>
     </ul>
   </div>
@@ -516,13 +516,13 @@
 <div class="copyright">
   
   &copy; 2016 – 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Ceplavia</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
         

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 6.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/Cyan-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/Cyan-16x16.png">
@@ -248,103 +248,103 @@
         <p>注意，本文与 Minecraft 三部曲一样，要求阅读者拥有基本的 Linux 系统操作知识。</p>
 <hr>
 <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近在和朋友愉快地玩一些很不错的三方图，同时也和一些初次接触求生的朋友玩，使用大厅的本地服务器实在是难以连接，而使用最佳可用服务器则总是连到别人的大量魔改服务器，搞得本地文件都变了，单喷都能改成500多发子弹，不检查文件完整性就没法修复，于是干脆自己搭建。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <p>求生2的服务器对硬件要求很低，基本上国内阿里云腾讯云什么的 1 核 2g 已足够，只是硬盘稍有要求，因为服务端本身就不小。</p>
 <p>我用的系统是 CentOS 7，但实际操作里因为不同发行版而要有不同操作的地方很少，所以就不着重说了。</p>
 <h3 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h3><p><del>像广东人喝茶一样，</del>装新软件之前先<del>洗杯碟</del>更新……</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br></pre></td></tr></table></figure>
 
 <p>之后安装依赖库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install glibc.i686 libstdc++.i686</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install glibc.i686 libstdc++.i686</span><br></pre></td></tr></table></figure>
 
 <p>若是使用 root 用户登录的服务器，则需要创建一个新的普通用户。因为下文提到的 SteamCMD 不能在 root 用户下跑。使用<code>adduser blabla</code>就能创建一个名为 blabla 的用户了。再使用<code>passwd blabla</code>就能为 blabla 用户设置密码，密码需要不少于7位。</p>
 <p>然后登录为新创建的用户并切换到该用户的根目录。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su blabla    &#x2F;&#x2F; 从 root 用户切换到其它用户不用输密码</span><br><span class="line">cd</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su blabla    // 从 root 用户切换到其它用户不用输密码</span><br><span class="line">cd</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>这里我把新用户名设置为 blabla 是有原因的，当然可以设置成别的，比如「userl4d2」，但最好不要设置成「l4d2」，你会后悔的，最后会说明为什么。</p>
 </blockquote>
 <p>接下来需要安装 SteamCMD，这是一个在命令行下可以运行的 Steam ，实际上他就是没有界面而已。</p>
 <p>执行以下命令来下载 SteamCMD 到当前目录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;steamcdn-a.akamaihd.net&#x2F;client&#x2F;installer&#x2F;steamcmd_linux.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz</span><br></pre></td></tr></table></figure>
 
 <p>然后解压：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar xvf steamcmd_linux.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar xvf steamcmd_linux.tar.gz</span><br></pre></td></tr></table></figure>
 
 <p>之后就可以使用 SteamCMD 来下载求生之路 2 的服务端了，先执行 steamcmd.sh：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;steamcmd.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./steamcmd.sh</span><br></pre></td></tr></table></figure>
 
 <p>然后匿名登录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login anonymous</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">login anonymous</span><br></pre></td></tr></table></figure>
 
 <p>之后指定目录，并下载服务端：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">force_install_dir .&#x2F;l4d2server</span><br><span class="line">app_update 222860 validate</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">force_install_dir ./l4d2server</span><br><span class="line">app_update 222860 validate</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>注意，这里的目录你也可以叫 l4d2 ，只要简单地把第一行指令的目录部分改成「./l4d2」就好了，但还是建议不要，同样在最后说明为什么。 </p>
+<p>注意，这里的目录你也可以叫 l4d2 ，只要简单地把第一行指令的目录部分改成「.&#x2F;l4d2」就好了，但还是建议不要，同样在最后说明为什么。 </p>
 <p>此外，下载需时比较久，毕竟服务端其实也接近 7g ，我使用阿里云的速度不错，也需要下载个十多分钟。</p>
 </blockquote>
 <p>完成之后就退出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure>
 
-<p>这里已经可以执行<code>./srcds_run</code>这个指令来直接启动超级纯净的服务器了，我跟着别人的不完整教程搭建时也是这样想的：「反正我只是要联机」，但我非常建议安装必备插件以及进行必要的安全防护，是的，你没看错，安全防护。不过在做安全防护之前，先安装一些必须插件，很有必要。</p>
-<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>首先我们需要安装 <a href="https://www.sourcemod.net/downloads.php?branch=stable" target="_blank" rel="noopener">SourceMOD</a> 和 <a href="http://metamodsource.net/downloads.php?branch=stable" target="_blank" rel="noopener">MetaMOD</a>，这两个东西除了提供 API 可供开发插件外，也提供了一些基本的功能。</p>
+<p>这里已经可以执行<code>./srcds_run </code>这个指令来直接启动超级纯净的服务器了，我跟着别人的不完整教程搭建时也是这样想的：「反正我只是要联机」，但我非常建议安装必备插件以及进行必要的安全防护，是的，你没看错，安全防护。不过在做安全防护之前，先安装一些必须插件，很有必要。</p>
+<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>首先我们需要安装 <a target="_blank" rel="noopener" href="https://www.sourcemod.net/downloads.php?branch=stable">SourceMOD</a> 和 <a target="_blank" rel="noopener" href="http://metamodsource.net/downloads.php?branch=stable">MetaMOD</a>，这两个东西除了提供 API 可供开发插件外，也提供了一些基本的功能。</p>
 <blockquote>
 <p>链接都是 stable 的分支。</p>
 </blockquote>
-<p>这里其它教程就开始作妖了，叫你在本地把两个东西捏一起再用什么软件上传，对我就是说 <a href="https://blog.csdn.net/qq741058114/article/details/81287465" target="_blank" rel="noopener">CSDN</a> 那篇东西。</p>
+<p>这里其它教程就开始作妖了，叫你在本地把两个东西捏一起再用什么软件上传，对我就是说 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq741058114/article/details/81287465">CSDN</a> 那篇东西。</p>
 <p>前面都用到 wget 了你为什么要自己折腾……</p>
 <p>打开上方两个 MOD 的链接，见到 Download 下面的小企鹅了吗？这些都是直链，右键那个小企鹅，按「复制连结网址」之类的东西，然后切换到我们该用来放插件的目录，在前面打上<code>wget</code>，并下载，就像下面这样。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd l4d2game    &#x2F;&#x2F; 注意：这里切换到你前面使用 SteamCMD 下载游戏时写的目录</span><br><span class="line">cd left4dead2   &#x2F;&#x2F; 这是真正的游戏目录……我是这么认为的 </span><br><span class="line">cd addons</span><br><span class="line">wget https:&#x2F;&#x2F;sm.alliedmods.net&#x2F;smdrop&#x2F;1.10&#x2F;sourcemod-1.10.0-git6454-linux.tar.gz</span><br><span class="line">wget https:&#x2F;&#x2F;mms.alliedmods.net&#x2F;mmsdrop&#x2F;1.10&#x2F;mmsource-1.10.7-git971-linux.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd l4d2game    // 注意：这里切换到你前面使用 SteamCMD 下载游戏时写的目录</span><br><span class="line">cd left4dead2   // 这是真正的游戏目录……我是这么认为的 </span><br><span class="line">cd addons</span><br><span class="line">wget https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6454-linux.tar.gz</span><br><span class="line">wget https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git971-linux.tar.gz</span><br></pre></td></tr></table></figure>
 
 <p>这里的下载网址是我写文章时现复制的，总之命令看起来就像这样，当然读者也执行这两条是没有问题的，但我建议替换成新版本的链接。</p>
 <p>之后解压：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar xvf sourcemod-1.10.0-git6454-linux.tar.gz</span><br><span class="line">tar xvf mmsource-1.10.7-git971-linux.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar xvf sourcemod-1.10.0-git6454-linux.tar.gz</span><br><span class="line">tar xvf mmsource-1.10.7-git971-linux.tar.gz</span><br></pre></td></tr></table></figure>
 
 <p>解压完之后这两个包可以直接删掉了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm sourcemod-1.10.0-git6454-linux.tar.gz</span><br><span class="line">rm mmsource-1.10.7-git971-linux.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm sourcemod-1.10.0-git6454-linux.tar.gz</span><br><span class="line">rm mmsource-1.10.7-git971-linux.tar.gz</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>这两个插件除了有基础功能之外，其实就像 Minecraft 的 Forge 和 Rift 一样，可以再安装别的插件，比方说 .smx （不是 Super Mario X） 的插件就要安装到 addons\sourcemod 下。</p>
 </blockquote>
 <p>到这里插件就算是安装完了，一般来说现在应该先开个服试试，检查一下插件是不是正确安装了，但开服参数里也包含着安全防护的东西，现在直接开服会有安全问题，所以请耐心继续阅读。</p>
-<h3 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h3><p>先到<a href="http://steamcommunity.com/actions/GroupCreate" target="_blank" rel="noopener">这里</a>创建一个属于你的 Steam 组，创建完成后记下组 ID ，另外，让要一起联机的人都加入这个组。</p>
+<h3 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h3><p>先到<a target="_blank" rel="noopener" href="http://steamcommunity.com/actions/GroupCreate">这里</a>创建一个属于你的 Steam 组，创建完成后记下组 ID ，另外，让要一起联机的人都加入这个组。</p>
 <p>现在，当前目录应该是在 addons ，那我们向上一层，到 cfg 文件夹去：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ..</span><br><span class="line">cd cfg</span><br><span class="line">vi server.cfg</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ..</span><br><span class="line">cd cfg</span><br><span class="line">vi server.cfg</span><br></pre></td></tr></table></figure>
 
 <p>在这里新建一个<code>server.cfg</code>，在里面写点东西。这里我就列出比较重要的。另外，这里写的东西实际上就是开服完成后执行的脚本。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hostname &quot;Ceplavia&#39;s L4D2 Server&quot;    &#x2F;&#x2F; 这个是服务器开放时，在游戏的右下角（如果你有加入一些组）显示的服务器名称，可以写但没用，下面会提到为什么</span><br><span class="line">sv_allow_lobby_connect_only 0    &#x2F;&#x2F; 是否允许从大厅选择「组服务器」来连接，建议 0 ，也就是 false</span><br><span class="line">sv_tags hidden    &#x2F;&#x2F; 在浏览服务器的地方隐藏</span><br><span class="line">sv_steamgroup 你的组id    &#x2F;&#x2F; 就是前面你建立的组的 ID</span><br><span class="line">sv_steamgroup_exclusive 1    &#x2F;&#x2F; 设置组为私有</span><br><span class="line"></span><br><span class="line">sm_cvar sv_gametypes coop    &#x2F;&#x2F; 游戏模式为合作</span><br><span class="line">z_difficulty Normal    &#x2F;&#x2F;游戏难度为普通</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hostname &quot;Ceplavia&#x27;s L4D2 Server&quot;    // 这个是服务器开放时，在游戏的右下角（如果你有加入一些组）显示的服务器名称，可以写但没用，下面会提到为什么</span><br><span class="line">sv_allow_lobby_connect_only 0    // 是否允许从大厅选择「组服务器」来连接，建议 0 ，也就是 false</span><br><span class="line">sv_tags hidden    // 在浏览服务器的地方隐藏</span><br><span class="line">sv_steamgroup 你的组id    // 就是前面你建立的组的 ID</span><br><span class="line">sv_steamgroup_exclusive 1    // 设置组为私有</span><br><span class="line"></span><br><span class="line">sm_cvar sv_gametypes coop    // 游戏模式为合作</span><br><span class="line">z_difficulty Normal    //游戏难度为普通</span><br></pre></td></tr></table></figure>
 
 <p>中间我故意分隔了一下，前面的部分是纯净的服务器就能执行的，下面的两行是安装了那两个插件才会执行的。</p>
 <blockquote>
 <p>对我就故意不写怎么离开编辑状态并保存，vim 应该自己学。</p>
 </blockquote>
 <p>然后到<code>addons/sourcemod/configs</code>这个目录来，修改<code>admins_simple.ini</code>这个文件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ..    &#x2F;&#x2F; 现在应该是在 cfg 文件夹里，往上一层</span><br><span class="line">cd addons</span><br><span class="line">cd sourcemod</span><br><span class="line">cd configs</span><br><span class="line">vi admins_simple.ini</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ..    // 现在应该是在 cfg 文件夹里，往上一层</span><br><span class="line">cd addons</span><br><span class="line">cd sourcemod</span><br><span class="line">cd configs</span><br><span class="line">vi admins_simple.ini</span><br></pre></td></tr></table></figure>
 
 <p>在里面以这样的格式写：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;STEAM_数字:数字:好多数字&quot;		&quot;99:z&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;STEAM_数字:数字:好多数字&quot;		&quot;99:z&quot;</span><br></pre></td></tr></table></figure>
 
-<p>前面那串是你的 SteamID，可以在<a href="https://steamidfinder.com/" target="_blank" rel="noopener">这里</a>查找到。</p>
+<p>前面那串是你的 SteamID，可以在<a target="_blank" rel="noopener" href="https://steamidfinder.com/">这里</a>查找到。</p>
 <p>这么一来就差不多了，回到游戏所在的目录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ..    &#x2F;&#x2F; 向上返回到 sourcemod</span><br><span class="line">cd ..    &#x2F;&#x2F; 向上返回到 addons</span><br><span class="line">cd ..    &#x2F;&#x2F; 向上返回到 left4dead2</span><br><span class="line">cd ..    &#x2F;&#x2F; 向上返回到 l4d2server</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ..    // 向上返回到 sourcemod</span><br><span class="line">cd ..    // 向上返回到 addons</span><br><span class="line">cd ..    // 向上返回到 left4dead2</span><br><span class="line">cd ..    // 向上返回到 l4d2server</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>应该没错……总之要返回到有<code>srcds_run</code>这个东西所在的目录。</p>
 </blockquote>
 <p>然后我们来写一个启动脚本：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi start.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi start.sh</span><br></pre></td></tr></table></figure>
 
 <p>写这段东西就好了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;srcds_run -game left4dead2 -insecure +hostport 写个数字嘛 -condebug  +exec server.cfg -nomaster</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./srcds_run -game left4dead2 -insecure +hostport 写个数字嘛 -condebug  +exec server.cfg -nomaster</span><br></pre></td></tr></table></figure>
 
 <p>来具体解释一下，srcds_run 就是启动服务端用的；game 参数不多说了；insecure 是禁用 VAC，一些客户端的 mod 不禁用这个的话容易被制裁，比如说自动 BunnyHop 的 mod；hostport 是端口，默认是27015，建议修改；condebug 是输出 debug 的信息；exec 是执行前面写的<code>server.cfg</code>；nomaster 同样是隐藏服务器用的。</p>
 <blockquote>
 <p>注意，这里使用的端口，请在防火墙或安全组允许双向，TCP 和 UDP 都要。</p>
 </blockquote>
 <p>然后给这个启动脚本加上权限：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x start.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x start.sh</span><br></pre></td></tr></table></figure>
 
 <p>这样就可以执行 start.sh 来启动服务器了，建议新增一个 screen 来使用。要停止服务器，只要在 screen 内 Ctrl+C 即可。</p>
 <h3 id="三方地图"><a href="#三方地图" class="headerlink" title="三方地图"></a>三方地图</h3><p>用 pscp 之类的工具上传到 addons这个文件夹内再开服就行。路径是<code>IP:home/你的用户/游戏文件夹/left4dead2/addons</code>。</p>
@@ -470,7 +470,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体步骤"><span class="nav-number">2.</span> <span class="nav-text">具体步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件"><span class="nav-number">3.</span> <span class="nav-text">插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全"><span class="nav-number">4.</span> <span class="nav-text">安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三方地图"><span class="nav-number">5.</span> <span class="nav-text">三方地图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件指令"><span class="nav-number">6.</span> <span class="nav-text">插件指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进入服务器"><span class="nav-number">7.</span> <span class="nav-text">进入服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它游戏的服务端"><span class="nav-number">8.</span> <span class="nav-text">其它游戏的服务端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WHY安全？"><span class="nav-number">9.</span> <span class="nav-text">WHY安全？</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.</span> <span class="nav-text">具体步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8"><span class="nav-number">4.</span> <span class="nav-text">安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E6%96%B9%E5%9C%B0%E5%9B%BE"><span class="nav-number">5.</span> <span class="nav-text">三方地图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E6%8C%87%E4%BB%A4"><span class="nav-number">6.</span> <span class="nav-text">插件指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E5%85%A5%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">7.</span> <span class="nav-text">进入服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E6%B8%B8%E6%88%8F%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-number">8.</span> <span class="nav-text">其它游戏的服务端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WHY%E5%AE%89%E5%85%A8%EF%BC%9F"><span class="nav-number">9.</span> <span class="nav-text">WHY安全？</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -486,7 +486,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-count">114</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -499,7 +499,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">128</span>
+        <span class="site-state-item-count">131</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -512,25 +512,25 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="https://insbex.jixun.moe/" title="https://insbex.jixun.moe/" rel="noopener" target="_blank">Insb 的思维过山车</a>
+          <a href="https://insbex.jixun.moe/" title="https:&#x2F;&#x2F;insbex.jixun.moe&#x2F;" rel="noopener" target="_blank">Insb 的思维过山车</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://jixun.moe/" title="https://jixun.moe/" rel="noopener" target="_blank">季寻日志</a>
+          <a href="https://jixun.moe/" title="https:&#x2F;&#x2F;jixun.moe&#x2F;" rel="noopener" target="_blank">季寻日志</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://laplacence.github.io/" title="https://laplacence.github.io/" rel="noopener" target="_blank">Laplacence's Trash Can</a>
+          <a href="https://laplacence.github.io/" title="https:&#x2F;&#x2F;laplacence.github.io&#x2F;" rel="noopener" target="_blank">Laplacence's Trash Can</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://penguinliong.moe/" title="https://penguinliong.moe/" rel="noopener" target="_blank">Liong 的技术博客</a>
+          <a href="https://penguinliong.moe/" title="https:&#x2F;&#x2F;penguinliong.moe&#x2F;" rel="noopener" target="_blank">Liong 的技术博客</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://sunnyrx.com/" title="https://sunnyrx.com/" rel="noopener" target="_blank">热心的周末</a>
+          <a href="https://sunnyrx.com/" title="https:&#x2F;&#x2F;sunnyrx.com&#x2F;" rel="noopener" target="_blank">热心的周末</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://www.tcdw.net/" title="https://www.tcdw.net/" rel="noopener" target="_blank">吐槽大王部落格</a>
+          <a href="https://www.tcdw.net/" title="https:&#x2F;&#x2F;www.tcdw.net&#x2F;" rel="noopener" target="_blank">吐槽大王部落格</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://blog.grandcyan.com/" title="https://blog.grandcyan.com/" rel="noopener" target="_blank">Ceplavia's Thinking Blog</a>
+          <a href="https://blog.grandcyan.com/" title="https:&#x2F;&#x2F;blog.grandcyan.com&#x2F;" rel="noopener" target="_blank">Ceplavia's Thinking Blog</a>
         </li>
     </ul>
   </div>
@@ -554,13 +554,13 @@
 <div class="copyright">
   
   &copy; 2016 – 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Ceplavia</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
         

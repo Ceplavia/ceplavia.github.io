@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 6.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/Cyan-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/Cyan-16x16.png">
@@ -247,7 +247,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>本文原发在<a href="http://gad.qq.com/content/wendetail/7165534" target="_blank" rel="noopener">这里</a>，是我自己的回答。</p>
+        <p>本文原发在<a target="_blank" rel="noopener" href="http://gad.qq.com/content/wendetail/7165534">这里</a>，是我自己的回答。</p>
 <p>此后在gad上的笔记回答我一般会在下一期出来之后把我原本的回答贴上来。这次的回答是一等奖~</p>
 <p>个人偏爱大型MMORPG，那么就来写一写我曾经做的一套大型MMORPG的数值框架中出现的问题和我个人的一些思考吧。</p>
 <p>首先从我整理出的一些问题开始：</p>
@@ -258,14 +258,14 @@
 <p>在有主要及次要属性的前提下，加入元素属性的设定，一个技能可以造成一种类型的元素伤害(两种或以上元素伤害亦可复合成一种高级元素伤害，碍于篇幅此处不谈)，同时必要地就要添加元素属性抗性，在面对对应的元素属性伤害时可以提供一定的减伤率(在不同的元素伤害之间亦可改为击退率之类的)。元素属性伤害在一定程度上起与次要属性相等的作用，即主要提供更多增强人物的途径，同时对游戏中的其他一些玩法系统有所影响。</p>
 <p>后面就是我所发现的问题了，在元素伤害种类增加到一定程度的时候(约8种为边界线，请不要认为这数量很多，这是我个人多次考量之后找出的一个分水岭)，如何去决定计算伤害的函数就变得无比复杂。</p>
 <p>举个例子：</p>
-<p>每x点元素属性可以增加(x/10)%的元素属性伤害，此时，</p>
-<p>人物伤害=普通技能伤害(无属性)+普通技能伤害*(x/10)%元素属性伤害</p>
+<p>每x点元素属性可以增加(x&#x2F;10)%的元素属性伤害，此时，</p>
+<p>人物伤害&#x3D;普通技能伤害(无属性)+普通技能伤害*(x&#x2F;10)%元素属性伤害</p>
 <p>当人物身上装备提供更多元素属性伤害时，此公式变更为</p>
-<p>人物伤害=普通技能伤害(无属性)+普通技能伤害<em>(x/10)%元素属性1伤害+普通技能伤害</em>(x/10)%元素属性2伤害+...etc</p>
+<p>人物伤害&#x3D;普通技能伤害(无属性)+普通技能伤害*(x&#x2F;10)%元素属性1伤害+普通技能伤害*(x&#x2F;10)%元素属性2伤害+...etc</p>
 <p>一般情况下若人物身上装备可以提供3种元素属性伤害时，则附加的元素属性伤害合计不应该超过(约)15%</p>
 <p>到这里就会出现一个矛盾，先把这里的合计元素属性伤害称为附加伤害，把技能本身打出去的伤害称为主要伤害。</p>
 <p>次要伤害占主要伤害的比率不宜过大，一般在不超过20%的情况下更容易令人接受，分情况讨论：</p>
-<p>若此比率过大，那么人物伤害就会变得过高，对应地游戏内怪物的难度在调整的时候就容易直接提高血量，在人物/怪物成长函数构造不好的情况下，在等级提升到一定程度后，容易出现“数据膨胀”现象(即数字直接呈指数级别增加趋势)，此现象难以避免，因在策划初期极难找到一个合适的成长函数，加之后期活动策划会偶尔放出一些大幅增强玩家的活动(如新版本开放，吸引AFK玩家回锅)，容易对角色的成长造成影响，其后果就是角色过于强大，为了平衡就可能直接调整怪物难度，在游戏中期已难以针对游戏中问题去大规模调整成长函数(暴雪对wow都做不到，更何况你?)，容易出现怪物过难的问题，在多次平衡下若无法解决，数字就会越来越大，这就是我个人认为的“恶性循环”现象。</p>
+<p>若此比率过大，那么人物伤害就会变得过高，对应地游戏内怪物的难度在调整的时候就容易直接提高血量，在人物&#x2F;怪物成长函数构造不好的情况下，在等级提升到一定程度后，容易出现“数据膨胀”现象(即数字直接呈指数级别增加趋势)，此现象难以避免，因在策划初期极难找到一个合适的成长函数，加之后期活动策划会偶尔放出一些大幅增强玩家的活动(如新版本开放，吸引AFK玩家回锅)，容易对角色的成长造成影响，其后果就是角色过于强大，为了平衡就可能直接调整怪物难度，在游戏中期已难以针对游戏中问题去大规模调整成长函数(暴雪对wow都做不到，更何况你?)，容易出现怪物过难的问题，在多次平衡下若无法解决，数字就会越来越大，这就是我个人认为的“恶性循环”现象。</p>
 <p>2.属性之间的相互影响程度</p>
 <p>你可曾记得以前的回合制网游中有一个有趣的设定？</p>
 <p>“敏捷——主要影响速度，次要影响暴击率”</p>
@@ -418,7 +418,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-count">114</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -431,7 +431,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">128</span>
+        <span class="site-state-item-count">131</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -444,25 +444,25 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="https://insbex.jixun.moe/" title="https://insbex.jixun.moe/" rel="noopener" target="_blank">Insb 的思维过山车</a>
+          <a href="https://insbex.jixun.moe/" title="https:&#x2F;&#x2F;insbex.jixun.moe&#x2F;" rel="noopener" target="_blank">Insb 的思维过山车</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://jixun.moe/" title="https://jixun.moe/" rel="noopener" target="_blank">季寻日志</a>
+          <a href="https://jixun.moe/" title="https:&#x2F;&#x2F;jixun.moe&#x2F;" rel="noopener" target="_blank">季寻日志</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://laplacence.github.io/" title="https://laplacence.github.io/" rel="noopener" target="_blank">Laplacence's Trash Can</a>
+          <a href="https://laplacence.github.io/" title="https:&#x2F;&#x2F;laplacence.github.io&#x2F;" rel="noopener" target="_blank">Laplacence's Trash Can</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://penguinliong.moe/" title="https://penguinliong.moe/" rel="noopener" target="_blank">Liong 的技术博客</a>
+          <a href="https://penguinliong.moe/" title="https:&#x2F;&#x2F;penguinliong.moe&#x2F;" rel="noopener" target="_blank">Liong 的技术博客</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://sunnyrx.com/" title="https://sunnyrx.com/" rel="noopener" target="_blank">热心的周末</a>
+          <a href="https://sunnyrx.com/" title="https:&#x2F;&#x2F;sunnyrx.com&#x2F;" rel="noopener" target="_blank">热心的周末</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://www.tcdw.net/" title="https://www.tcdw.net/" rel="noopener" target="_blank">吐槽大王部落格</a>
+          <a href="https://www.tcdw.net/" title="https:&#x2F;&#x2F;www.tcdw.net&#x2F;" rel="noopener" target="_blank">吐槽大王部落格</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://blog.grandcyan.com/" title="https://blog.grandcyan.com/" rel="noopener" target="_blank">Ceplavia's Thinking Blog</a>
+          <a href="https://blog.grandcyan.com/" title="https:&#x2F;&#x2F;blog.grandcyan.com&#x2F;" rel="noopener" target="_blank">Ceplavia's Thinking Blog</a>
         </li>
     </ul>
   </div>
@@ -486,13 +486,13 @@
 <div class="copyright">
   
   &copy; 2016 – 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Ceplavia</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
         

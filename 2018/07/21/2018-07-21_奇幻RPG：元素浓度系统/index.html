@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 6.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/Cyan-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/Cyan-16x16.png">
@@ -256,7 +256,7 @@
 <h2 id="基础设定"><a href="#基础设定" class="headerlink" title="基础设定"></a><strong>基础设定</strong></h2><p>游戏中每个区域参考MC中Chunk的概念进行编程，每个区域有其固有属性，属性假设为只有地、火、风、水。那么在最平衡的地方，每一个属性都占25%，为了说明方面就让他干脆是25点吧，这样每个区域的总属性点数是100点。在强属性区域，该属性需要占比达到70%以上。</p>
 <h2 id="法术飞行"><a href="#法术飞行" class="headerlink" title="法术飞行"></a><strong>法术飞行</strong></h2><p>法术从A区域飞行到B区域，抽取A区域中的法术元素转移到B区域中，A区域中立即按百分比减少对应元素的浓度，从其他类型元素处按区域权值以比例方式抽取补充。</p>
 <p>飞行时路过的路径也会受到影响。权值与A区域距离成正比。即越接近B区域，变化得越多。</p>
-<h2 id="周期事件"><a href="#周期事件" class="headerlink" title="周期事件"></a><strong>周期事件</strong></h2><p>强/弱属性地区以Tag标识，然后加以权值来储存这个数据。</p>
+<h2 id="周期事件"><a href="#周期事件" class="headerlink" title="周期事件"></a><strong>周期事件</strong></h2><p>强&#x2F;弱属性地区以Tag标识，然后加以权值来储存这个数据。</p>
 <p>每次周期有一定（较低）的机率（还受法阵影响）来触发元素回溯。元素回溯指的是地区的元素浓度回到最初的设定标准。这个模拟了大自然的自我调节。</p>
 <h2 id="法阵影响"><a href="#法阵影响" class="headerlink" title="法阵影响"></a><strong>法阵影响</strong></h2><p>有些法阵会从更远的区域调动元素向当前区域补充元素——看起来是如此，但注意这里只是在调节各个区域的元素比例，实际不调整数量。</p>
 <p>被法阵影响的地区，周期事件的成功率会下调。 法阵还可以提供更多存在感。</p>
@@ -381,7 +381,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础设定"><span class="nav-number">1.</span> <span class="nav-text">基础设定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#法术飞行"><span class="nav-number">2.</span> <span class="nav-text">法术飞行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#周期事件"><span class="nav-number">3.</span> <span class="nav-text">周期事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#法阵影响"><span class="nav-number">4.</span> <span class="nav-text">法阵影响</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">5.</span> <span class="nav-text">例子</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E8%AE%BE%E5%AE%9A"><span class="nav-number">1.</span> <span class="nav-text">基础设定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%95%E6%9C%AF%E9%A3%9E%E8%A1%8C"><span class="nav-number">2.</span> <span class="nav-text">法术飞行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%A8%E6%9C%9F%E4%BA%8B%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">周期事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%95%E9%98%B5%E5%BD%B1%E5%93%8D"><span class="nav-number">4.</span> <span class="nav-text">法阵影响</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">5.</span> <span class="nav-text">例子</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -397,7 +397,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-count">114</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -410,7 +410,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">128</span>
+        <span class="site-state-item-count">131</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -423,25 +423,25 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="https://insbex.jixun.moe/" title="https://insbex.jixun.moe/" rel="noopener" target="_blank">Insb 的思维过山车</a>
+          <a href="https://insbex.jixun.moe/" title="https:&#x2F;&#x2F;insbex.jixun.moe&#x2F;" rel="noopener" target="_blank">Insb 的思维过山车</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://jixun.moe/" title="https://jixun.moe/" rel="noopener" target="_blank">季寻日志</a>
+          <a href="https://jixun.moe/" title="https:&#x2F;&#x2F;jixun.moe&#x2F;" rel="noopener" target="_blank">季寻日志</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://laplacence.github.io/" title="https://laplacence.github.io/" rel="noopener" target="_blank">Laplacence's Trash Can</a>
+          <a href="https://laplacence.github.io/" title="https:&#x2F;&#x2F;laplacence.github.io&#x2F;" rel="noopener" target="_blank">Laplacence's Trash Can</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://penguinliong.moe/" title="https://penguinliong.moe/" rel="noopener" target="_blank">Liong 的技术博客</a>
+          <a href="https://penguinliong.moe/" title="https:&#x2F;&#x2F;penguinliong.moe&#x2F;" rel="noopener" target="_blank">Liong 的技术博客</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://sunnyrx.com/" title="https://sunnyrx.com/" rel="noopener" target="_blank">热心的周末</a>
+          <a href="https://sunnyrx.com/" title="https:&#x2F;&#x2F;sunnyrx.com&#x2F;" rel="noopener" target="_blank">热心的周末</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://www.tcdw.net/" title="https://www.tcdw.net/" rel="noopener" target="_blank">吐槽大王部落格</a>
+          <a href="https://www.tcdw.net/" title="https:&#x2F;&#x2F;www.tcdw.net&#x2F;" rel="noopener" target="_blank">吐槽大王部落格</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://blog.grandcyan.com/" title="https://blog.grandcyan.com/" rel="noopener" target="_blank">Ceplavia's Thinking Blog</a>
+          <a href="https://blog.grandcyan.com/" title="https:&#x2F;&#x2F;blog.grandcyan.com&#x2F;" rel="noopener" target="_blank">Ceplavia's Thinking Blog</a>
         </li>
     </ul>
   </div>
@@ -465,13 +465,13 @@
 <div class="copyright">
   
   &copy; 2016 – 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Ceplavia</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
         

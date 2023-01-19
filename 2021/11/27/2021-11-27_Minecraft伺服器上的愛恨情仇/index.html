@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.1">
+<meta name="generator" content="Hexo 6.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/Cyan-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/Cyan-16x16.png">
@@ -240,24 +240,24 @@
       
         <p>架設 Minecraft 伺服端其實沒有看起來那麼簡單， 儘管大部分人真的覺得很簡單。</p>
 <p>在 1.18 (aka 1.17 part 2) 即將發佈之際，寫下一點重大變更。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h3 id="找數"><a href="#找數" class="headerlink" title="找數"></a>找數</h3><p>還記得當初我説一定要補上多節點 MC 的方法嗎？答案就是流量轉發。只要轉發端到 MC 伺服端是直連，或是路由相對簡單，延遲又低，就可以做到。對於我自己的伺服器，為了大部分人易於訪問而部署在上海，然後使用香港、日本、台北的 VPS 進行轉發，就可以做到各地都是低延遲的體驗。</p>
 <p>流量轉發我用 NGINX。不用防火牆來轉發的其中一個原因是性能不足，使用很簡單，只要下面幾行。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">stream &#123;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen 25565;</span><br><span class="line">        proxy_pass YOURMC.DOMAIN.COM:25565;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">stream &#123;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen 25565;</span><br><span class="line">        proxy_pass YOURMC.DOMAIN.COM:25565;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>很簡單。</p>
 <h3 id="Hybrid-Server-的愛恨情仇"><a href="#Hybrid-Server-的愛恨情仇" class="headerlink" title="Hybrid Server 的愛恨情仇"></a>Hybrid Server 的愛恨情仇</h3><p>有一天偶然看到這一篇，當初是為了性能而選用的 Mohist，但沒有注意到 Mohist 會這樣做。</p>
-<p><a href="https://essentialsx.net/do-not-use-mohist.html" target="_blank" rel="noopener">https://essentialsx.net/do-not-use-mohist.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://essentialsx.net/do-not-use-mohist.html">https://essentialsx.net/do-not-use-mohist.html</a></p>
 <blockquote>
-<p>It has come to our attention that as of <a href="https://github.com/MohistMC/Mohist/commit/58bbb1c8a13dcbf764c11668287e6fb85a884b3a" target="_blank" rel="noopener">10th April 2021</a>, <strong>Mohist tricks users into deleting official plugin jars and installing unofficial modified builds.</strong> Not only is this behaviour shady, but it also poses significant risk to users who don&#39;t know what software they&#39;re running. </p>
+<p>It has come to our attention that as of <a target="_blank" rel="noopener" href="https://github.com/MohistMC/Mohist/commit/58bbb1c8a13dcbf764c11668287e6fb85a884b3a">10th April 2021</a>, <strong>Mohist tricks users into deleting official plugin jars and installing unofficial modified builds.</strong> Not only is this behaviour shady, but it also poses significant risk to users who don&#39;t know what software they&#39;re running. </p>
 </blockquote>
 <p>已經説得很清楚了。自此之後再運營 Mod 服，大概我也不會再考慮 Mohist。</p>
 <h3 id="JVM"><a href="#JVM" class="headerlink" title="JVM?"></a>JVM?</h3><p>自 MC 的 1.17 發佈以來，當時我就留意到官方要求使用 JDK17 來進行遊戲，……其實也不算官方要求，而是低版本 JDK 會報錯。然後我就開始留意各種 JVM 的性能，有好有壞的就不説了，只拿好的來説，就是 Azul Zulu 和 Alibaba Dragonwell。前者相對更優，後者很棒，不用多説了。後者甚至完美兼容 Hotspot JVM。</p>
 <p>為了表達對 Oracle 的感謝，我決定在 1.18 的原版生存服中使用 Alibaba Dragonwell JVM。</p>
 <p>不過 Dragonwell 有個小缺點，就是對於新 JDK 版本的發佈較慢，但相對於它對 CPU 和 RAM 的使用優化，值了。</p>
-<h3 id="Server"><a href="#Server" class="headerlink" title="Server?"></a>Server?</h3><p>原本我對插件伺服器的認知還停留在 Bukkit -&gt; Spigot/Paper Spigot(aka PaperMC)，不過後來又多了 Purpur，Yatopia 等，在研究了很多對比後，在即將到來的 1.18 原版生存服，我決定使用 Purpur。</p>
-<p><a href="https://purpur.pl3x.net/downloads/" target="_blank" rel="noopener">https://purpur.pl3x.net/downloads/</a></p>
+<h3 id="Server"><a href="#Server" class="headerlink" title="Server?"></a>Server?</h3><p>原本我對插件伺服器的認知還停留在 Bukkit -&gt; Spigot&#x2F;Paper Spigot(aka PaperMC)，不過後來又多了 Purpur，Yatopia 等，在研究了很多對比後，在即將到來的 1.18 原版生存服，我決定使用 Purpur。</p>
+<p><a target="_blank" rel="noopener" href="https://purpur.pl3x.net/downloads/">https://purpur.pl3x.net/downloads/</a></p>
 <h3 id="OS"><a href="#OS" class="headerlink" title="OS"></a>OS</h3><p>CentOS 大抵最終還是死了（嘆氣）。</p>
 <p>説起來很有趣，我一直喜歡 CentOS 的原因有兩個，一個當然是它可以縮寫成 CTOS，嗯……</p>
 <p>另一個就是 CentOS 的命令在我看來很「合理」，比如直接 yum 而不是 apt-get 還要按個「-」。</p>
@@ -371,7 +371,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#找數"><span class="nav-number">1.</span> <span class="nav-text">找數</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hybrid-Server-的愛恨情仇"><span class="nav-number">2.</span> <span class="nav-text">Hybrid Server 的愛恨情仇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM"><span class="nav-number">3.</span> <span class="nav-text">JVM?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Server"><span class="nav-number">4.</span> <span class="nav-text">Server?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OS"><span class="nav-number">5.</span> <span class="nav-text">OS</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%BE%E6%95%B8"><span class="nav-number">1.</span> <span class="nav-text">找數</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hybrid-Server-%E7%9A%84%E6%84%9B%E6%81%A8%E6%83%85%E4%BB%87"><span class="nav-number">2.</span> <span class="nav-text">Hybrid Server 的愛恨情仇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM"><span class="nav-number">3.</span> <span class="nav-text">JVM?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Server"><span class="nav-number">4.</span> <span class="nav-text">Server?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OS"><span class="nav-number">5.</span> <span class="nav-text">OS</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -387,7 +387,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-count">114</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -400,7 +400,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">128</span>
+        <span class="site-state-item-count">131</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -413,25 +413,25 @@
     </div>
     <ul class="links-of-blogroll-list">
         <li class="links-of-blogroll-item">
-          <a href="https://insbex.jixun.moe/" title="https://insbex.jixun.moe/" rel="noopener" target="_blank">Insb 的思维过山车</a>
+          <a href="https://insbex.jixun.moe/" title="https:&#x2F;&#x2F;insbex.jixun.moe&#x2F;" rel="noopener" target="_blank">Insb 的思维过山车</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://jixun.moe/" title="https://jixun.moe/" rel="noopener" target="_blank">季寻日志</a>
+          <a href="https://jixun.moe/" title="https:&#x2F;&#x2F;jixun.moe&#x2F;" rel="noopener" target="_blank">季寻日志</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://laplacence.github.io/" title="https://laplacence.github.io/" rel="noopener" target="_blank">Laplacence's Trash Can</a>
+          <a href="https://laplacence.github.io/" title="https:&#x2F;&#x2F;laplacence.github.io&#x2F;" rel="noopener" target="_blank">Laplacence's Trash Can</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://penguinliong.moe/" title="https://penguinliong.moe/" rel="noopener" target="_blank">Liong 的技术博客</a>
+          <a href="https://penguinliong.moe/" title="https:&#x2F;&#x2F;penguinliong.moe&#x2F;" rel="noopener" target="_blank">Liong 的技术博客</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://sunnyrx.com/" title="https://sunnyrx.com/" rel="noopener" target="_blank">热心的周末</a>
+          <a href="https://sunnyrx.com/" title="https:&#x2F;&#x2F;sunnyrx.com&#x2F;" rel="noopener" target="_blank">热心的周末</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://www.tcdw.net/" title="https://www.tcdw.net/" rel="noopener" target="_blank">吐槽大王部落格</a>
+          <a href="https://www.tcdw.net/" title="https:&#x2F;&#x2F;www.tcdw.net&#x2F;" rel="noopener" target="_blank">吐槽大王部落格</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://blog.grandcyan.com/" title="https://blog.grandcyan.com/" rel="noopener" target="_blank">Ceplavia's Thinking Blog</a>
+          <a href="https://blog.grandcyan.com/" title="https:&#x2F;&#x2F;blog.grandcyan.com&#x2F;" rel="noopener" target="_blank">Ceplavia's Thinking Blog</a>
         </li>
     </ul>
   </div>
@@ -455,13 +455,13 @@
 <div class="copyright">
   
   &copy; 2016 – 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Ceplavia</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
         
