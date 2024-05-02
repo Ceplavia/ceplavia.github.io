@@ -173,6 +173,122 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://www.ceplavia.com/2018/07/21/2018-07-21_%E5%A5%87%E5%B9%BBRPG%EF%BC%9A%E5%85%83%E7%B4%A0%E6%B5%93%E5%BA%A6%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Ceplavia">
+      <meta itemprop="description" content="遊戲是潛在抑鬱症患者最後的避風港。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ceplavia's Gaming Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/07/21/2018-07-21_%E5%A5%87%E5%B9%BBRPG%EF%BC%9A%E5%85%83%E7%B4%A0%E6%B5%93%E5%BA%A6%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">奇幻RPG：元素浓度系统</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 21-07-2018 23:32:02" itemprop="dateCreated datePublished" datetime="2018-07-21T23:32:02+08:00">21-07-2018</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 30-07-2020 21:52:54" itemprop="dateModified" datetime="2020-07-30T21:52:54+08:00">30-07-2020</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%A7%86%E7%82%B9/" itemprop="url" rel="index"><span itemprop="name">视点</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%A7%86%E7%82%B9/%E8%AE%BE%E5%AE%9A/" itemprop="url" rel="index"><span itemprop="name">设定</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2018/07/21/2018-07-21_%E5%A5%87%E5%B9%BBRPG%EF%BC%9A%E5%85%83%E7%B4%A0%E6%B5%93%E5%BA%A6%E7%B3%BB%E7%BB%9F/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/21/2018-07-21_奇幻RPG：元素浓度系统/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>元素浓度系统 Ens Otyo System</p>
+<p>（其实两个单词都是对应中文发音缩减音节的结果，发现了吗？）</p>
+<p>这是一个我很久以前想做，但我的技术能力又做不出来的东西。</p>
+<p>总而言之，是一个解决在譬如水下地区竟然能施放火球术的方案。不是直接对区域进行限制，而是改为使用此系统接管所有法术的施放。</p>
+<p>首先我们先来给法术增加一个咏唱限制。对咏唱法术的属性和当前区域该属性的值进行判断。区域属性值超过界限时，全速咏唱，低于多少又高于多少时，80%速度咏唱，少于多少时，则干脆不可咏唱。</p>
+<h2 id="基础设定"><a href="#基础设定" class="headerlink" title="基础设定"></a><strong>基础设定</strong></h2><p>游戏中每个区域参考MC中Chunk的概念进行编程，每个区域有其固有属性，属性假设为只有地、火、风、水。那么在最平衡的地方，每一个属性都占25%，为了说明方面就让他干脆是25点吧，这样每个区域的总属性点数是100点。在强属性区域，该属性需要占比达到70%以上。</p>
+<h2 id="法术飞行"><a href="#法术飞行" class="headerlink" title="法术飞行"></a><strong>法术飞行</strong></h2><p>法术从A区域飞行到B区域，抽取A区域中的法术元素转移到B区域中，A区域中立即按百分比减少对应元素的浓度，从其他类型元素处按区域权值以比例方式抽取补充。</p>
+<p>飞行时路过的路径也会受到影响。权值与A区域距离成正比。即越接近B区域，变化得越多。</p>
+<h2 id="周期事件"><a href="#周期事件" class="headerlink" title="周期事件"></a><strong>周期事件</strong></h2><p>强&#x2F;弱属性地区以Tag标识，然后加以权值来储存这个数据。</p>
+<p>每次周期有一定（较低）的机率（还受法阵影响）来触发元素回溯。元素回溯指的是地区的元素浓度回到最初的设定标准。这个模拟了大自然的自我调节。</p>
+<h2 id="法阵影响"><a href="#法阵影响" class="headerlink" title="法阵影响"></a><strong>法阵影响</strong></h2><p>有些法阵会从更远的区域调动元素向当前区域补充元素——看起来是如此，但注意这里只是在调节各个区域的元素比例，实际不调整数量。</p>
+<p>被法阵影响的地区，周期事件的成功率会下调。 法阵还可以提供更多存在感。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a><strong>例子</strong></h2><p>有一个水系铸能使受委托前往火山地区解决当地降雨稀少的问题。</p>
+<p>要求：在火山地区的某村庄施放降雨术。</p>
+<p>降雨术</p>
+<p>基础咏唱时间：17秒（引导）</p>
+<p>魔力值消耗：25%MAXMP+320MP</p>
+<p>范围：150px</p>
+<p>咏唱需求：当前区域水元素浓度在80%或以上</p>
+<p>已知火山地区各区域水元素浓度都在10%以下，使用水箭术从河流地区将水元素运向火山地区明显不可行。</p>
+<p>于是在河流地区和火山地区边缘各架设一个元素法阵。</p>
+<p>河流地区架设的是元素传送法阵，可以抽空区域中的元素向其他地区传送。</p>
+<p>这还不够，传送到的水元素会被周期事件调节回低比例，于是火山地区还要架设一个元素集中法阵，将周期事件的频率降低。</p>
+<p>这样就在火山地区临时有了高比例的水元素浓度。然后就可以唱技能完成委托了。</p>
+<p>如何？</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://www.ceplavia.com/2018/07/10/2018-07-10_%E5%9B%BD%E5%86%85%E7%BD%91%E6%B8%B8%EF%BC%9A%E8%B0%81%E5%9C%A8%E6%8A%9B%E5%BC%83%E7%8E%A9%E5%AE%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1389,148 +1505,6 @@ _Counterattack - 平松建治 (Xenoblade 2 Sound Selection)_
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://www.ceplavia.com/2018/02/01/2018-02-01_DnF-Origin%EF%BC%9A%E8%BF%99%E8%AE%A9%E5%A4%A7%E8%BD%AC%E7%A7%BB%E5%8F%98%E6%88%90%E4%BA%86%E4%B8%80%E4%B8%AA%E7%AC%91%E8%AF%9D%E3%80%82/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Ceplavia">
-      <meta itemprop="description" content="遊戲是潛在抑鬱症患者最後的避風港。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ceplavia's Gaming Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/01/2018-02-01_DnF-Origin%EF%BC%9A%E8%BF%99%E8%AE%A9%E5%A4%A7%E8%BD%AC%E7%A7%BB%E5%8F%98%E6%88%90%E4%BA%86%E4%B8%80%E4%B8%AA%E7%AC%91%E8%AF%9D%E3%80%82/" class="post-title-link" itemprop="url">DnF-Origin：这让大转移变成了一个笑话。</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 01-02-2018 20:05:28" itemprop="dateCreated datePublished" datetime="2018-02-01T20:05:28+08:00">01-02-2018</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 30-07-2020 21:52:54" itemprop="dateModified" datetime="2020-07-30T21:52:54+08:00">30-07-2020</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B8%B8%E6%88%8F%E8%AF%84%E6%B5%8B/" itemprop="url" rel="index"><span itemprop="name">游戏评测</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2018/02/01/2018-02-01_DnF-Origin%EF%BC%9A%E8%BF%99%E8%AE%A9%E5%A4%A7%E8%BD%AC%E7%A7%BB%E5%8F%98%E6%88%90%E4%BA%86%E4%B8%80%E4%B8%AA%E7%AC%91%E8%AF%9D%E3%80%82/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/02/01/2018-02-01_DnF-Origin：这让大转移变成了一个笑话。/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>从这篇文章开始，所有关于游戏的吐槽或评测均会采用新的评分系统。</p>
-<p>以10分为满分。文章最后的每个“-”号为-1分，每个“+”号为+1分。</p>
-<p>5分为可以玩的游戏，但不会推荐其他好友去玩。</p>
-<p>6~7分为好作，佳作，会推荐好友去玩的程度。</p>
-<p>8分及以上，就现在这个随便一款游戏都能被IGN评10分的年代，我看是很难出现，但，在我心目中绝对是极好的作品。</p>
-<p><em>对于一个游戏，我不认为随便玩玩，有几个小时或是十几个小时流程就有资格去评测。至少主线、支线(如果有)，全部打完，单机游戏的话至少要到出制作人员名单的程度；网游的话，没有500小时我不会随便写东西评测。</em></p>
-<hr>
-<p>……在这之前，为了方便说明： 把最老的那个阿拉德(暗黑城一直在地下的那个世界)暂且称为<strong>镜像世界</strong></p>
-<p>大转移后的阿拉德(暗黑城整个反转到地面的那个世界)称为<strong>转移世界</strong></p>
-<p>现行的Origin版本(暗黑城又浮起来的那个世界)称为<strong>起源世界</strong></p>
-<p>一些我不满意的国服译名会以我自己的译名代替，转移世界的一些地名我还真记不太清，因为玩的时候就觉得这个版本并不令人满意。</p>
-<hr>
-<p>我先声明我的观点：转移世界只不过是NX(Nexon)试图接手NP(Neople)所搞出来的东西，NX强行送过来的一批“策划”完全按照自己所想来做，对于NP遗留物的态度就是丢也不是，用也不是。比如从旧设里翻出来的技能，男法的魔力燃烧，瞬移之类的。而对于NP已经做好的东西，他们不想要，要做自己的，于是就有了1~54级的剧情全重做，而暗黑城里职业导师全部放在一间房子里，比起地图设计便利性，我更觉得这是关禁闭。</p>
-<p>总而言之，我认为NX的这批策划对NP的产物有很大的怨气，这点后面我会陆续讲到。</p>
-<p>众所周知，大转移对于DNF的剧情可以说是造成了致命一击。 致命点在于：镜像世界是有既定剧情的，只要按照这条剧情线发展下去就能顺利到魔界。而我为什么说大转移就是一个笑话，因为整个转移世界都很明显是与镜像世界、起源世界相……不该说矛盾，而该说突兀。</p>
-<p>仅仅是剧情上，还不够让人认为大转移是个笑话，但我们先从剧情说起。</p>
-<p>虽然地图有所变更，但整体还是能看得出区域的： 首先是银冠之森，但这个简直是名副其实的新手村，除了在这里开始了黑色噩梦的伏笔之外，还有光暗冰火互克的教学。</p>
-<p>赫顿玛尔(镜像世界的主要城市)废墟，<strong>整个地区的副本剧情都是在描述赫顿玛尔附近村庄的居民如何如何惨</strong>。谜之出现的斯卡迪女王？以及圣魂船的船长为什么要通过龙女找主角冒险家？龙族的来由？酒吧里面为什么会是[咳咳]军的根据地，以及为什么要[咳咳]？</p>
-<blockquote>
-<p>19年9月1日修排版：</p>
-<p>那个词是「革命」。</p>
-</blockquote>
-<p>这些问题完全没有来龙去脉可言。</p>
-<p>漂流洞穴(在这里封印英雄冢里的七个鬼，干掉了假猪)，冒险家又成了英雄。</p>
-<p>天帷巨兽(解救击毙儿GBL教，击败使徒)，又做一次英雄。</p>
-<p>北方避难所(避什么难?)为过度，击败了一堆不知道为什么要击败的怪，仅仅是因为剧情上这些怪物阻挠冒险家寻找黑色噩梦的真相。</p>
-<p>回到漂流洞穴封印邪龙，进入天界。</p>
-<p>从天界开始，天界部分剧情添加了少许黑色噩梦的情节，除此之外与镜像世界没有不同。</p>
-<p>到最后黑色噩梦是卢克用来收集光的东西，而光是用来反射照射到自己居所的光用的，也就是掩藏自己的踪迹。</p>
-<p>……别忘了在转移世界的剧情里卢克的身份是The Maker，制造者卢克，也是一个使徒。</p>
-<p>我没记错的话安图恩不是使徒都能有个raid本撑个脸，卢克则是死于CG杀……</p>
-<blockquote>
-<p>19年9月1日修排版：</p>
-<p>安图恩是个剧情后期插入的使徒，有20人本，而卢克几乎可以说是剧情最初的时候就写下的使徒，是个8人本……</p>
-</blockquote>
-<p>是的，除了天界剧情有些微不同以外，其他剧情完全没有不同。就不同位面这个设定来看，排除时空之门可以解释的通，剩下的区域为什么没有重做，或者说剧情没有变化，我能想到的唯一原因就是。</p>
-<p>NX那帮人太懒。</p>
-<p>起源世界能看得出来制作团队(推测一半NP老人)的心意，因为在解包的时候，能在Music文件夹里发现不少老客户端才会有的一些音乐，比如幽暗密林的最旧版本音乐、天帷巨兽绝大多数副本的最旧版音乐等。……倒也不排除这是拷资源顺手塞的，但要知道之前他们有将Music文件夹的音乐删减过，所以这基本可以确定是故意加回来的。</p>
-<p>从地图的NPC分布上也能看得出来起源世界有不少镜像世界的影子，比如进入天帷巨兽地区副本的场景(西海岸)和镜像世界中的场景(西海岸)几乎完全一致。而玩家的角色的身份也确立了，就是冒险家。而不是NX想要的什么鬼拯救世界的大英雄。 之所以我推测说现在的制作团队有一半的NP老人，是因为很明显剩下的东西只有NX的平衡才做得出来：无脑加强弱职业，数字平衡靠减伤。</p>
-<p>现在平衡做得简直一塌糊涂，简单的说就是：小技能全没用，伤害低打不中。大技能伤害高，冷却长全脱手。被动直接加技能伤害，就是为了能吃到其他加成。所有对怪物削弱的技能都改成了加技能伤害，一二觉主动必有一个是没人想用的。所有偶发性的增伤都改成了必定或持续。数字平衡通过增加怪物的减伤率来做。</p>
-<p>我今天上去练了个小号，30级没到能打出200万的伤害。我差点怀疑这是跟魔兽一样抄的暗黑。</p>
-<p>我以前不懂韩文，第一次去韩服玩体验服，时装上衣加的技能，就算有对照表我都认不清想要的是哪个。后来因缘际会学会了韩文，当时就开始给NX(NXNP一家亲？)写邮件，内容大概就是一些弱势平衡应当如何加强而非直接调数值，比方说蓝拳的影子持续时间，我认为应该合理地调整到通过一些异界套装可以达到伪全程(比方说40sCD，36s持续这样)，谁知道他们来了个影子直接全程。</p>
-<p>……我也无话可说。</p>
-<p>更无法忍受的是引入了装备等级(iLv)系统。这个东西从鬼蟹在魔兽世界里做出来就开始被人吐槽，我实在是吐槽不动了。结合史诗制作这个系统来看（连名字都是旧武器的，加点新特效当新东西，底下灰字一模一样，要脸不要？），我怀疑以后这游戏会跟魔兽世界一样。从新手期开始直到刚满级，你所捡到的所有装备都是没用的，因为满级之后还有满级的玩法。</p>
-<p>其实全境封锁也死于这样的傻子设定。</p>
-<hr>
-<p>- 所谓的街机般爽快打击感呢，技能全脱手，我到底在玩什么？ </p>
-<p>- 数值平衡让狗来吧，狗上狗也行。 </p>
-<p>- 装备等级系统，假紫已经算很失败了，我等着看。 </p>
-<p>- NX方还是不愿承认自己做得没NP好。诺顿在转移世界的剧情安排是失踪而不是死亡。回来之后就在第二个剧情地区的分解机旁边毫无用途？这剧情可真棒。</p>
-<p>- 强行结合转移世界与镜像世界的剧情。</p>
-<p>-  每个副本最多刷3次，基本是2次，有的竟然是1次。怪物再有特色玩家也不可能留下什么记忆，这改得还不如转移世界的剧情副本。</p>
-<p>+ 剧情上能感受到那么想要挽回老玩家的诚意。</p>
-<p>* 我实在想不到有什么加分点，情怀吧，这条算加0.5。</p>
-<p><strong>综合评分：5.5 &#x2F; 10。</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1602,20 +1576,20 @@ _Counterattack - 平松建治 (Xenoblade 2 Sound Selection)_
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">115</span>
+          <span class="site-state-item-count">116</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">133</span>
+        <span class="site-state-item-count">138</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1670,7 +1644,7 @@ _Counterattack - 平松建治 (Xenoblade 2 Sound Selection)_
 <div class="copyright">
   
   &copy; 2016 – 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
